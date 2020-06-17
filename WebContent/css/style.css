@@ -1,0 +1,45 @@
+input.w3-input{
+	outline: none;
+}
+
+/*Parsley
+
+input:valid {
+	border-left: 4px solid green;
+}
+input:invalid {
+	border-left: 4px solid red;
+}
+input.parsley-success,
+select.parsley-success,
+textarea.parsley-success {
+	border-left: 4px solid green;
+}
+
+input.parsley-error,
+select.parsley-error,
+textarea.parsley-error {
+	border-left: 4px solid red;
+}
+*/
+
+.server-errors-list {
+  color:red;
+}
+
+.parsley-errors-list {
+  margin: 0 0 0 0;
+  padding: 0 0 0 10px;
+  list-style-type: none;
+  font-size: 0.9em;
+  line-height: 0.9em;
+  opacity: 0;
+  color: red;
+  display:inline-block;
+}
+
+.parsley-errors-list.filled {
+  opacity: 1;
+  display:inline-block;
+}
+ /**/
