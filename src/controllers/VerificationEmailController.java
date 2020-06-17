@@ -76,7 +76,7 @@ public class VerificationEmailController extends HttpServlet {
 				// Comprovar que el token es correcte.
 				if (dbToken.equals(emailToken)) {
 					// Actualitzar verificated a true correctament.
-					query = "UPDATE Users SET verificated=1 WHERE mail=?";
+					query = "UPDATE Users SET regVerified=1 WHERE mail=?";
 					statement = null;
 					statement = db.prepareStatement(query);
 					statement.setString(1, email);

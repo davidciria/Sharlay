@@ -28,7 +28,7 @@ public class VerificationEmailSender {
 		// System.out.println(sHostName);
 		String hostname = "localhost";
 		sender.sendEmail(destEmail, "Gaming Twitter Email Verification",
-				verificationMsg + "http://" + hostname + ":8080/Lab_3/VerificationEmailController?email=" + destEmail
+				verificationMsg + "http://" + hostname + ":8080/Lab4/VerificationEmailController?email=" + destEmail
 						+ "&token=" + token + " " + incorrectEmailMsg);
 	}
 
