@@ -35,7 +35,7 @@ public class ManageTweet {
 	public void insertTweet(Tweet tweet) throws Exception{
 		
 		String query = "INSERT INTO Tweets (uid,text,likes,retweets,comments,createdAt,parentTweet) VALUES (?,?,?,?,?,?,?)";
-		System.out.println(tweet.getUid());
+
 		PreparedStatement statement = null;
 		try {
 			statement = db.prepareStatement(query);
@@ -133,33 +133,32 @@ public class ManageTweet {
 	
 	public void deleteTweet(int tweetid) throws Exception{
 		
-		String query = "DELETE FROM Tweets WHERE tweetid = ?";
+		String query = "SELECT uid FROM Tweets WHERE tweetid = ?";
 
 		PreparedStatement statement = null;
-		try {
-		statement = db.prepareStatement(query);
-		statement.setInt(1, tweetid);
-		statement.executeUpdate();
-		statement.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return;
-		}
-		
-		String query2 = "SELECT uid FROM Tweets WHERE tweetid = ?";
-
-		PreparedStatement statement2 = null;
 		Integer uid = null;
 		try {
-			statement2 = db.prepareStatement(query2);
-			statement2.setInt(1, tweetid);
-			ResultSet rs = statement2.executeQuery();
+			statement = db.prepareStatement(query);
+			statement.setInt(1, tweetid);
+			ResultSet rs = statement.executeQuery();
 			if(rs.next()) uid = rs.getInt("uid");
 		}catch (SQLException e) {
 			e.printStackTrace();
 			return;
 		}
 		
+		String query2 = "DELETE FROM Tweets WHERE tweetid = ?";
+
+		PreparedStatement statement2 = null;
+		try {
+			statement2 = db.prepareStatement(query2);
+			statement2.setInt(1, tweetid);
+			statement2.executeUpdate();
+			statement2.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return;
+		}
 		
 		String query3 = "UPDATE Users SET tweets = tweets - 1 WHERE uid = ?";
 		PreparedStatement statement3 = null; //treure el tweet a la pagina del user q ha retuitat

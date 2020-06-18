@@ -35,9 +35,7 @@ public class AddTweetFromUser extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		Tweet tweet = new Tweet();
-		//HttpSession session = request.getSession(false);
-		//int uid = (int)session.getAttribute("uid");
-System.out.println(request.getParameter("uid"));
+		
 		try {
 			BeanUtils.populate(tweet, request.getParameterMap());
 			ManageTweet tweetManager = new ManageTweet();
