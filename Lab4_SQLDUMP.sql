@@ -147,3 +147,5 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2019-06-28  9:32:06
+
+SET GLOBAL time_zone = '-3:00';
