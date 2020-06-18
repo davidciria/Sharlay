@@ -73,6 +73,10 @@ public class Tweet {
 		return sdf.format(this.createdAt);
 	}
 	
+	public Timestamp getCreatedAt() {
+		return this.createdAt;
+	}
+	
 	public void setCreatedAt(Timestamp createdAt) {
 		this.createdAt = createdAt;
 	}

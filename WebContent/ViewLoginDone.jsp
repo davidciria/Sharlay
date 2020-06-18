@@ -53,7 +53,7 @@ $(document).ready(function(){
 	/* Add tweet and reload Tweet Visualitzation */
 	$("#aT").click(function(event){
 		event.preventDefault();
-		$.post( "AddTweetFromUser", { uid: uid, content: $("#cT").text() } , function(data) {
+		$.post( "AddTweetFromUser", { uid: uid, text: $("#cT").text() } , function(data) {
 			$("#dtweets").load( "GetTweetsFromUser", { uid: uid, start: 0 , end: nt } ,function() {
 				start = nt;
 				cview = "GetTweetsFromUser";

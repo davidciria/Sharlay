@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import utils.DAO;
 import models.Tweet;
 
@@ -33,19 +34,22 @@ public class ManageTweet {
 	
 	public void insertTweet(Tweet tweet) throws Exception{
 		
-		String query = "INSERT INTO Tweets (uid,tweetid,text,likes,retweets,comments,createdAt, parentTweet) VALUES (?,?,?,?,?,?,?,?)";
-
+		String query = "INSERT INTO Tweets (uid,text,likes,retweets,comments,createdAt,parentTweet) VALUES (?,?,?,?,?,?,?)";
+		System.out.println(tweet.getUid());
 		PreparedStatement statement = null;
 		try {
 			statement = db.prepareStatement(query);
 			statement.setInt(1, tweet.getUid());
-			statement.setInt(2, tweet.getTweetid());
-			statement.setString(3, tweet.getText());
-			statement.setInt(4, tweet.getLikes());
-			statement.setInt(5, tweet.getRetweets());
-			statement.setInt(6, tweet.getComments());
-			statement.setString(7, tweet.getDateConverted());
-			statement.setInt(8, tweet.getParentTweet());
+			statement.setString(2, tweet.getText());
+			statement.setInt(3, tweet.getLikes());
+			statement.setInt(4, tweet.getRetweets());
+			statement.setInt(5, tweet.getComments());
+			statement.setTimestamp(6, tweet.getCreatedAt());
+			if(tweet.getParentTweet() == null) {
+				statement.setNull(7, java.sql.Types.NULL);
+			}else {
+				statement.setInt(7, tweet.getParentTweet());
+			}
 			statement.executeUpdate();
 			statement.close();
 

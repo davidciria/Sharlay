@@ -15,6 +15,7 @@ import org.apache.commons.beanutils.BeanUtils;
 
 import managers.ManageUser;
 import models.Login;
+import models.User;
 
 /**
  * Servlet implementation class LoginController
@@ -43,6 +44,9 @@ public class LoginController extends HttpServlet {
 			
 	    	BeanUtils.populate(login, request.getParameterMap());
 	    	
+	    	User user = new User();
+			user.setUid(manager.getUserID(login.getMail()));
+	    	
 	    	Integer loginResult = null;
 	
 	    	if ( login.isComplete() && (loginResult = manager.checkLogin(login.getMail(), login.getPwd())) == 0 ) {
@@ -50,6 +54,7 @@ public class LoginController extends HttpServlet {
 	    		System.out.println("login OK, forwarding to ViewLoginDone ");
 		    	HttpSession session = request.getSession();
 		    	session.setAttribute("uid", manager.getUserID(login.getMail()));
+		    	request.setAttribute("user", user);
 		    	RequestDispatcher dispatcher = request.getRequestDispatcher("ViewLoginDone.jsp");
 			    dispatcher.forward(request, response);
 			    

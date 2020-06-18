@@ -35,19 +35,21 @@ public class AddTweetFromUser extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		Tweet tweet = new Tweet();
-		
+		//HttpSession session = request.getSession(false);
+		//int uid = (int)session.getAttribute("uid");
+System.out.println(request.getParameter("uid"));
 		try {
 			BeanUtils.populate(tweet, request.getParameterMap());
 			ManageTweet tweetManager = new ManageTweet();
 			//Create tweet.
 			Tweet new_tweet = new Tweet();
-			tweet.setText(tweet.getText());
-			tweet.setCreatedAt(new Timestamp(System.currentTimeMillis()));
-			tweet.setUid(tweet.getUid());
-			tweet.setRetweets(0);
-			tweet.setComments(0);
-			tweet.setLikes(0);
-			tweet.setParentTweet(null);
+			new_tweet.setText(tweet.getText());
+			new_tweet.setCreatedAt(new Timestamp(System.currentTimeMillis()));
+			new_tweet.setUid(tweet.getUid());
+			new_tweet.setRetweets(0);
+			new_tweet.setComments(0);
+			new_tweet.setLikes(0);
+			new_tweet.setParentTweet(null);
 			/**/
 			tweetManager.insertTweet(new_tweet);
 			tweetManager.finalize();
