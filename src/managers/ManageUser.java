@@ -5,6 +5,8 @@ import java.nio.charset.StandardCharsets;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import models.User;
 import utils.DAO;
@@ -100,6 +102,55 @@ public class ManageUser {
 		}
 
 	}
+	
+	
+	// Get users a given user is following
+	public List<User> getUserFollows(Integer uid, Integer start, Integer end) {
+		String query = "SELECT Users.uid,Users.name FROM Follows JOIN users ON Users.uid = Follows.uid2 WHERE Follows.uid1 = ? ORDER BY Users.username LIMIT ?,?;;";
+		PreparedStatement statement = null;
+		List<User> l = new ArrayList<User>();
+		try {
+			statement = db.prepareStatement(query);
+			statement.setInt(1, uid);
+			statement.setInt(2, start);
+			statement.setInt(3, end);
+			ResultSet rs = statement.executeQuery();
+			while (rs.next()) {
+				User user = new User();
+				user.setUid(rs.getInt("uid"));
+				user.setUsername(rs.getString("username"));
+				l.add(user);
+			}
+			rs.close();
+			statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return  l;
+	}
+	
+	// Get users a given user is following
+		public List<User> getUserFollowers(Integer uid) {
+			 String query = "SELECT Users.uid,Users.name FROM Users JOIN Follows ON Users.uid = Follows.uid1 WHERE Follows.uid2 = ?;";
+			 PreparedStatement statement = null;
+			 List<User> l = new ArrayList<User>();
+			 try {
+				 statement = db.prepareStatement(query);
+				 statement.setInt(1,uid);
+				 ResultSet rs = statement.executeQuery();
+				 while (rs.next()) {
+					 User user = new User();
+					 user.setUid(rs.getInt("uid"));
+					 user.setUsername(rs.getString("name"));
+					 l.add(user);
+				 }
+				 rs.close();
+				 statement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} 
+			return  l;
+		}
 
 	public Integer getUserID(String mail) {
 		String query = "SELECT uid FROM Users WHERE mail=?";
