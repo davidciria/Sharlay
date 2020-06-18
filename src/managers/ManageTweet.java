@@ -70,6 +70,7 @@ public class ManageTweet {
 		}
 	}
 	
+	//Aquesta funcio s'ha de revisar !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	public List<Tweet> getTweets(Integer tweetid) throws Exception {
 
 		List<Tweet> tweets = new ArrayList<Tweet>();
@@ -91,11 +92,38 @@ public class ManageTweet {
 	      tweet.setLikes(rs.getInt("likes"));
 	      tweet.setRetweets(rs.getInt("retweets"));
 	      tweet.setComments(rs.getInt("comments"));
-	      tweet.setCreatedAt(rs.getDate("createdAt"));
+	      tweet.setCreatedAt(rs.getTimestamp("createdAt"));
 	      tweet.setParentTweet(rs.getInt("parentTweet"));
 	      tweets.add(tweet);
 		}
 		return tweets;
+	}
+	
+	// Get tweets from a user given start and end
+	public List<Tweet> getUserTweets(String uid,Integer start, Integer end) {
+		String query = "SELECT Tweets.tweetid,Tweets.uid,Tweets.createdAt,Tweets.text FROM Tweets WHERE Tweets.uid = ? ORDER BY Tweets.createdAt DESC LIMIT ?,? ;";
+		PreparedStatement statement = null;
+		List<Tweet> l = new ArrayList<Tweet>();
+		try {
+			statement = db.prepareStatement(query);
+			statement.setString(1,uid);
+			statement.setInt(2,start);
+			statement.setInt(3,end);
+			ResultSet rs = statement.executeQuery();
+			while (rs.next()) {
+				Tweet tweet = new Tweet();
+	       		tweet.setTweetid(rs.getInt("tweetid"));
+				tweet.setUid(rs.getInt("uid"));
+				tweet.setCreatedAt(rs.getTimestamp("createdAt"));
+				tweet.setText(rs.getString("text"));
+				l.add(tweet);
+			}
+			rs.close();
+			statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return  l;
 	}
 	
 	
@@ -360,7 +388,7 @@ public class ManageTweet {
 		      tweet.setLikes(rs.getInt("likes"));
 		      tweet.setRetweets(rs.getInt("retweets"));
 		      tweet.setComments(rs.getInt("comments"));
-		      tweet.setCreatedAt(rs.getDate("createdAt"));
+		      tweet.setCreatedAt(rs.getTimestamp("createdAt"));
 		      tweet.setParentTweet(rs.getInt("parentTweet"));
 		      
 		      /*Afegim el tweet a la llista de tweets*/

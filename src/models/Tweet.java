@@ -1,7 +1,7 @@
 package models;
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class Tweet {
 
@@ -11,7 +11,7 @@ public class Tweet {
 	private Integer likes;
 	private Integer retweets;
 	private Integer comments;
-	private Date createdAt = new Date();
+	private Timestamp createdAt = null;
 	private Integer parentTweet = null;
 
 	public Integer getUid() {
@@ -73,7 +73,7 @@ public class Tweet {
 		return sdf.format(this.createdAt);
 	}
 	
-	public void setCreatedAt(Date createdAt) {
+	public void setCreatedAt(Timestamp createdAt) {
 		this.createdAt = createdAt;
 	}
 	
