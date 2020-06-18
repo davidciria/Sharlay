@@ -69,7 +69,7 @@ $(document).ready(function(){
 	$("body").on("click",".dT",function(event){
 		event.preventDefault();
 		var tweet = $(this).parent();
-		$.post( "DelTweetFromUser", { tid: $(this).parent().attr("id") } , function(data) {
+		$.post( "DelTweetFromUser", { tweetid: $(this).parent().attr("id") } , function(data) {
 			tweet.remove();
 			start = start - 1;
 	  	});

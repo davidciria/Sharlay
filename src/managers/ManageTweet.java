@@ -154,7 +154,7 @@ public class ManageTweet {
 			statement2 = db.prepareStatement(query2);
 			statement2.setInt(1, tweetid);
 			ResultSet rs = statement2.executeQuery();
-			uid = rs.getInt("uid");
+			if(rs.next()) uid = rs.getInt("uid");
 		}catch (SQLException e) {
 			e.printStackTrace();
 			return;

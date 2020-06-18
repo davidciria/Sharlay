@@ -17,7 +17,7 @@ public class DAO {
 		String hostname = "localhost";
 		Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 		connection = DriverManager
-				.getConnection("jdbc:mysql://" + hostname + "/ts1?user=" + user + "&password=" + password);
+				.getConnection("jdbc:mysql://" + hostname + "/ts1?user=" + user + "&password=" + password + "&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");
 
 	}
 
