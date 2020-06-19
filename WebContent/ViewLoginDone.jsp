@@ -74,6 +74,34 @@ $(document).ready(function(){
 			start = start - 1;
 	  	});
 	});
+	
+	/* Like tweet from user */
+	$("body").on("click",".lT",function(event){
+		event.preventDefault();
+		var tweet = $(this).parent();
+		var icon = $(this);
+		$.post( "LikeTweet", { tweetid: $(this).parent().attr("id") } , function(data) {
+			icon.addClass("dlT");
+			icon.removeClass("lT");
+			icon.addClass("w3-theme-d1");
+			icon.removeClass("w3-theme-l5");
+			start = start - 1;
+	  	});
+	});
+	
+	/* Dislike tweet from user */
+	$("body").on("click",".dlT",function(event){
+		event.preventDefault();
+		var tweet = $(this).parent();
+		var icon = $(this);
+		$.post( "DislikeTweet", { tweetid: $(this).parent().attr("id") } , function(data) {
+			icon.addClass("lT");
+			icon.removeClass("dlT");
+			icon.addClass("w3-theme-l5");
+			icon.removeClass("w3-theme-d1");
+			start = start - 1;
+	  	});
+	});
 
 });
 </script>

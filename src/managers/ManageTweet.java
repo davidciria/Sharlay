@@ -120,6 +120,7 @@ public class ManageTweet {
 				tweet.setUid(rs.getInt("uid"));
 				tweet.setCreatedAt(rs.getTimestamp("createdAt"));
 				tweet.setText(rs.getString("text"));
+				tweet.setIsLiked(tweetIsLiked(tweet.getUid(), tweet.getTweetid()));
 				l.add(tweet);
 			}
 			rs.close();
@@ -238,23 +239,27 @@ public class ManageTweet {
 	public void dislikeTweet(Integer tweetid, Integer uid) throws Exception{
 	
 		String query1 = "DELETE FROM Likes WHERE tweetid = ? and uid = ?";
-		String query2 = "UPDATE Tweets SET likes = likes - 1 WHERE tweetid = ?";
-
 		PreparedStatement statement1 = null; //afegeix like a la taula de likes
-		PreparedStatement statement2 = null; //decrementem comptador de likes a liked tweet 
 		
 		try {
 			statement1 = db.prepareStatement(query1);
-			statement1.setInt(1, uid);
-			statement1.setInt(2, tweetid);
+			statement1.setInt(1, tweetid);
+			statement1.setInt(2, uid);
 			statement1.executeUpdate();
 			statement1.close();
-			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return;
+		}
+		
+		String query2 = "UPDATE Tweets SET likes = likes - 1 WHERE tweetid = ?";
+		PreparedStatement statement2 = null; //decrementem comptador de likes a liked tweet 
+		
+		try {
 			statement2 = db.prepareStatement(query2);
 			statement2.setInt(1, tweetid);
 			statement2.executeUpdate();
 			statement2.close();
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return;
@@ -265,10 +270,7 @@ public class ManageTweet {
 	public void likeTweet(Integer tweetid, Integer uid) throws Exception{
 	
 		String query1 = "INSERT INTO Likes (uid,tweetid) VALUES (?,?)";
-		String query2 = "UPDATE Tweets SET likes = likes + 1 WHERE tweetid = ?";
-
 		PreparedStatement statement1 = null; //afegeix like a la taula de likes
-		PreparedStatement statement2 = null; //inrementem comptador de likes a liked tweet 
 		
 		try {
 			statement1 = db.prepareStatement(query1);
@@ -276,6 +278,16 @@ public class ManageTweet {
 			statement1.setInt(2, tweetid);
 			statement1.executeUpdate();
 			statement1.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return;
+		}
+		
+		String query2 = "UPDATE Tweets SET likes = likes + 1 WHERE tweetid = ?";
+		PreparedStatement statement2 = null; //inrementem comptador de likes a liked tweet 
+		
+		try {
 			
 			statement2 = db.prepareStatement(query2);
 			statement2.setInt(1, tweetid);
