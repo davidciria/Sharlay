@@ -32,6 +32,7 @@ public class LikeTweet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//System.out.println("like");
 		HttpSession session = request.getSession();
 		int uid = (int)session.getAttribute("uid");
 		
@@ -39,7 +40,7 @@ public class LikeTweet extends HttpServlet {
 		try {
 			BeanUtils.populate(tweet, request.getParameterMap());
 			ManageTweet tweetManager = new ManageTweet();
-			tweetManager.dislikeTweet(tweet.getTweetid(), uid);
+			tweetManager.likeTweet(tweet.getTweetid(), uid);
 			tweetManager.finalize();
 		}catch(Throwable e) {
 			e.printStackTrace();
