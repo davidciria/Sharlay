@@ -127,6 +127,19 @@ $(document).ready(function(){
 		});
 	});
 	
+	/* Edit tweet from user */
+	$("body").on("click",".eT",function(event){
+		event.preventDefault();
+		
+		var tweet = $(this).parent();
+		var tweetText = $('#tweetText');
+		//$.post( "EditTweetFromUser", { tweetid: $(this).parent().attr("id") } , function(data) {
+			tweetText.prop("contentEditable", true);
+			//start = start - 1;
+	  	//});
+	});
+	
+	
 	/* Unfollow user */
 	$("body").on("click",".uF",function(event){
 		event.preventDefault();
