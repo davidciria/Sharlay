@@ -29,9 +29,9 @@ public class EditProfileForm extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println(request.getParameter("username"));
-		System.out.println(request.getParameter("firstname"));
-		System.out.println(request.getParameter("lastname"));
+		if(request.getParameter("username") != "")System.out.println(request.getParameter("username"));
+		if(request.getParameter("firstname") != "")System.out.println(request.getParameter("firstname"));
+		if(request.getParameter("lastname") != "")System.out.println(request.getParameter("lastname"));
 		System.out.println("oasdjiasdj");
 		RequestDispatcher dispatcher = request.getRequestDispatcher("EditProfileForm.jsp");
 	    if (dispatcher != null) dispatcher.forward(request, response);

@@ -50,6 +50,24 @@ $(document).ready(function(){
 		  }
 	  });
 	  
+	$(".editForm").submit( function(event) {
+		event.preventDefault();
+		var formParams = $(this).serializeArray();
+		var firstname = "${user.firstname}";
+		var lastname = "${user.lastname}";
+		var username = "${user.username}";
+		var newfirstname = null;
+		var newlastname = null;
+		var newusername = null;
+		if(firstname != formParams[0].value) newfirstname = formParams[0].value;
+		if(lastname != formParams[1].value) newlastname = formParams[1].value;
+		if(username != formParams[2].value) newusername = formParams[2].value;
+		$('#dtweets').load("EditProfileForm",{firstname: newfirstname, lastname: newlastname, username: newusername}, function(data){
+			
+		});
+	});
+	
+	  
 	});
 </script>
 
@@ -76,7 +94,7 @@ $(document).ready(function(){
 </ul>
 <div class="w3-container w3-card w3-white w3-round w3-margin w3-animate-opacity">
 
-<form data-parsley-validate method="POST" id="editForm">
+<form data-parsley-validate method="POST" class="editForm">
 	<p>      
     <label class="w3-text-red"><b> First Name </b></label>
     <input class="w3-input w3-border w3-light-grey" type="text" id="firstname" name="firstname" placeholder="First Name" value="${user.firstname}" required pattern="^[a-zA-Z0-9_ ]+$" data-parsley-maxlength="50"></p>

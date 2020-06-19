@@ -2,15 +2,12 @@
     pageEncoding="UTF-8" session="true"%>
 
 <script>
-$('#navigation').load('MenuController');
-</script>
-
-<script>
 var start = 0;
 var nt = 4;
 var cview = "GetTweetsFromUser";
 var uid = "${user.uid}";
-
+$('#navigation').load('MenuController', function(){
+	
 $(document).ready(function(){
 	$("#duser").load( "GetUserInfo", { uid:  uid } ,function() {});
 	$("#dtweets").load( "GetTweetsFromUser", { uid: uid, start: start , end: start+nt } ,function() {
@@ -29,23 +26,23 @@ $(document).ready(function(){
 	    }
 	});
 	
-	$("#editForm").submit( function(event) {
-		alert("Submitted");
-		event.preventDefault();
-		var formParams = $(this).serializeArray();
-		var firstname = "${user.firstname}";
-		var lastname = "${user.lastname}";
-		var username = "${user.username}";
-		var newfirstname = null;
-		var newlastname = null;
-		var newusername = null;
-		if(firstname != formParams[0].value) newfirstname = formParams[0].value;
-		if(lastname != formParams[1].value) newlastname = formParams[1].value;
-		if(username != formParams[2].value) newusername = formParams[2].value;
-		$('#dtweets').load("EditProfileForm",{firstname: newfirstname, lastname: newlastname, username: newusername}, function(data){
-			
-		});
-	});
+	//$(".editForm").submit( function(event) {
+		//alert("Submitted");
+		//event.preventDefault();
+		//var formParams = $(this).serializeArray();
+		//var firstname = "${user.firstname}";
+		//var lastname = "${user.lastname}";
+		//var username = "${user.username}";
+		//var newfirstname = null;
+		//var newlastname = null;
+		//var newusername = null;
+		//if(firstname != formParams[0].value) newfirstname = formParams[0].value;
+		//if(lastname != formParams[1].value) newlastname = formParams[1].value;
+		//if(username != formParams[2].value) newusername = formParams[2].value;
+		//$('#dtweets').load("EditProfileForm",{firstname: newfirstname, lastname: newlastname, username: newusername}, function(data){
+		//	
+		//});
+	//});
 	
 	// *******************************************************************************************//
 	// Elements $("#id").click(...)  caputure clicks of elements that have been statically loaded //
@@ -140,6 +137,7 @@ $(document).ready(function(){
 	  	});
 	});
 
+});
 });
 </script>
 
