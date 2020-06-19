@@ -13,6 +13,7 @@ public class Tweet {
 	private Integer comments;
 	private Timestamp createdAt = null;
 	private Integer parentTweet = null;
+	private boolean isLiked = false;
 
 	public Integer getUid() {
 		return uid;
@@ -79,6 +80,14 @@ public class Tweet {
 	
 	public void setCreatedAt(Timestamp createdAt) {
 		this.createdAt = createdAt;
+	}
+	
+	public boolean getIsLiked() {
+		return this.isLiked;
+	}
+	
+	public void setIsLiked(boolean isLiked) {
+		this.isLiked = isLiked;
 	}
 	
 	/*public boolean isComplete() {

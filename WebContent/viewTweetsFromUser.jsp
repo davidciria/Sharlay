@@ -8,7 +8,7 @@
    <h4> ${t.tweetid} </h4><br>
    <hr class="w3-clear">
    <p> ${t.text} </p>
-   <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i> &nbsp;Like</button>
+   <button type="button" class="lT w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i> &nbsp;Like</button>
    <button type="button" class="dT w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-trash"></i> &nbsp;Delete</button> 
  </div>
 </c:forEach>
