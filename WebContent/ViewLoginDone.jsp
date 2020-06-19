@@ -100,7 +100,7 @@ $(document).ready(function(){
 			icon.removeClass("dlT");
 			icon.addClass("w3-theme-l5");
 			icon.removeClass("w3-theme-d1");
-		}
+		});
 	});
 	
 	/* Unfollow user */
