@@ -65,15 +65,6 @@ $(document).ready(function(){
 		});
 	});
 	
-	/* Edit Profile */
-	$(".eP").click(function(event){
-		event.preventDefault();
-		$("#dtweets").load( "EditProfileForm", {firstname: null, lastname: null, username: null } , function(data) {
-			start = nt;
-			cview = "GetTweetsFromUser";
-		});
-	});
-	
 	/* Add tweet and reload Tweet Visualitzation */
 	$("#aT").click(function(event){
 		event.preventDefault();
@@ -148,6 +139,15 @@ $(document).ready(function(){
 			user.remove();
 			start = start - 1;
 	  	});
+	});
+	
+	/* Edit Profile */
+	$("body").on("click", ".eP",function(event){
+		event.preventDefault();
+		$("#dtweets").load( "EditProfileForm", {firstname: null, lastname: null, username: null } , function(data) {
+			start = nt;
+			cview = "EditProfileForm";
+		});
 	});
 
 });
