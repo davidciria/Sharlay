@@ -33,10 +33,14 @@ public class EditProfileForm extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		if(new Integer(request.getParameter("firstTime")) != 1) {
+		String username = request.getParameter("username");
+		String firstname = request.getParameter("firstname");
+		String lastname = request.getParameter("lastname");
+		if(username != "" || firstname != "" || lastname != "") {
 			HttpSession session = request.getSession(false);
 			int uid = (int)session.getAttribute("uid");
 			
+			/*
 			if(request.getParameter("username") != "") {
 				System.out.println(request.getParameter("username"));
 			}
@@ -46,17 +50,17 @@ public class EditProfileForm extends HttpServlet {
 			if(request.getParameter("lastname") != ""){
 				System.out.println(request.getParameter("lastname"));
 			}
-			
+			*/
 			User user = (User) session.getAttribute("user");
 			
-			user.setUsername(request.getParameter("username"));
-			user.setFirstname(request.getParameter("firstname"));
-			user.setLastname(request.getParameter("lastname"));
+			user.setUsername(username);
+			user.setFirstname(firstname);
+			user.setLastname(lastname);
 			
 			session.setAttribute("user", user);
 			
 			ManageUser userManager = new ManageUser();
-			userManager.editUser(uid, request.getParameter("username"), request.getParameter("firstname"), request.getParameter("lastname"));
+			userManager.editUser(uid, username, firstname, lastname);
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("EditProfileForm.jsp");

@@ -325,7 +325,7 @@ public class ManageUser {
 			PreparedStatement statement3 = null; 
 			try {
 				statement3 = db.prepareStatement(query3);
-				statement3.setString(1, firstname);
+				statement3.setString(1, lastname);
 				statement3.setInt(2, uid);
 				statement3.executeUpdate();
 				statement3.close();

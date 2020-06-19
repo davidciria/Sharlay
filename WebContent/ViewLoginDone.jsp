@@ -68,7 +68,7 @@ $(document).ready(function(){
 	/* Edit Profile */
 	$(".eP").click(function(event){
 		event.preventDefault();
-		$("#dtweets").load( "EditProfileForm", { firstTime: 1 } , function(data) {
+		$("#dtweets").load( "EditProfileForm", {firstname: null, lastname: null, username: null } , function(data) {
 			start = nt;
 			cview = "GetTweetsFromUser";
 		});
