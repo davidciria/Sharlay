@@ -101,7 +101,7 @@ $(document).ready(function(){
 			icon.addClass("w3-theme-l5");
 			icon.removeClass("w3-theme-d1");
 		}
-	}
+	});
 	
 	/* Unfollow user */
 	$("body").on("click",".uF",function(event){
