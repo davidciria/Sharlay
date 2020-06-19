@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" session="true"%>
 
-<script type="text/javascript">
+<script>
 $('#navigation').load('MenuController');
 </script>
 
@@ -12,7 +12,6 @@ var cview = "GetTweetsFromUser";
 var uid = "${user.uid}";
 
 $(document).ready(function(){
-	
 	$("#duser").load( "GetUserInfo", { uid:  uid } ,function() {});
 	$("#dtweets").load( "GetTweetsFromUser", { uid: uid, start: start , end: start+nt } ,function() {
 		start = nt;
