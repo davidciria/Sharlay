@@ -1,7 +1,6 @@
 package controllers;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -44,8 +43,7 @@ public class LoginController extends HttpServlet {
 			
 	    	BeanUtils.populate(login, request.getParameterMap());
 	    	
-	    	User user = new User();
-			user.setUid(manager.getUserID(login.getMail()));
+	    	User user = manager.getUser(manager.getUserID(login.getMail()));
 	    	
 	    	Integer loginResult = null;
 	
@@ -53,7 +51,7 @@ public class LoginController extends HttpServlet {
 		    	
 	    		System.out.println("login OK, forwarding to ViewLoginDone ");
 		    	HttpSession session = request.getSession();
-		    	session.setAttribute("uid", manager.getUserID(login.getMail()));
+		    	session.setAttribute("uid", user.getUid());
 		    	session.setAttribute("user", user);
 		    	RequestDispatcher dispatcher = request.getRequestDispatcher("ViewLoginDone.jsp");
 			    dispatcher.forward(request, response);
@@ -70,7 +68,7 @@ public class LoginController extends HttpServlet {
 			    dispatcher.forward(request, response);
 		    	
 		    }
-		} catch (IllegalAccessException | InvocationTargetException e) {
+		} catch (Throwable e) {
 			e.printStackTrace();
 		}
 	    

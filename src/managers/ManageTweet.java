@@ -130,6 +130,24 @@ public class ManageTweet {
 		return  l;
 	}
 	
+	public boolean tweetIsLiked(int uid, int tweetid) {
+		String query = "SELECT * FROM Likes WHERE uid=? AND tweetid=?";
+
+		PreparedStatement statement = null;
+		try {
+			statement = db.prepareStatement(query);
+			statement.setInt(1, uid);
+			statement.setInt(2, tweetid);
+			ResultSet rs = statement.executeQuery();
+			if(rs.next()) return true;
+			else return false;
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	
 	
 	public void deleteTweet(int tweetid) throws Exception{
 		
