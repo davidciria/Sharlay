@@ -74,6 +74,16 @@ $(document).ready(function(){
 			start = start - 1;
 	  	});
 	});
+	
+	/* Unfollow user */
+	$("body").on("click",".uF",function(event){
+		event.preventDefault();
+		var user = $(this).parent();
+		$.post( "UnfollowUser", { uid: $(this).parent().attr("id") } , function(data) {
+			user.remove();
+			start = start - 1;
+	  	});
+	});
 
 });
 </script>
