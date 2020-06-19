@@ -61,8 +61,8 @@ $(document).ready(function(){
 		if(firstname != formParams[0].value) newfirstname = formParams[0].value;
 		if(lastname != formParams[1].value) newlastname = formParams[1].value;
 		if(username != formParams[2].value) newusername = formParams[2].value;
-		$('#dtweets').load("EditProfileForm",{firstname: newfirstname, lastname: newlastname, username: newusername}, function(data){
-			
+		$('#dtweets').load("EditProfileForm",{firstname: newfirstname, lastname: newlastname, username: newusername, firstTime: 0}, function(data){
+			$("#duser").load( "GetUserInfo", { uid:  uid } ,function() {});
 		});
 	});
 	
