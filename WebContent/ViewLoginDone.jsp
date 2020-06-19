@@ -75,6 +75,7 @@ $(document).ready(function(){
 	  	});
 	});
 	
+
 	/* Like tweet from user */
 	$("body").on("click",".lT",function(event){
 		event.preventDefault();
@@ -99,6 +100,15 @@ $(document).ready(function(){
 			icon.removeClass("dlT");
 			icon.addClass("w3-theme-l5");
 			icon.removeClass("w3-theme-d1");
+		}
+	}
+	
+	/* Unfollow user */
+	$("body").on("click",".uF",function(event){
+		event.preventDefault();
+		var user = $(this).parent();
+		$.post( "UnfollowUser", { uid: $(this).parent().attr("id") } , function(data) {
+			user.remove();
 			start = start - 1;
 	  	});
 	});

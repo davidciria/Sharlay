@@ -191,7 +191,7 @@ public class ManageUser {
 		
 		String query1 = "DELETE FROM Follows WHERE uid1 = ? and uid2 = ?";
 		String query2 = "UPDATE Users SET following = following - 1 WHERE uid = ?"; //uid1
-		String query3 = "UPDATE Users SET follower = follower - 1 WHERE uid = ?"; //uid2
+		String query3 = "UPDATE Users SET followers = followers - 1 WHERE uid = ?"; //uid2
 
 		PreparedStatement statement1 = null; //eliminem follow a la taula de follows
 		PreparedStatement statement2 = null; //decrementem comptador de following al user 
@@ -225,7 +225,7 @@ public class ManageUser {
 
 		String query1 = "INSERT INTO Follows (uid1,uid2) VALUES (?,?)";
 		String query2 = "UPDATE Users SET following = following + 1 WHERE uid = ?"; //uid1
-		String query3 = "UPDATE Users SET follower = follower + 1 WHERE uid = ?"; //uid2
+		String query3 = "UPDATE Users SET followers = followers + 1 WHERE uid = ?"; //uid2
 
 		PreparedStatement statement1 = null; //afegeix follow a la taula de follows
 		PreparedStatement statement2 = null; //incrementem comptador de following al user 
