@@ -106,7 +106,7 @@ public class ManageUser {
 	
 	// Get users a given user is following
 	public List<User> getUserFollows(Integer uid, Integer start, Integer end) {
-		String query = "SELECT Users.uid,Users.name FROM Follows JOIN users ON Users.uid = Follows.uid2 WHERE Follows.uid1 = ? ORDER BY Users.username LIMIT ?,?;;";
+		String query = "SELECT Users.uid,Users.username FROM Follows JOIN Users ON Users.uid = Follows.uid2 WHERE Follows.uid1 = ? ORDER BY Users.username LIMIT ?,?;;";
 		PreparedStatement statement = null;
 		List<User> l = new ArrayList<User>();
 		try {
