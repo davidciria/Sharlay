@@ -1,11 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" session="true"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 
-<script>
+    
+    <script>
 var start = 0;
 var nt = 4;
 var cview = "GetTweetsFromUser";
-var uid = "${user.uid}";
+var uid = "${viewuser.uid}"; //uid of view user.
 	
 $(document).ready(function(){
 $('#navigation').load('MenuController', function(){
@@ -33,7 +34,7 @@ $('#navigation').load('MenuController', function(){
 	/* Get and visualize user follows*/
 	$(".vF").click(function(event){
 		event.preventDefault();
-		$("#dtweets").load( "GetFollows", { uid: uid, start: 0 , end: nt } , function(data) {
+		$("#dtweets").load( "GetFollows", { uid: user.uid, start: 0 , end: nt } , function(data) {
 			start = nt;
 			cview = "GetFollows";
 		});
@@ -41,30 +42,10 @@ $('#navigation').load('MenuController', function(){
 	/* Get and visualize Tweets from a given user */
 	$(".vT").click(function(event){
 		event.preventDefault();
-		$("#dtweets").load( "GetTweetsFromUser", { uid: uid, start: 0 , end: nt } , function(data) {
+		$("#content").load( "MainController", { uid: user.uid, start: 0 , end: nt } , function(data) {
 			start = nt;
 			cview = "GetTweetsFromUser";
 		});
-	});
-	
-	/* Get and visualize Tweets from a given user */
-	$(".vTl").click(function(event){
-		event.preventDefault();
-		$("#dtweets").load( "GetAllTweets", { uid: uid, start: 0 , end: nt } , function(data) {
-			start = nt;
-			cview = "GetTweetsFromUser";
-		});
-	});
-	
-	/* Add tweet and reload Tweet Visualitzation */
-	$("#aT").click(function(event){
-		event.preventDefault();
-		$.post( "AddTweetFromUser", { uid: uid, text: $("#cT").text() } , function(data) {
-			$("#dtweets").load( "GetTweetsFromUser", { uid: uid, start: 0 , end: nt } ,function() {
-				start = nt;
-				cview = "GetTweetsFromUser";
-			});
-   		});
 	});
 	
 	// ***************************************************************************************************//
@@ -113,48 +94,13 @@ $('#navigation').load('MenuController', function(){
 	$("body").on("click",".eT",function(event){
 		event.preventDefault();
 		
-		var tweetid = $(this).parent().attr("id");
-		var tweetText = $(this).parent().find("#tweetText");
-		var prevText = tweetText.text();
-		var editButton = $(this);
-		var undoButton = $('<button type="button" class="w3-button w3-green w3-margin-bottom"><i class="fa fa-undo"></i></button>');
-		var saveButton = $('<button type="button" class="w3-button w3-red w3-margin-bottom"><i class="fa fa-floppy-o"></i></button>'); 
-		
-		tweetText.prop("contentEditable", true);
-        editButton.parent().append(undoButton).append(saveButton);
-        editButton.remove();
-        saveButton.on("click",function(event){
-    		event.preventDefault();
-    		$.post( "SaveEditTweetFromUser", { tweetid: tweetid, tweetText: tweetText.text() } , function(data) {
-    			tweetText.prop("contentEditable", false);
-    			undoButton.parent().append(editButton);
-        		saveButton.remove();
-    			undoButton.remove();
-    		});
-    	});
-        undoButton.on("click",function(event){
-    		event.preventDefault();
-    		tweetText.text(prevText);
-    		tweetText.prop("contentEditable", false);
-			undoButton.parent().append(editButton);
-    		saveButton.remove();
-			undoButton.remove();
-    	});
+		var tweet = $(this).parent();
+		var tweetText = $('#tweetText');
+		//$.post( "EditTweetFromUser", { tweetid: $(this).parent().attr("id") } , function(data) {
+			tweetText.prop("contentEditable", true);
+			//start = start - 1;
+	  	//});
 	});
-	
-	/* Save edit tweet from user */
-	//$("body").on("click",".seT",function(event){
-		//event.preventDefault();
-		//var tweet = $(this).parent();
-		//var tweetText = $('#tweetText');
-		//var editButton = $(this).prev();
-		//
-		//$.post( "SaveEditTweetFromUser", { tweetid: $(this).parent().attr("id"), tweetText: $('#tweetText').text() } , function(data) {
-			//tweetText.prop("contentEditable", false);
-			//$(this).remove();
-			//editButton.removeClass("uC").addClass("eT");
-		//});
-	//});
 	
 	
 	/* Unfollow user */
@@ -165,15 +111,6 @@ $('#navigation').load('MenuController', function(){
 			user.remove();
 			start = start - 1;
 	  	});
-	});
-	
-	/* Edit Profile */
-	$("body").on("click", ".eP",function(event){
-		event.preventDefault();
-		$("#dtweets").load( "EditProfileForm", {firstname: null, lastname: null, username: null } , function(data) {
-			start = nt;
-			cview = "EditProfileForm";
-		});
 	});
 
 });
@@ -196,18 +133,6 @@ $('#navigation').load('MenuController', function(){
     
     <!-- Middle Column -->
     <div class="w3-col m9">
-    
-      <div class="w3-row-padding" >
-        <div class="w3-col m12">
-          <div class="w3-card w3-round w3-white">
-            <div class="w3-container w3-padding">
-              <h6 class="w3-opacity"> EPAW template by UPF </h6>
-              <p id="cT" contenteditable="true" class="w3-border w3-padding">Status: Feeling EPAW</p>
-              <button id="aT" type="button" class="w3-button w3-theme"><i class="fa fa-pencil"></i> &nbsp;Post</button> 
-            </div>
-          </div>
-        </div>
-      </div>
       
       <div id="dtweets"> </div>
 
@@ -223,7 +148,7 @@ $('#navigation').load('MenuController', function(){
 
 <!-- Footer -->
 <footer class="w3-container w3-theme-d3 w3-padding-16">
-  <h5> AvÃ­s legal </h5>
+  <h5> Avís legal </h5>
 </footer>
 
 <footer class="w3-container w3-theme-d5">

@@ -14,6 +14,7 @@ public class Tweet {
 	private Timestamp createdAt = null;
 	private Integer parentTweet = null;
 	private boolean isLiked = false;
+	private String username;
 
 	public Integer getUid() {
 		return uid;
@@ -88,6 +89,14 @@ public class Tweet {
 	
 	public void setIsLiked(boolean isLiked) {
 		this.isLiked = isLiked;
+	}
+	
+	public String getUsername() {
+		return this.username;
+	}
+	
+	public void setUsername(String username) {
+		this.username = username;	
 	}
 	
 	/*public boolean isComplete() {

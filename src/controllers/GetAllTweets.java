@@ -1,7 +1,6 @@
 package controllers;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Collections;
 import java.util.List;
 
@@ -21,14 +20,14 @@ import models.dTmodel;
 /**
  * Servlet implementation class dTcontroller
  */
-@WebServlet("/GetTweetsFromUser")
-public class GetTweetsFromUser extends HttpServlet {
+@WebServlet("/GetAllTweets")
+public class GetAllTweets extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetTweetsFromUser() {
+    public GetAllTweets() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -44,20 +43,15 @@ public class GetTweetsFromUser extends HttpServlet {
 		try {
 			BeanUtils.populate(dt, request.getParameterMap());
 			ManageTweet tweetManager = new ManageTweet();
-			try {
-				tweets = tweetManager.getUserTweets(dt.getUid(),dt.getStart(),dt.getEnd());
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			tweets = tweetManager.getAllTweets();
 			tweetManager.finalize();
 		
-		} catch (IllegalAccessException | InvocationTargetException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 		request.setAttribute("tweets",tweets);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/viewTweetsFromUser.jsp"); 
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/viewAllTweets.jsp"); 
 		dispatcher.forward(request,response);
 		
 	}
