@@ -6,9 +6,9 @@ var start = 0;
 var nt = 4;
 var cview = "GetTweetsFromUser";
 var uid = "${user.uid}";
-$('#navigation').load('MenuController', function(){
 	
 $(document).ready(function(){
+$('#navigation').load('MenuController', function(){
 	$("#duser").load( "GetUserInfo", { uid:  uid } ,function() {});
 	$("#dtweets").load( "GetTweetsFromUser", { uid: uid, start: start , end: start+nt } ,function() {
 		start = nt;
