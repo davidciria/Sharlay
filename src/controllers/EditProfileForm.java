@@ -61,6 +61,7 @@ public class EditProfileForm extends HttpServlet {
 			
 			ManageUser userManager = new ManageUser();
 			userManager.editUser(uid, username, firstname, lastname);
+			userManager.finalize();
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("EditProfileForm.jsp");

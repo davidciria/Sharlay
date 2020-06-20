@@ -55,6 +55,7 @@ public class LoginController extends HttpServlet {
 		    	session.setAttribute("viewuser", user);
 		    	session.setAttribute("user", user);
 		    	session.setAttribute("defaultDtweets", "GetTweetsFromUser");
+		    	manager.finalize();
 		    	RequestDispatcher dispatcher = request.getRequestDispatcher("ViewLoginDone.jsp");
 			    dispatcher.forward(request, response);
 			    
@@ -65,6 +66,7 @@ public class LoginController extends HttpServlet {
 				if(loginResult != null) {
 					request.setAttribute("db_error", (int)loginResult);
 				}
+				manager.finalize();
 				request.setAttribute("login",login);
 			    RequestDispatcher dispatcher = request.getRequestDispatcher("ViewLoginForm.jsp");
 			    dispatcher.forward(request, response);

@@ -37,6 +37,7 @@ public class VerificationEmailSenderController extends HttpServlet {
 		ManageUser manager = new ManageUser();
 		VerificationEmailSender verSender = new VerificationEmailSender();
 		verSender.sendVerificationEmail(mail, manager.getUserID(mail), username);
+		manager.finalize();
 	}
 
 	/**

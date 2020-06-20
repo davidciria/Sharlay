@@ -53,6 +53,7 @@ public class ViewUser extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			userManager.finalize();
 			session.setAttribute("viewuser", viewuser);
 			content = "ProfileUserView.jsp";
 		}

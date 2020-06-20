@@ -36,6 +36,7 @@ public class SaveEditTweetFromUser extends HttpServlet {
 		if(tweetText != "") {		
 			ManageTweet tweetManager = new ManageTweet();
 			tweetManager.editTweet(tweetid, tweetText);
+			tweetManager.finalize();
 		}
 	}
 

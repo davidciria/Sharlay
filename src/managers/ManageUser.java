@@ -27,7 +27,7 @@ public class ManageUser {
 	public void finalize() {
 		try {
 			super.finalize();
-			//db.disconnectBD();
+			db.disconnectBD();
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
