@@ -94,11 +94,8 @@ $('#navigation').load('MenuController', function(){
 		var tweet = $(this).parent();
 		var icon = $(this);
 		$.post( "LikeTweet", { tweetid: $(this).parent().attr("id") } , function(data) {
-			icon.addClass("dlT");
-			icon.removeClass("lT");
-			icon.addClass("w3-theme-d1");
-			icon.removeClass("w3-theme-l5");
-			start = start - 1;
+			icon.removeClass("lT").addClass("dlT");
+			icon.removeClass("w3-theme-l5").addClass("w3-theme-d1");
 	  	});
 	});
 	
@@ -108,10 +105,8 @@ $('#navigation').load('MenuController', function(){
 		var tweet = $(this).parent();
 		var icon = $(this);
 		$.post( "DislikeTweet", { tweetid: $(this).parent().attr("id") } , function(data) {
-			icon.addClass("lT");
-			icon.removeClass("dlT");
-			icon.addClass("w3-theme-l5");
-			icon.removeClass("w3-theme-d1");
+			icon.removeClass("dlT").addClass("lT");
+			icon.removeClass("w3-theme-d1").addClass("w3-theme-l5");
 		});
 	});
 	
