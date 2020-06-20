@@ -26,24 +26,6 @@ $('#navigation').load('MenuController', function(){
 	    }
 	});
 	
-	//$(".editForm").submit( function(event) {
-		//alert("Submitted");
-		//event.preventDefault();
-		//var formParams = $(this).serializeArray();
-		//var firstname = "${user.firstname}";
-		//var lastname = "${user.lastname}";
-		//var username = "${user.username}";
-		//var newfirstname = null;
-		//var newlastname = null;
-		//var newusername = null;
-		//if(firstname != formParams[0].value) newfirstname = formParams[0].value;
-		//if(lastname != formParams[1].value) newlastname = formParams[1].value;
-		//if(username != formParams[2].value) newusername = formParams[2].value;
-		//$('#dtweets').load("EditProfileForm",{firstname: newfirstname, lastname: newlastname, username: newusername}, function(data){
-		//	
-		//});
-	//});
-	
 	// *******************************************************************************************//
 	// Elements $("#id").click(...)  caputure clicks of elements that have been statically loaded //
 	// *******************************************************************************************//
