@@ -284,6 +284,36 @@ public class ManageUser {
 		return user;
 	}
 	
+	public User getUser(String username) throws Exception{
+		User user = new User();
+		
+		String query = "SELECT * FROM Users WHERE username = ?";
+		
+		PreparedStatement statement = null;
+		
+		statement = db.prepareStatement(query);
+		statement.setString(1, username);
+		
+		ResultSet rs = statement.executeQuery();
+		
+		if(rs.next()) {
+			user.setUid(rs.getInt("uid"));
+			user.setUsername(rs.getString("username"));
+	      	user.setFirstname(rs.getString("firstname"));
+	      	user.setLastname(rs.getString("lastname"));
+	      	user.setMail(rs.getString("mail"));
+	      	user.setHashedPassword(rs.getString("hashedPassword"));
+	      	user.setSalt(rs.getString("salt"));
+	      	user.setBirth(rs.getString("birth"));
+	      	user.setTweets(rs.getInt("tweets"));
+	      	user.setFollowers(rs.getInt("followers"));
+	      	user.setFollowing(rs.getInt("following"));
+	      	user.setIsVerified(rs.getBoolean("isVerified"));
+		}
+	
+		return user;
+	}
+	
 	public void editUser(Integer uid, String username, String firstname, String lastname) {
 		
 		if(hasValue(username)) {

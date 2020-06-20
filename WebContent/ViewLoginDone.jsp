@@ -52,7 +52,7 @@ $('#navigation').load('MenuController', function(){
 		event.preventDefault();
 		$("#dtweets").load( "GetAllTweets", { uid: uid, start: 0 , end: nt } , function(data) {
 			start = nt;
-			cview = "GetTweetsFromUser";
+			cview = "GetAllTweets";
 		});
 	});
 	
@@ -173,6 +173,15 @@ $('#navigation').load('MenuController', function(){
 		$("#dtweets").load( "EditProfileForm", {firstname: null, lastname: null, username: null } , function(data) {
 			start = nt;
 			cview = "EditProfileForm";
+		});
+	});
+	
+	$("body").on("click", ".uVw", function(event){
+		event.preventDefault();
+		console.log("clicking");
+		$("#content").load( "ViewUser", { viewusername: $(this).text() } , function(data) {
+			start = nt;
+			cview = "ViewUser";
 		});
 	});
 
