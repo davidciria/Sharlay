@@ -122,13 +122,48 @@ $('#navigation').load('MenuController', function(){
 	$("body").on("click",".eT",function(event){
 		event.preventDefault();
 		
-		var tweet = $(this).parent();
-		var tweetText = $('#tweetText');
-		//$.post( "EditTweetFromUser", { tweetid: $(this).parent().attr("id") } , function(data) {
-			tweetText.prop("contentEditable", true);
-			//start = start - 1;
-	  	//});
+		var tweetid = $(this).parent().attr("id");
+		var tweetText = $(this).parent().find("#tweetText");
+		var prevText = tweetText.text();
+		var editButton = $(this);
+		var undoButton = $('<button type="button" class="w3-button w3-green w3-margin-bottom"><i class="fa fa-undo"></i></button>');
+		var saveButton = $('<button type="button" class="w3-button w3-red w3-margin-bottom"><i class="fa fa-floppy-o"></i></button>'); 
+		
+		tweetText.prop("contentEditable", true);
+        editButton.parent().append(undoButton).append(saveButton);
+        editButton.remove();
+        saveButton.on("click",function(event){
+    		event.preventDefault();
+    		$.post( "SaveEditTweetFromUser", { tweetid: tweetid, tweetText: tweetText.text() } , function(data) {
+    			tweetText.prop("contentEditable", false);
+    			undoButton.parent().append(editButton);
+        		saveButton.remove();
+    			undoButton.remove();
+    		});
+    	});
+        undoButton.on("click",function(event){
+    		event.preventDefault();
+    		tweetText.text(prevText);
+    		tweetText.prop("contentEditable", false);
+			undoButton.parent().append(editButton);
+    		saveButton.remove();
+			undoButton.remove();
+    	});
 	});
+	
+	/* Save edit tweet from user */
+	//$("body").on("click",".seT",function(event){
+		//event.preventDefault();
+		//var tweet = $(this).parent();
+		//var tweetText = $('#tweetText');
+		//var editButton = $(this).prev();
+		//
+		//$.post( "SaveEditTweetFromUser", { tweetid: $(this).parent().attr("id"), tweetText: $('#tweetText').text() } , function(data) {
+			//tweetText.prop("contentEditable", false);
+			//$(this).remove();
+			//editButton.removeClass("uC").addClass("eT");
+		//});
+	//});
 	
 	
 	/* Unfollow user */

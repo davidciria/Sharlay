@@ -149,6 +149,21 @@ public class ManageTweet {
 		return false;
 	}
 	
+	public void editTweet(int tweetid, String text) {
+		String query = "UPDATE Tweets SET text=? WHERE tweetid=?";
+		
+		PreparedStatement statement = null;
+		try {
+			statement = db.prepareStatement(query);
+			statement.setString(1, text);
+			statement.setInt(2, tweetid);
+			statement.executeUpdate();
+			statement.close();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	
 	public void deleteTweet(int tweetid) throws Exception{
 		
