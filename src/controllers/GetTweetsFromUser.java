@@ -44,7 +44,12 @@ public class GetTweetsFromUser extends HttpServlet {
 		try {
 			BeanUtils.populate(dt, request.getParameterMap());
 			ManageTweet tweetManager = new ManageTweet();
-			tweets = tweetManager.getUserTweets(dt.getUid(),dt.getStart(),dt.getEnd());
+			try {
+				tweets = tweetManager.getUserTweets(dt.getUid(),dt.getStart(),dt.getEnd());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			tweetManager.finalize();
 		
 		} catch (IllegalAccessException | InvocationTargetException e) {

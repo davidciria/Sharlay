@@ -9,6 +9,7 @@ import java.util.List;
 
 import utils.DAO;
 import models.Tweet;
+import models.User;
 
 
 public class ManageTweet {
@@ -104,7 +105,7 @@ public class ManageTweet {
 	}
 	
 	// Get tweets from a user given start and end
-	public List<Tweet> getUserTweets(String uid,Integer start, Integer end) {
+	public List<Tweet> getUserTweets(String uid,Integer start, Integer end) throws Exception {
 		String query = "SELECT Tweets.tweetid,Tweets.uid,Tweets.createdAt,Tweets.text FROM Tweets WHERE Tweets.uid = ? ORDER BY Tweets.createdAt DESC LIMIT ?,? ;";
 		PreparedStatement statement = null;
 		List<Tweet> l = new ArrayList<Tweet>();
@@ -121,6 +122,10 @@ public class ManageTweet {
 				tweet.setCreatedAt(rs.getTimestamp("createdAt"));
 				tweet.setText(rs.getString("text"));
 				tweet.setIsLiked(tweetIsLiked(tweet.getUid(), tweet.getTweetid()));
+				ManageUser manager = new ManageUser();
+			    User usertweet = manager.getUser(tweet.getUid());
+			      
+			    tweet.setUsername(usertweet.getUsername());
 				l.add(tweet);
 			}
 			rs.close();
@@ -423,6 +428,11 @@ public class ManageTweet {
 		      tweet.setComments(rs.getInt("comments"));
 		      tweet.setCreatedAt(rs.getTimestamp("createdAt"));
 		      tweet.setParentTweet(rs.getInt("parentTweet"));
+		      
+		      ManageUser manager = new ManageUser();
+		      User usertweet = manager.getUser(tweet.getUid());
+		      
+		      tweet.setUsername(usertweet.getUsername());
 		      
 		      /*Afegim el tweet a la llista de tweets*/
 		      tweets.add(tweet);
