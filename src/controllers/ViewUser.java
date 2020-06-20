@@ -47,14 +47,22 @@ public class ViewUser extends HttpServlet {
 		}else {
 			ManageUser userManager = new ManageUser();
 			User viewuser = null;
+			Boolean isFollowed = null;
 			try {
 				viewuser = userManager.getUser(viewusername);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			try {
+				isFollowed = userManager.userIsFollowed(user.getUid(), viewuser.getUid());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			userManager.finalize();
 			session.setAttribute("viewuser", viewuser);
+			session.setAttribute("isFollowed", isFollowed);
 			content = "ProfileUserView.jsp";
 		}
 		

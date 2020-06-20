@@ -157,14 +157,27 @@ $('#navigation').load('MenuController', function(){
 		//});
 	//});
 	
+	/* Follow user */
+	$("body").on("click",".fU",function(event){
+		event.preventDefault();
+		var followButton = $(this);
+		var user = $(this).parent().parent();
+		var unfollowButton = $('<button type="button" class="uU w3-button w3-red w3-margin-bottom"><i class="fa fa-minus-circle"></i>&nbsp;Unfollow</button>');
+		console.log(user.attr("id"));
+		$.post( "FollowUser", { uid: user.attr("id") } , function(data) {
+			followButton.replaceWith(unfollowButton);
+	  	});
+	});
 	
 	/* Unfollow user */
-	$("body").on("click",".uF",function(event){
+	$("body").on("click",".uU",function(event){
 		event.preventDefault();
-		var user = $(this).parent();
-		$.post( "UnfollowUser", { uid: $(this).parent().attr("id") } , function(data) {
-			user.remove();
-			start = start - 1;
+		var unfollowButton = $(this);
+		var user = $(this).parent().parent();
+		console.log(user.attr("id"));
+		var followButton = $('<button type="button" class="fU w3-button w3-green w3-margin-bottom"><i class="fa fa-plus-circle"></i>&nbsp;Follow</button>');
+		$.post( "UnfollowUser", { uid: user.attr("id") } , function(data) {
+			unfollowButton.replaceWith(followButton);
 	  	});
 	});
 	

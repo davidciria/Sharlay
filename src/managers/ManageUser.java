@@ -254,6 +254,24 @@ public class ManageUser {
 		}
 	}
 	
+	public boolean userIsFollowed(int uidfollower, int uid) {
+		String query = "SELECT * FROM Follows WHERE uid1=? AND uid2=?";
+
+		PreparedStatement statement = null;
+		try {
+			statement = db.prepareStatement(query);
+			statement.setInt(1, uidfollower);
+			statement.setInt(2, uid);
+			ResultSet rs = statement.executeQuery();
+			if(rs.next()) return true;
+			else return false;
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	
 	public User getUser(Integer uid) throws Exception{
 		User user = new User();
 		

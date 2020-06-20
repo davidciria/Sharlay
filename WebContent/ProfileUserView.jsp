@@ -118,8 +118,9 @@ $('#navigation').load('MenuController', function(){
 	/* Unfollow user */
 	$("body").on("click",".uF",function(event){
 		event.preventDefault();
-		var user = $(this).parent();
-		$.post( "UnfollowUser", { uid: $(this).parent().attr("id") } , function(data) {
+		console.log("LOL?");
+		var user = $(this).parent().parent();
+		$.post( "UnfollowUser", { uid: user.attr("id") } , function(data) {
 			user.remove();
 			start = start - 1;
 	  	});
