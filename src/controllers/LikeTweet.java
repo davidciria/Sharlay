@@ -35,10 +35,10 @@ public class LikeTweet extends HttpServlet {
 		//System.out.println("like");
 		HttpSession session = request.getSession();
 		int uid = (int)session.getAttribute("uid");
-		
 		Tweet tweet = new Tweet();
 		try {
 			BeanUtils.populate(tweet, request.getParameterMap());
+
 			ManageTweet tweetManager = new ManageTweet();
 			tweetManager.likeTweet(tweet.getTweetid(), uid);
 			tweetManager.finalize();
