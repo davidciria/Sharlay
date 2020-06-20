@@ -52,6 +52,7 @@ public class LoginController extends HttpServlet {
 	    		System.out.println("login OK, forwarding to ViewLoginDone ");
 		    	HttpSession session = request.getSession();
 		    	session.setAttribute("uid", user.getUid());
+		    	session.setAttribute("viewuser", user);
 		    	session.setAttribute("user", user);
 		    	RequestDispatcher dispatcher = request.getRequestDispatcher("ViewLoginDone.jsp");
 			    dispatcher.forward(request, response);

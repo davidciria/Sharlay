@@ -42,7 +42,7 @@ $('#navigation').load('MenuController', function(){
 	/* Get and visualize Tweets from a given user */
 	$(".vT").click(function(event){
 		event.preventDefault();
-		$("#dtweets").load( "GetTweetsFromUser", { uid: user.uid, start: 0 , end: nt } , function(data) {
+		$("#content").load( "MainController", { uid: user.uid, start: 0 , end: nt } , function(data) {
 			start = nt;
 			cview = "GetTweetsFromUser";
 		});

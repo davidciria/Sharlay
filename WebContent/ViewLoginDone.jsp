@@ -47,6 +47,15 @@ $('#navigation').load('MenuController', function(){
 		});
 	});
 	
+	/* Get and visualize Tweets from a given user */
+	$(".vTl").click(function(event){
+		event.preventDefault();
+		$("#dtweets").load( "GetAllTweets", { uid: uid, start: 0 , end: nt } , function(data) {
+			start = nt;
+			cview = "GetTweetsFromUser";
+		});
+	});
+	
 	/* Add tweet and reload Tweet Visualitzation */
 	$("#aT").click(function(event){
 		event.preventDefault();
