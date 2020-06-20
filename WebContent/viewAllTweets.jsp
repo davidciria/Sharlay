@@ -6,7 +6,7 @@
 	 <div id="${t.tweetid}" class="w3-container w3-card w3-white w3-round w3-margin w3-animate-opacity"><br>
 	   <img src="w3images/avatar2.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
 	   <span class="w3-right w3-opacity"> ${t.createdAt} </span>
-	   <h4> ${t.username} </h4><br>
+	   <a class="uVw" href="#"> ${t.username} </a><br>
 	   <hr class="w3-clear">
 	   <p id="tweetText"> ${t.text} </p>
 	   <c:if test="${t.isLiked}">

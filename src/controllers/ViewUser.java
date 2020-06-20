@@ -32,26 +32,28 @@ public class ViewUser extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int viewuid = new Integer(request.getParameter("viewuid"));
 		
-		HttpSession session = request.getSession();
-		int uid = (int)session.getAttribute("uid");
+		System.out.println("Hii from view user"+request.getParameter("viewusername"));
+		String viewusername = request.getParameter("viewusername").replace(" ", "");
 		
-		
+		HttpSession session = request.getSession(false);
+		User user = (User)session.getAttribute("user");
+		System.out.println(user.getUsername());
 		String content = "";
-		if(viewuid == uid) {
+		if(viewusername.equals(user.getUsername())) {
+			System.out.println("Same user");
 			content = "ViewLoginDone.jsp";
 		}else {
 			ManageUser userManager = new ManageUser();
 			User viewuser = null;
 			try {
-				viewuser = userManager.getUser(viewuid);
+				viewuser = userManager.getUser(viewusername);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			session.setAttribute("viewuser", viewuser);
-			content = "ProfileUserView";
+			content = "ProfileUserView.jsp";
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(content);

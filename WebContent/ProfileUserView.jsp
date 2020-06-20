@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1" session="true"%>
 
     
     <script>
@@ -42,7 +42,7 @@ $('#navigation').load('MenuController', function(){
 	/* Get and visualize Tweets from a given user */
 	$(".vT").click(function(event){
 		event.preventDefault();
-		$("#content").load( "MainController", { uid: user.uid, start: 0 , end: nt } , function(data) {
+		$("#content").load( "MainController", { uid: "${user.uid}", start: 0 , end: nt } , function(data) {
 			start = nt;
 			cview = "GetTweetsFromUser";
 		});
