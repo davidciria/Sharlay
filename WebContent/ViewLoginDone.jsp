@@ -4,15 +4,15 @@
 <script>
 var start = 0;
 var nt = 4;
-var cview = "GetTweetsFromUser";
+var cview = "${defaultDtweets}";
 var uid = "${user.uid}";
 	
 $(document).ready(function(){
 $('#navigation').load('MenuController', function(){
 	$("#duser").load( "GetUserInfo", { uid:  uid } ,function() {});
-	$("#dtweets").load( "GetTweetsFromUser", { uid: uid, start: start , end: start+nt } ,function() {
+	$("#dtweets").load("${defaultDtweets}", { uid: uid, start: start , end: start+nt } ,function() {
 		start = nt;
-		cview = "GetTweetsFromUser";
+		cview = "${defaultDtweets}";
 	});
 	
 	/* Infinite scrolling */
@@ -180,7 +180,7 @@ $('#navigation').load('MenuController', function(){
 		event.preventDefault();
 		console.log("clicking");
 		$("#content").load( "ViewUser", { viewusername: $(this).text() } , function(data) {
-			start = nt;
+			start = 0;
 			cview = "ViewUser";
 		});
 	});

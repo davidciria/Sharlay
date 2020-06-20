@@ -40,6 +40,7 @@ public class MainController extends HttpServlet {
 		}
 		else {
 			System.out.println("Main Controller: active session has been found,");
+			session.setAttribute("viewuser", session.getAttribute("user"));
 			request.setAttribute("menu","ViewMenuLogged.jsp");
 			request.setAttribute("content","ViewLoginDone.jsp");
 		}

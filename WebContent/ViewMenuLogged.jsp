@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" session="false"%>
-    
-
 
 <div class="w3-bar w3-red">
 	<a class="vT w3-bar-item w3-button" id="LogoutController" href="#"> <i class="fa fa-home" aria-hidden="true"></i> </a>

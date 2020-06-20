@@ -55,7 +55,7 @@ public class GetTweetsFromUser extends HttpServlet {
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			e.printStackTrace();
 		}
-
+		System.out.println("getting tweets from" + dt.getUid() + " " + dt.getStart() + " " + dt.getEnd());
 		request.setAttribute("tweets",tweets);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/viewTweetsFromUser.jsp"); 
 		dispatcher.forward(request,response);

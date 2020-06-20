@@ -54,6 +54,7 @@ public class LoginController extends HttpServlet {
 		    	session.setAttribute("uid", user.getUid());
 		    	session.setAttribute("viewuser", user);
 		    	session.setAttribute("user", user);
+		    	session.setAttribute("defaultDtweets", "GetTweetsFromUser");
 		    	RequestDispatcher dispatcher = request.getRequestDispatcher("ViewLoginDone.jsp");
 			    dispatcher.forward(request, response);
 			    

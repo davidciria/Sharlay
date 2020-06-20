@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1" session="true"%>
 
     
-    <script>
+<script>
 var start = 0;
 var nt = 4;
 var cview = "GetTweetsFromUser";
@@ -34,17 +34,22 @@ $('#navigation').load('MenuController', function(){
 	/* Get and visualize user follows*/
 	$(".vF").click(function(event){
 		event.preventDefault();
-		$("#dtweets").load( "GetFollows", { uid: user.uid, start: 0 , end: nt } , function(data) {
-			start = nt;
-			cview = "GetFollows";
+		$.post("changeSessionVar", {setVar: "viewuser", getVar:"user", mode: 1}, function(data){
+			$.post("changeSessionVar", {setVar: "defaultDtweets", getVar:"GetFollows", mode: 2}, function(data){
+				$("#content").load( "ViewLoginDone.jsp", function(){
+					$("#dtweets").load( "GetFollows", { uid: user.uid, start: 0 , end: nt } , function(data) {
+						start = nt;
+						cview = "GetFollows";
+					});
+				});
+			});
 		});
 	});
 	/* Get and visualize Tweets from a given user */
 	$(".vT").click(function(event){
 		event.preventDefault();
-		$.post( "MainController", { uid: "${user.uid}", start: 0 , end: nt } , function(data) {
-			start = nt;
-			cview = "GetTweetsFromUser";
+		$.post("changeSessionVar", {setVar: "viewuser", getVar:"user", mode: 1}, function(data){
+			$("#content").load( "ViewLoginDone.jsp");
 		});
 	});
 	
