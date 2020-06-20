@@ -37,10 +37,6 @@ $('#navigation').load('MenuController', function(){
 		$.post("changeSessionVar", {setVar: "viewuser", getVar:"user", mode: 1}, function(data){
 			$.post("changeSessionVar", {setVar: "defaultDtweets", getVar:"GetFollows", mode: 2}, function(data){
 				$("#content").load( "ViewLoginDone.jsp", function(){
-					$("#dtweets").load( "GetFollows", { uid: user.uid, start: 0 , end: nt } , function(data) {
-						start = nt;
-						cview = "GetFollows";
-					});
 				});
 			});
 		});
@@ -50,6 +46,17 @@ $('#navigation').load('MenuController', function(){
 		event.preventDefault();
 		$.post("changeSessionVar", {setVar: "viewuser", getVar:"user", mode: 1}, function(data){
 			$("#content").load( "ViewLoginDone.jsp");
+		});
+	});
+	
+	/* Get and visualize Tweets from a given user */
+	$(".vTl").click(function(event){
+		event.preventDefault();
+		$.post("changeSessionVar", {setVar: "viewuser", getVar:"user", mode: 1}, function(data){
+			$.post("changeSessionVar", {setVar: "defaultDtweets", getVar: "GetAllTweets", mode: 2}, function(data){
+				$("#content").load( "ViewLoginDone.jsp", function(){
+				});
+			});
 		});
 	});
 	

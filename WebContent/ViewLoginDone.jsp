@@ -33,26 +33,32 @@ $('#navigation').load('MenuController', function(){
 	/* Get and visualize user follows*/
 	$(".vF").click(function(event){
 		event.preventDefault();
-		$("#dtweets").load( "GetFollows", { uid: uid, start: 0 , end: nt } , function(data) {
-			start = nt;
-			cview = "GetFollows";
+		$.post("changeSessionVar", {setVar: "defaultDtweets", getVar:"GetFollows", mode: 2}, function(data){
+			$("#dtweets").load( "GetFollows", { uid: uid, start: 0 , end: nt } , function(data) {
+				start = nt;
+				cview = "GetFollows";
+			});
 		});
 	});
 	/* Get and visualize Tweets from a given user */
 	$(".vT").click(function(event){
 		event.preventDefault();
-		$("#dtweets").load( "GetTweetsFromUser", { uid: uid, start: 0 , end: nt } , function(data) {
-			start = nt;
-			cview = "GetTweetsFromUser";
+		$.post("changeSessionVar", {setVar: "defaultDtweets", getVar: "GetTweetsFromUser", mode: 2}, function(data){
+			$("#dtweets").load( "GetTweetsFromUser", { uid: uid, start: 0 , end: nt } , function(data) {
+				start = nt;
+				cview = "GetTweetsFromUser";
+			});
 		});
 	});
 	
 	/* Get and visualize Tweets from a given user */
 	$(".vTl").click(function(event){
 		event.preventDefault();
-		$("#dtweets").load( "GetAllTweets", { uid: uid, start: 0 , end: nt } , function(data) {
-			start = nt;
-			cview = "GetAllTweets";
+		$.post("changeSessionVar", {setVar: "defaultDtweets", getVar: "GetAllTweets", mode: 2}, function(data){
+			$("#dtweets").load( "GetAllTweets", { uid: uid, start: 0 , end: nt } , function(data) {
+				start = nt;
+				cview = "GetAllTweets";
+			});
 		});
 	});
 	
