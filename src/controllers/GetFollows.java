@@ -44,17 +44,28 @@ public class GetFollows extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		int uid = (int)session.getAttribute("uid");
 		
+		System.out.println(request.getParameter("uid"));
+		int viewuid = Integer.parseInt(request.getParameter("uid"));
+		
 		try {
 			BeanUtils.populate(dt, request.getParameterMap());
 			ManageUser userManager = new ManageUser();
-			users = userManager.getUserFollows(uid,dt.getStart(),dt.getEnd());
+			users = userManager.getUserFollows(viewuid,dt.getStart(),dt.getEnd());
 			userManager.finalize();
 		
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			e.printStackTrace();
 		}
-
+		
+		boolean mainUser;
+		
+		if(uid != viewuid) {
+			mainUser = false;
+		} else {
+			mainUser = true;
+		}
 		request.setAttribute("users",users);
+		request.setAttribute("mainUser",mainUser);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/viewFollows.jsp"); 
 		dispatcher.forward(request,response);
 	}

@@ -11,7 +11,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.commons.beanutils.BeanUtils;
 
@@ -41,14 +40,13 @@ public class GetFollowers extends HttpServlet {
 		System.out.println("Hola mundo");
 		List<User> users = Collections.emptyList();
 		dTmodel dt = new dTmodel();
-		
-		HttpSession session = request.getSession(false);
-		int uid = (int)session.getAttribute("uid");
+		System.out.println(request.getParameter("uid"));
+		int viewuid = Integer.parseInt(request.getParameter("uid"));
 		
 		try {
 			BeanUtils.populate(dt, request.getParameterMap());
 			ManageUser userManager = new ManageUser();
-			users = userManager.getUserFollowers(uid,dt.getStart(),dt.getEnd());
+			users = userManager.getUserFollowers(viewuid,dt.getStart(),dt.getEnd());
 			userManager.finalize();
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			e.printStackTrace();
