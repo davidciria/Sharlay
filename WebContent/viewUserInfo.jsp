@@ -61,10 +61,10 @@
 	   <p class="w3-center"><img src="w3images/avatar3.png" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
 	   <hr>
 	   <c:if test="${!isFollowed}">
-	   	<button type="button" class="fU w3-button w3-green w3-margin-bottom"><i class="fa fa-plus-circle"></i>&nbsp;Follow</button>
+	   	<button type="button" class="fU w3-button w3-green w3-margin-bottom w3-round-medium"><i class="fa fa-plus-circle"></i>&nbsp;Follow</button>
 	   </c:if>
 	   <c:if test="${isFollowed}">
-	   	<button type="button" class="uU w3-button w3-red w3-margin-bottom"><i class="fa fa-minus-circle"></i>&nbsp;Unfollow</button>
+	   	<button type="button" class="uU w3-button w3-red w3-margin-bottom w3-round-medium"><i class="fa fa-minus-circle"></i>&nbsp;Unfollow</button>
 	   </c:if>
 	   <p id="name"><i class="fa fa-user fa-fw w3-margin-right w3-text-theme"></i> ${viewuser.username} </p>
 		<p id="birthday"><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> ${viewuser.birth} </p>

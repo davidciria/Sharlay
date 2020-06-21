@@ -137,28 +137,27 @@ $('#navigation').load('MenuController', function(){
 		var tweetText = $(this).parent().find("#tweetText");
 		var prevText = tweetText.text();
 		var editButton = $(this);
-		var undoButton = $('<button type="button" class="w3-button w3-green w3-margin-bottom"><i class="fa fa-undo"></i></button>');
-		var saveButton = $('<button type="button" class="w3-button w3-red w3-margin-bottom"><i class="fa fa-floppy-o"></i></button>'); 
+		var trashButton = editButton.prev();
+		var undoButton = $('<button type="button" class="w3-button w3-red w3-margin-bottom w3-right"><i class="fa fa-undo"></i></button>');
+		var saveButton = $('<button type="button" class="w3-button w3-green w3-margin-bottom w3-right"><i class="fa fa-floppy-o"></i></button>'); 
 		
 		tweetText.prop("contentEditable", true);
-        editButton.parent().append(undoButton).append(saveButton);
-        editButton.remove();
+        editButton.replaceWith(undoButton);
+        trashButton.replaceWith(saveButton);
         saveButton.on("click",function(event){
     		event.preventDefault();
     		$.post( "SaveEditTweetFromUser", { tweetid: tweetid, tweetText: tweetText.text() } , function(data) {
     			tweetText.prop("contentEditable", false);
-    			undoButton.parent().append(editButton);
-        		saveButton.remove();
-    			undoButton.remove();
+    			undoButton.replaceWith(editButton);
+    			saveButton.replaceWith(trashButton);
     		});
     	});
         undoButton.on("click",function(event){
     		event.preventDefault();
     		tweetText.text(prevText);
     		tweetText.prop("contentEditable", false);
-			undoButton.parent().append(editButton);
-    		saveButton.remove();
-			undoButton.remove();
+    		undoButton.replaceWith(editButton);
+			saveButton.replaceWith(trashButton);
     	});
 	});
 	
@@ -249,7 +248,7 @@ $('#navigation').load('MenuController', function(){
             <div class="w3-container w3-padding">
               <h6 class="w3-opacity">What do you want to share?</h6>
               <p id="cT" contenteditable="true" class="w3-border w3-padding">I'm enjoying Sharlay!</p>
-              <button id="aT" type="button" class="w3-button w3-theme"><i class="fa fa-pencil"></i> &nbsp;Post</button> 
+              <button id="aT" type="button" class="w3-button w3-theme w3-round-medium w3-right"><i class="fa Example of arrow-circle-o-down fa-arrow-down"></i> &nbsp;Post</button> 
             </div>
           </div>
         </div>
