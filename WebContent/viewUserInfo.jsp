@@ -46,7 +46,7 @@
 		    </div>
 		        <div class="center line-in-middle"></div>
 		    <div class="right">
-		      	<p id="followerstxt" class="w3-center w3-text-theme"><b>Followers</b> </p>
+		      	<p id="followerstxt" class="vS w3-center w3-text-theme" style="text-decoration:none" onmouseover="style='text-decoration:underline; cursor:pointer'" onmouseout="style='text-decoration:none'"><b>Followers</b> </p>
 		      	<p id="followersnum" class="w3-center" style="margin-top: -5px;"> ${user.followers} </p>
 		    </div>
 		</div>

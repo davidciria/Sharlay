@@ -39,6 +39,16 @@ $('#navigation').load('MenuController', function(){
 			});
 		});
 	});
+	/* Get and visualize user followers*/
+	$("body").on("click",".vS",function(event){
+		event.preventDefault();
+		$.post("changeSessionVar", {setVar: "defaultDtweets", getVar:"GetFollowers", mode: 2}, function(data){
+			$("#dtweets").load( "GetFollowers", { uid: uid, start: 0 , end: nt } , function(data) {
+				start = nt;
+				cview = "GetFollowers";
+			});
+		});
+	});
 	/* Get and visualize Tweets from a given user */
 	$(".vT").click(function(event){
 		event.preventDefault();

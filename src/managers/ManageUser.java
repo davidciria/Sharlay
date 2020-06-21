@@ -130,22 +130,24 @@ public class ManageUser {
 	}
 	
 	// Get users a given user is following
-		public List<User> getUserFollowers(Integer uid) {
-			 String query = "SELECT Users.uid,Users.name FROM Users JOIN Follows ON Users.uid = Follows.uid1 WHERE Follows.uid2 = ?;";
-			 PreparedStatement statement = null;
-			 List<User> l = new ArrayList<User>();
-			 try {
-				 statement = db.prepareStatement(query);
-				 statement.setInt(1,uid);
-				 ResultSet rs = statement.executeQuery();
-				 while (rs.next()) {
-					 User user = new User();
-					 user.setUid(rs.getInt("uid"));
-					 user.setUsername(rs.getString("name"));
-					 l.add(user);
-				 }
-				 rs.close();
-				 statement.close();
+		public List<User> getUserFollowers(Integer uid, Integer start, Integer end) {
+			String query = "SELECT Users.uid,Users.username FROM Follows JOIN Users ON Users.uid = Follows.uid1 WHERE Follows.uid2 = ? ORDER BY Users.username LIMIT ?,?;;";
+			PreparedStatement statement = null;
+			List<User> l = new ArrayList<User>();
+			try {
+				statement = db.prepareStatement(query);
+				statement.setInt(1, uid);
+				statement.setInt(2, start);
+				statement.setInt(3, end);
+				ResultSet rs = statement.executeQuery();
+				while (rs.next()) {
+					User user = new User();
+					user.setUid(rs.getInt("uid"));
+					user.setUsername(rs.getString("username"));
+					l.add(user);
+				}
+				rs.close();
+				statement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} 
