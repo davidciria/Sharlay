@@ -10,8 +10,8 @@
 			background-position: center center;
 			opacity: 0.1;
 	}
-	     .splitscreen {
-	    display:flex;
+	.splitscreen {
+    	display:flex;
 	}
 	.splitscreen .left {
 	    flex: 0.45;
@@ -41,12 +41,12 @@
 	   <hr>
 	   <div class="splitscreen">
 		    <div class="left">
-		        <p id="followingtxt" class="w3-center w3-text-theme"><b>Following</b> </p>
+		        <p id="followingtxt" class="vF w3-center w3-text-theme" style="text-decoration:none" onmouseover="style='text-decoration:underline; cursor:pointer'" onmouseout="style='text-decoration:none'"><b>Following</b> </p>
 		        <p id="followingnum" class="w3-center" style="margin-top: -5px;"> ${user.following} </p>
 		    </div>
 		        <div class="center line-in-middle"></div>
 		    <div class="right">
-		      	<p id="followerstxt" class="w3-center w3-text-theme"><b>Followers</b> </p>
+		      	<p id="followerstxt" class="vS w3-center w3-text-theme" style="text-decoration:none" onmouseover="style='text-decoration:underline; cursor:pointer'" onmouseout="style='text-decoration:none'"><b>Followers</b> </p>
 		      	<p id="followersnum" class="w3-center" style="margin-top: -5px;"> ${user.followers} </p>
 		    </div>
 		</div>
