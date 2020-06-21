@@ -30,7 +30,7 @@ $('#navigation').load('MenuController', function(){
 	// *******************************************************************************************//
 	
 	/* Get and visualize user follows*/
-	$(".vF").click(function(event){
+	$("body").on("click",".vF",function(event){
 		event.preventDefault();
 		$.post("changeSessionVar", {setVar: "defaultDtweets", getVar:"GetFollows", mode: 2}, function(data){
 			$("#dtweets").load( "GetFollows", { uid: uid, start: 0 , end: nt } , function(data) {
