@@ -139,8 +139,8 @@ $('#navigation').load('MenuController', function(){
 		var prevText = tweetText.text();
 		var editButton = $(this);
 		var trashButton = editButton.prev();
-		var undoButton = $('<button type="button" class="w3-button w3-red w3-margin-bottom w3-right"><i class="fa fa-undo"></i></button>');
-		var saveButton = $('<button type="button" class="w3-button w3-green w3-margin-bottom w3-right"><i class="fa fa-floppy-o"></i></button>'); 
+		var undoButton = $('<button type="button" class="w3-button w3-red w3-margin-bottom w3-right w3-round-medium"><i class="fa fa-undo"></i></button>');
+		var saveButton = $('<button type="button" class="w3-button w3-green w3-margin-bottom w3-right w3-round-medium" style="margin-left: -5px"><i class="fa fa-floppy-o"></i></button>'); 
 		
 		tweetText.prop("contentEditable", true);
         editButton.replaceWith(undoButton);
