@@ -4,7 +4,7 @@ public class dTmodel implements java.io.Serializable {
 
 	 private static final long serialVersionUID = 1L;
 
-	 private String uid;
+	 private Integer uid;
 	 private Integer start;
 	 private Integer end;
 	 
@@ -13,11 +13,11 @@ public class dTmodel implements java.io.Serializable {
 		 this.end = 4;
 	 }
 
-	 public String getUid() {
+	 public Integer getUid() {
 		 return this.uid;
 	 }
 	 
-	 public void setUid(String uid) {
+	 public void setUid(Integer uid) {
 		 this.uid = uid;
 	 }
 	 

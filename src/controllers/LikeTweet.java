@@ -38,7 +38,7 @@ public class LikeTweet extends HttpServlet {
 		Tweet tweet = new Tweet();
 		try {
 			BeanUtils.populate(tweet, request.getParameterMap());
-
+			System.out.print(tweet.getTweetid());
 			ManageTweet tweetManager = new ManageTweet();
 			boolean result = false;
 			if(!tweetManager.tweetIsLiked(uid, tweet.getTweetid())) result = tweetManager.likeTweet(tweet.getTweetid(), uid);
