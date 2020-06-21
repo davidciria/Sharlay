@@ -33,7 +33,7 @@ public class ViewUser extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		System.out.println("Hii from view user"+request.getParameter("viewusername"));
+		System.out.println("Hii from view user "+request.getParameter("viewusername"));
 		String viewusername = request.getParameter("viewusername").replace(" ", "");
 		
 		HttpSession session = request.getSession(false);
