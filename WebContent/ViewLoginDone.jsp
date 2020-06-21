@@ -32,8 +32,9 @@ $('#navigation').load('MenuController', function(){
 	/* Get and visualize user follows*/
 	$("body").on("click",".vF",function(event){
 		event.preventDefault();
+		var user = $(this).parent().parent().parent().parent();
 		$.post("changeSessionVar", {setVar: "defaultDtweets", getVar:"GetFollows", mode: 2}, function(data){
-			$("#dtweets").load( "GetFollows", { uid: uid, start: 0 , end: nt } , function(data) {
+			$("#dtweets").load( "GetFollows", { uid: user.attr("id"), start: 0 , end: nt } , function(data) {
 				start = nt;
 				cview = "GetFollows";
 			});
@@ -42,8 +43,9 @@ $('#navigation').load('MenuController', function(){
 	/* Get and visualize user followers*/
 	$("body").on("click",".vS",function(event){
 		event.preventDefault();
+		var user = $(this).parent().parent().parent().parent();
 		$.post("changeSessionVar", {setVar: "defaultDtweets", getVar:"GetFollowers", mode: 2}, function(data){
-			$("#dtweets").load( "GetFollowers", { uid: uid, start: 0 , end: nt } , function(data) {
+			$("#dtweets").load( "GetFollowers", { uid: user.attr("id"), start: 0 , end: nt } , function(data) {
 				start = nt;
 				cview = "GetFollowers";
 			});
