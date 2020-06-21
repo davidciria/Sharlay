@@ -32,6 +32,7 @@ $('#navigation').load('MenuController', function(){
 	/* Get and visualize user follows*/
 	$("body").on("click",".vF",function(event){
 		event.preventDefault();
+		console.log("times");
 		var user = $(this).parent().parent().parent().parent();
 		$.post("changeSessionVar", {setVar: "defaultDtweets", getVar:"GetFollows", mode: 2}, function(data){
 			$("#dtweets").load( "GetFollows", { uid: user.attr("id"), start: 0 , end: nt } , function(data) {
@@ -185,7 +186,7 @@ $('#navigation').load('MenuController', function(){
 		var unfollowButton = $('<button type="button" class="uU w3-button w3-red w3-margin-bottom"><i class="fa fa-minus-circle"></i>&nbsp;Unfollow</button>');
 		console.log(user.attr("id"));
 		$.post( "FollowUser", { uid: user.attr("id") } , function(data) {
-			followButton.replaceWith(unfollowButton);
+			//followButton.replaceWith(unfollowButton);
 			$("#duser").load( "GetUserInfo", { uid:  user.attr("id") } ,function() {});
 	  	});
 	});
@@ -199,7 +200,7 @@ $('#navigation').load('MenuController', function(){
 		console.log(user.attr("id"));
 		var followButton = $('<button type="button" class="fU w3-button w3-green w3-margin-bottom"><i class="fa fa-plus-circle"></i>&nbsp;Follow</button>');
 		$.post( "UnfollowUser", { uid: user.attr("id") } , function(data) {
-			unfollowButton.replaceWith(followButton);
+			//unfollowButton.replaceWith(followButton);
 			$("#duser").load( "GetUserInfo", { uid:  user.attr("id") } ,function() {});
 	  	});
 	});
