@@ -50,7 +50,6 @@ public class GetFollowers extends HttpServlet {
 			ManageUser userManager = new ManageUser();
 			users = userManager.getUserFollowers(uid,dt.getStart(),dt.getEnd());
 			userManager.finalize();
-		
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			e.printStackTrace();
 		}
