@@ -9,11 +9,9 @@
 	   <hr class="w3-clear">
 	   <p id="tweetText"> ${t.text} </p>
 	   <c:if test="${t.isLiked}">
-	   ${t.isLiked}
 	   <button type="button" class="dlT w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i> &nbsp;Like</button>
 	   </c:if>
 	   <c:if test="${!t.isLiked}">
-	   ${t.isLiked}
 	   <button type="button" class="lT w3-button w3-theme-l5 w3-margin-bottom"><i class="fa fa-thumbs-up"></i> &nbsp;Like</button>
 	   </c:if>
 	   <c:if test="${t.uid == user.uid}">
