@@ -6,6 +6,10 @@
 	<a class="vF w3-bar-item w3-button w3-hide-small" id="Following" href=#> Following </a>
 	<a class="vTl w3-bar-item w3-button w3-hide-small" id="Following" href=#> Timeline </a>
 	<a class="menu w3-bar-item w3-button w3-hide-small w3-right" id="LogoutController" href=#><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+	<form class="menu w3-bar-item w3-button w3-hide-small w3-right" action="../../form-result.php" method="post" target="_blank">
+	<input type="search" name="busquedamusica" placeholder="Canción, autor, álbum...">
+	<input type="submit" value="Buscar">
+	</form>
 	<a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="stack()">&#9776;</a>
 </div>
 
