@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.beanutils.BeanUtils;
 
@@ -41,11 +42,14 @@ public class GetTweetsFromUser extends HttpServlet {
 		dTmodel dt = new dTmodel();
 		List<Tweet> tweets = Collections.emptyList();
 		
+		HttpSession session = request.getSession();
+		int uid = (int)session.getAttribute("uid");
+		
 		try {
 			BeanUtils.populate(dt, request.getParameterMap());
 			ManageTweet tweetManager = new ManageTweet();
 			try {
-				tweets = tweetManager.getUserTweets(dt.getUid(),dt.getStart(),dt.getEnd());
+				tweets = tweetManager.getUserTweets(dt.getUid(),dt.getStart(),dt.getEnd(), uid);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

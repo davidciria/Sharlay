@@ -136,6 +136,38 @@ public class ManageTweet {
 		return  l;
 	}
 	
+	// Get tweets from a user given start and end
+		public List<Tweet> getUserTweets(Integer uid,Integer start, Integer end, Integer likeUid) throws Exception {
+			String query = "SELECT Tweets.tweetid,Tweets.uid,Tweets.createdAt,Tweets.text FROM Tweets WHERE Tweets.uid = ? ORDER BY Tweets.createdAt DESC LIMIT ?,? ;";
+			PreparedStatement statement = null;
+			List<Tweet> l = new ArrayList<Tweet>();
+			try {
+				statement = db.prepareStatement(query);
+				statement.setInt(1,uid);
+				statement.setInt(2,start);
+				statement.setInt(3,end);
+				ResultSet rs = statement.executeQuery();
+				while (rs.next()) {
+					Tweet tweet = new Tweet();
+		       		tweet.setTweetid(rs.getInt("tweetid"));
+					tweet.setUid(rs.getInt("uid"));
+					tweet.setCreatedAt(rs.getTimestamp("createdAt"));
+					tweet.setText(rs.getString("text"));
+					tweet.setIsLiked(tweetIsLiked(likeUid, tweet.getTweetid()));
+					ManageUser manager = new ManageUser();
+				    User usertweet = manager.getUser(tweet.getUid());
+				      
+				    tweet.setUsername(usertweet.getUsername());
+					l.add(tweet);
+				}
+				rs.close();
+				statement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} 
+			return  l;
+		}
+	
 	public boolean tweetIsLiked(int uid, int tweetid) {
 		String query = "SELECT * FROM Likes WHERE uid=? AND tweetid=?";
 
