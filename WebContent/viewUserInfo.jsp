@@ -14,15 +14,15 @@
 	    display:flex;
 	}
 	.splitscreen .left {
-	    flex: 1;
+	    flex: 0.45;
 	    margin-top: -30px;
 	    margin-bottom: -5px;
 	}.splitscreen .center {
-	    flex: 1;
+	    flex: 0.1;
 	    margin-top: -20px;
 	}
 	.splitscreen .right {
-	    flex: 1;
+	    flex: 0.45;
 	    margin-top: -30px;
 	    margin-bottom: -5px;
 	} 
@@ -37,7 +37,7 @@
 	   <p class="w3-center"><img src="w3images/avatar3.png" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
 	   <hr>
 	   <p id="name"><i class="fa fa-user fa-fw w3-margin-right w3-text-theme"></i> ${user.username} </p>
-	   <p id="uid"><i class="fa fa-envelope fa-fw w3-margin-right w3-text-theme"></i> ${user.mail} </p>
+	   <p id="birthday"><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> ${user.birth} </p>
 	   <hr>
 	   <div class="splitscreen">
 		    <div class="left">
@@ -67,7 +67,7 @@
 	   	<button type="button" class="uU w3-button w3-red w3-margin-bottom"><i class="fa fa-minus-circle"></i>&nbsp;Unfollow</button>
 	   </c:if>
 	   <p id="name"><i class="fa fa-user fa-fw w3-margin-right w3-text-theme"></i> ${viewuser.username} </p>
-	   <p id="uid"><i class="fa fa-envelope fa-fw w3-margin-right w3-text-theme"></i> ${viewuser.mail} </p>
+		<p id="birthday"><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> ${viewuser.birth} </p>
 	   <hr>
 	   <div class="splitscreen">
 		    <div class="left">
