@@ -20,7 +20,6 @@ import models.User;
 @WebServlet("/RegisterController")
 public class RegisterController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private ManageUser manager = new ManageUser();
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -42,6 +41,7 @@ public class RegisterController extends HttpServlet {
 		
 		try {
 			BeanUtils.populate(model, request.getParameterMap());
+			ManageUser manager = new ManageUser();
 			if (manager.isComplete(model)) {
 				boolean userAdded = manager.addUser(model, model.getPwd1());
 				manager.finalize();

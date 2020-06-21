@@ -63,8 +63,8 @@ $('#navigation').load('MenuController', function(){
 	// ***************************************************************************************************//
 	// Elements $("body").on("click","...)  caputure clicks of elements that have been dinamically loaded //
 	// ***************************************************************************************************//
-	
-	/* Delete tweet from user */
+	/*
+	// Delete tweet from user
 	$("body").on("click",".dT",function(event){
 		event.preventDefault();
 		var tweet = $(this).parent();
@@ -75,7 +75,7 @@ $('#navigation').load('MenuController', function(){
 	});
 	
 
-	/* Like tweet from user */
+	// Like tweet from user 
 	$("body").on("click",".lT",function(event){
 		event.preventDefault();
 		var tweet = $(this).parent();
@@ -89,7 +89,7 @@ $('#navigation').load('MenuController', function(){
 	  	});
 	});
 	
-	/* Dislike tweet from user */
+	// Dislike tweet from user 
 	$("body").on("click",".dlT",function(event){
 		event.preventDefault();
 		var tweet = $(this).parent();
@@ -102,7 +102,7 @@ $('#navigation').load('MenuController', function(){
 		});
 	});
 	
-	/* Edit tweet from user */
+	// Edit tweet from user 
 	$("body").on("click",".eT",function(event){
 		event.preventDefault();
 		
@@ -115,7 +115,7 @@ $('#navigation').load('MenuController', function(){
 	});
 	
 	
-	/* Unfollow user */
+	// Unfollow user 
 	$("body").on("click",".uF",function(event){
 		event.preventDefault();
 		console.log("LOL?");
@@ -125,6 +125,8 @@ $('#navigation').load('MenuController', function(){
 			start = start - 1;
 	  	});
 	});
+	
+	*/
 
 });
 });

@@ -455,6 +455,7 @@ public class ManageTweet {
 		      tweet.setComments(rs.getInt("comments"));
 		      tweet.setCreatedAt(rs.getTimestamp("createdAt"));
 		      tweet.setParentTweet(rs.getInt("parentTweet"));
+		      tweet.setIsLiked(this.tweetIsLiked(tweet.getUid(), tweet.getTweetid()));
 		      
 		      ManageUser manager = new ManageUser();
 		      User usertweet = manager.getUser(tweet.getUid());
