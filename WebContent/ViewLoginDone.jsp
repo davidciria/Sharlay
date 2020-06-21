@@ -93,9 +93,13 @@ $('#navigation').load('MenuController', function(){
 		event.preventDefault();
 		var tweet = $(this).parent();
 		var icon = $(this);
-		$.post( "LikeTweet", { tweetid: $(this).parent().attr("id") } , function(data) {
-			icon.removeClass("lT").addClass("dlT");
-			icon.removeClass("w3-theme-l5").addClass("w3-theme-d1");
+		$.post( "LikeTweet", { tweetid: $(this).parent().attr("id") } , function(data, status) {
+			if(status == "success"){
+				icon.removeClass("lT").addClass("dlT");
+				icon.removeClass("w3-theme-l5").addClass("w3-theme-d1");
+			}
+	  	}).fail(function(response, status) {
+	  		console.log("Some problem trying to like tweet.");
 	  	});
 	});
 	
@@ -104,10 +108,14 @@ $('#navigation').load('MenuController', function(){
 		event.preventDefault();
 		var tweet = $(this).parent();
 		var icon = $(this);
-		$.post( "DislikeTweet", { tweetid: $(this).parent().attr("id") } , function(data) {
-			icon.removeClass("dlT").addClass("lT");
-			icon.removeClass("w3-theme-d1").addClass("w3-theme-l5");
-		});
+		$.post( "DislikeTweet", { tweetid: $(this).parent().attr("id") } , function(data, status) {
+			if(status == "success"){
+				icon.removeClass("dlT").addClass("lT");
+				icon.removeClass("w3-theme-d1").addClass("w3-theme-l5");
+			}
+		}).fail(function(response, status) {
+			console.log("Some problem trying to dislike tweet.");
+	  	});
 	});
 	
 	/* Edit tweet from user */

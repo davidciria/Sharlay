@@ -268,7 +268,7 @@ public class ManageTweet {
 	}	
  
 
-	public void dislikeTweet(Integer tweetid, Integer uid) throws Exception{
+	public boolean dislikeTweet(Integer tweetid, Integer uid) throws Exception{
 	
 		String query1 = "DELETE FROM Likes WHERE tweetid = ? and uid = ?";
 		PreparedStatement statement1 = null; //afegeix like a la taula de likes
@@ -281,7 +281,7 @@ public class ManageTweet {
 			statement1.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return;
+			return false;
 		}
 		
 		String query2 = "UPDATE Tweets SET likes = likes - 1 WHERE tweetid = ?";
@@ -294,12 +294,15 @@ public class ManageTweet {
 			statement2.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return;
+			return false;
 		}
+		
+		return true;
 	}
+	
 
 
-	public void likeTweet(Integer tweetid, Integer uid) throws Exception{
+	public boolean likeTweet(Integer tweetid, Integer uid) throws Exception{
 	
 		String query1 = "INSERT INTO Likes (uid,tweetid) VALUES (?,?)";
 		PreparedStatement statement1 = null; //afegeix like a la taula de likes
@@ -310,26 +313,25 @@ public class ManageTweet {
 			statement1.setInt(2, tweetid);
 			statement1.executeUpdate();
 			statement1.close();
-
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return;
+			return false; //Si el usuari no ha pogut donarli like que no intenti sumarli un like al tweet.
 		}
 		
 		String query2 = "UPDATE Tweets SET likes = likes + 1 WHERE tweetid = ?";
 		PreparedStatement statement2 = null; //inrementem comptador de likes a liked tweet 
 		
 		try {
-			
 			statement2 = db.prepareStatement(query2);
 			statement2.setInt(1, tweetid);
 			statement2.executeUpdate();
 			statement2.close();
-
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return;
+			return false;
 		}
+		
+		return true;
 	}
 	
 	

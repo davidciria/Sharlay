@@ -39,8 +39,13 @@ public class DislikeTweet extends HttpServlet {
 		try {
 			BeanUtils.populate(tweet, request.getParameterMap());
 			ManageTweet tweetManager = new ManageTweet();
-			tweetManager.dislikeTweet(tweet.getTweetid(), uid);
+			boolean result = false;
+			if(tweetManager.tweetIsLiked(uid, tweet.getTweetid())) result = tweetManager.dislikeTweet(tweet.getTweetid(), uid);
 			tweetManager.finalize();
+			if(result) response.setStatus(HttpServletResponse.SC_ACCEPTED);
+			else{
+				response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+			}
 		}catch(Throwable e) {
 			e.printStackTrace();
 		}
