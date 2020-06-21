@@ -1,6 +1,8 @@
 package controllers;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,13 +31,16 @@ public class searchUsers extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ManageUser userManager = new ManageUser();
-		
+		System.out.println("sdaasdasd");
 		try {
 			request.setAttribute("searchResult", userManager.searchUsers(request.getParameter("searchWords")));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("searchResult.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	/**
