@@ -1,31 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="true" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!-- style to create vertical line -->
-    <style> 
-		.line-in-middle {
-	    background-image: linear-gradient(#000, #000);
-  		background-size: 0.5px 100%;
-  		background-repeat: no-repeat;
-  		background-position: center center;
-  		opacity: 0.1;
-		}
-       .splitscreen {
-		    display:flex;
-		}
-		.splitscreen .left {
-		    flex: 0.45;
-		    margin-top: -30px;
-		    margin-bottom: -5px;
-		}.splitscreen .center {
-		    flex: 0.1;
-		    margin-top: -20px;
-		}
-		.splitscreen .right {
-		    flex: 0.45;
-		    margin-top: -30px;
-		    margin-bottom: -5px;
-		} 
-    </style> 
+<style> 
+	.line-in-middle {
+	   background-image: linear-gradient(#000, #000);
+			background-size: 0.5px 100%;
+			background-repeat: no-repeat;
+			background-position: center center;
+			opacity: 0.1;
+	}
+	     .splitscreen {
+	    display:flex;
+	}
+	.splitscreen .left {
+	    flex: 1;
+	    margin-top: -30px;
+	    margin-bottom: -5px;
+	}.splitscreen .center {
+	    flex: 1;
+	    margin-top: -20px;
+	}
+	.splitscreen .right {
+	    flex: 1;
+	    margin-top: -30px;
+	    margin-bottom: -5px;
+	} 
+</style> 
 
 <c:if test="${viewuser.uid == user.uid}">
 	<div class="w3-card w3-round w3-white">
