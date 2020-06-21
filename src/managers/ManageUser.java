@@ -386,6 +386,31 @@ public class ManageUser {
 		}
 	}
 	
+	public List<User> searchUsers(String searchWords) throws Exception{
+		List<User> users = new ArrayList<>();
+		String regex = ".*(?i)(" + searchWords + ").*";
+		
+		String query = "SELECT uid FROM Users WHERE username REGEXP ? OR firstname REGEXP ? OR lastname REGEXP ?";
+		
+		PreparedStatement statement = null; 
+		try {
+			statement = db.prepareStatement(query);
+			statement.setString(1, regex);
+			statement.setString(2, regex);
+			statement.setString(3, regex);
+			ResultSet rs = statement.executeQuery();
+			while(rs.next()) {
+				User user = this.getUser(rs.getInt("uid"));
+				users.add(user);
+			}
+			statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return users;
+	}
+	
 	//TODO: hasPermission returns isAdmin related to extended class admin
 	
 	
