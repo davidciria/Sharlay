@@ -22,9 +22,10 @@ $(document).ready(function(){
 		event.preventDefault();
 	});
 	$("body").on("submit","form", function(event) {
-		//console.log("Submit default");
-		$('#content').load($(this).attr('action'),$(this).serialize());
-	    event.preventDefault();
+		if($(this).attr('action') != "#"){
+			$('#content').load($(this).attr('action'),$(this).serialize());
+		    event.preventDefault();
+		}
 	});
 });
 </script>
