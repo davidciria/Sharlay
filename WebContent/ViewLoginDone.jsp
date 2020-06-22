@@ -32,6 +32,7 @@ $('#navigation').load('MenuController', function(){
 	/* Get and visualize user follows*/
 	$("body").on("click",".vF",function(event){
 		event.preventDefault();
+		event.stopImmediatePropagation();
 		console.log("times");
 		var user = $(this).parent().parent().parent().parent();
 		$.post("changeSessionVar", {setVar: "defaultDtweets", getVar:"GetFollows", mode: 2}, function(data){
@@ -44,6 +45,7 @@ $('#navigation').load('MenuController', function(){
 	/* Get and visualize user followers*/
 	$("body").on("click",".vS",function(event){
 		event.preventDefault();
+		event.stopImmediatePropagation();
 		var user = $(this).parent().parent().parent().parent();
 		$.post("changeSessionVar", {setVar: "defaultDtweets", getVar:"GetFollowers", mode: 2}, function(data){
 			$("#dtweets").load( "GetFollowers", { uid: user.attr("id"), start: 0 , end: nt } , function(data) {
@@ -55,6 +57,7 @@ $('#navigation').load('MenuController', function(){
 	/* Get and visualize Tweets from a given user */
 	$(".vT").click(function(event){
 		event.preventDefault();
+		event.stopImmediatePropagation();
 		$.post("changeSessionVar", {setVar: "defaultDtweets", getVar: "GetTweetsFromUser", mode: 2}, function(data){
 			$("#dtweets").load( "GetTweetsFromUser", { uid: uid, start: 0 , end: nt } , function(data) {
 				start = nt;
@@ -66,6 +69,7 @@ $('#navigation').load('MenuController', function(){
 	/* Get and visualize Tweets from a given user */
 	$(".vTl").click(function(event){
 		event.preventDefault();
+		event.stopImmediatePropagation();
 		$.post("changeSessionVar", {setVar: "defaultDtweets", getVar: "GetAllTweets", mode: 2}, function(data){
 			$("#dtweets").load( "GetAllTweets", { uid: uid, start: 0 , end: nt } , function(data) {
 				start = nt;
@@ -77,6 +81,7 @@ $('#navigation').load('MenuController', function(){
 	/* Add tweet and reload Tweet Visualitzation */
 	$("#aT").click(function(event){
 		event.preventDefault();
+		event.stopImmediatePropagation();
 		$.post( "AddTweetFromUser", { uid: uid, text: $("#cT").text() } , function(data) {
 			$("#dtweets").load( "GetTweetsFromUser", { uid: uid, start: 0 , end: nt } ,function() {
 				start = nt;
@@ -92,6 +97,7 @@ $('#navigation').load('MenuController', function(){
 	/* Delete tweet from user */
 	$("body").on("click",".dT",function(event){
 		event.preventDefault();
+		event.stopImmediatePropagation();
 		var tweet = $(this).parent();
 		$.post( "DelTweetFromUser", { tweetid: $(this).parent().attr("id") } , function(data) {
 			tweet.remove();
@@ -103,6 +109,7 @@ $('#navigation').load('MenuController', function(){
 	/* Like tweet from user */
 	$("body").on("click",".lT",function(event){
 		event.preventDefault();
+		event.stopImmediatePropagation();
 		var tweet = $(this).parent();
 		var icon = $(this);
 		$.post( "LikeTweet", { tweetid: $(this).parent().attr("id") } , function(data, status) {
@@ -118,6 +125,7 @@ $('#navigation').load('MenuController', function(){
 	/* Dislike tweet from user */
 	$("body").on("click",".dlT",function(event){
 		event.preventDefault();
+		event.stopImmediatePropagation();
 		var tweet = $(this).parent();
 		var icon = $(this);
 		$.post( "DislikeTweet", { tweetid: $(this).parent().attr("id") } , function(data, status) {
@@ -133,7 +141,7 @@ $('#navigation').load('MenuController', function(){
 	/* Edit tweet from user */
 	$("body").on("click",".eT",function(event){
 		event.preventDefault();
-		
+		event.stopImmediatePropagation();
 		var tweetid = $(this).parent().attr("id");
 		var tweetText = $(this).parent().find("#tweetText");
 		var prevText = tweetText.text();
@@ -179,6 +187,7 @@ $('#navigation').load('MenuController', function(){
 	/* Follow user */
 	$("body").on("click",".fU",function(event){
 		event.preventDefault();
+		event.stopImmediatePropagation();
 		console.log("button follow" + "${viewuser.username}");
 		var followButton = $(this);
 		var user = $(this).parent().parent();
@@ -193,6 +202,7 @@ $('#navigation').load('MenuController', function(){
 	/* Unfollow user */
 	$("body").on("click",".uU",function(event){
 		event.preventDefault();
+		event.stopImmediatePropagation();
 		console.log("button unfollow");
 		var unfollowButton = $(this);
 		var user = $(this).parent().parent();
@@ -207,6 +217,7 @@ $('#navigation').load('MenuController', function(){
 	/* Edit Profile */
 	$("body").on("click", ".eP",function(event){
 		event.preventDefault();
+		event.stopImmediatePropagation();
 		$("#dtweets").load( "EditProfileForm", {firstname: null, lastname: null, username: null } , function(data) {
 			start = nt;
 			cview = "EditProfileForm";
@@ -215,6 +226,7 @@ $('#navigation').load('MenuController', function(){
 	
 	$("body").on("click", ".uVw", function(event){
 		event.preventDefault();
+		event.stopImmediatePropagation();
 		console.log("clicking");
 		$("#content").load( "ViewUser", { viewusername: $(this).text() } , function(data) {
 			start = 0;
