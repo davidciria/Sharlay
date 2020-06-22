@@ -1,6 +1,7 @@
 package controllers;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import managers.ManageUser;
+import models.User;
 
 /**
  * Servlet implementation class searchUsers
@@ -33,7 +35,8 @@ public class searchUsers extends HttpServlet {
 		ManageUser userManager = new ManageUser();
 		System.out.println("sdaasdasd");
 		try {
-			request.setAttribute("searchResult", userManager.searchUsers(request.getParameter("searchWords")));
+			List<User> searchResult = userManager.searchUsers(request.getParameter("searchWords"));
+			request.setAttribute("searchResult", searchResult);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

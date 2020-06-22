@@ -62,13 +62,13 @@ public class GetUserInfo extends HttpServlet {
 				BeanUtils.populate(newuser, request.getParameterMap());
 				ManageUser userManager = new ManageUser();
 				newuser = userManager.getUser(viewuser.getUid());
+				session.setAttribute("isFollowed", userManager.userIsFollowed(uid, viewuser.getUid()));
 				userManager.finalize();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			System.out.println(viewuser.getUid());
 			session.setAttribute("viewuser",newuser);
-			session.setAttribute("isFollowed",!(boolean)session.getAttribute("isFollowed"));
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/viewUserInfo.jsp"); 
 			dispatcher.include(request,response);
 		}
