@@ -507,5 +507,49 @@ public class ManageTweet {
 		return tweets;
 		
 	}
+	
+	public List<Tweet> getAllTweets(int uid,int start, int end) throws Exception {
+
+		List<Tweet> tweets = new ArrayList<Tweet>();
+		
+		String query = "SELECT * FROM Tweets ORDER BY createdAt DESC LIMIT ?,? ;";
+
+		PreparedStatement statement = null;
+		try {
+			statement = db.prepareStatement(query);
+			statement.setInt(1, start);
+			statement.setInt(2, end);
+			ResultSet rs = statement.executeQuery();
+
+			while (rs.next()) {
+		      Tweet tweet = new Tweet();
+		      
+		      /*Omplim les dades del tweet*/
+		      tweet.setUid(rs.getInt("uid"));
+		      tweet.setTweetid(rs.getInt("tweetid"));
+		      tweet.setText(rs.getString("text"));
+		      tweet.setLikes(rs.getInt("likes"));
+		      tweet.setRetweets(rs.getInt("retweets"));
+		      tweet.setComments(rs.getInt("comments"));
+		      tweet.setCreatedAt(rs.getTimestamp("createdAt"));
+		      tweet.setParentTweet(rs.getInt("parentTweet"));
+		      tweet.setIsLiked(this.tweetIsLiked(uid, tweet.getTweetid()));
+		      
+		      ManageUser manager = new ManageUser();
+		      User usertweet = manager.getUser(tweet.getUid());
+		      
+		      tweet.setUsername(usertweet.getUsername());
+		      
+		      /*Afegim el tweet a la llista de tweets*/
+		      tweets.add(tweet);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return tweets;
+		
+	}
 
 }

@@ -43,7 +43,7 @@ public class GetAllTweets extends HttpServlet {
 		try {
 			BeanUtils.populate(dt, request.getParameterMap());
 			ManageTweet tweetManager = new ManageTweet();
-			tweets = tweetManager.getAllTweets(dt.getUid());
+			tweets = tweetManager.getAllTweets(dt.getUid(), dt.getStart(), dt.getEnd());
 			tweetManager.finalize();
 		
 		} catch (Exception e) {
