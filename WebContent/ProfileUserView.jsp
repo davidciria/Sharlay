@@ -2,10 +2,11 @@
 
     
 <script>
-var start = 0;
-var nt = 4;
-var cview = "GetTweetsFromUser";
-var uid = "${viewuser.uid}"; //uid of view user.
+
+start = 0;
+nt = 4;
+cview = "GetTweetsFromUser";
+uid = "${viewuser.uid}"; //uid of view user.
 	
 $(document).ready(function(){
 $('#navigation').load('MenuController', function(){
@@ -13,17 +14,6 @@ $('#navigation').load('MenuController', function(){
 	$("#dtweets").load( "GetTweetsFromUser", { uid: uid, start: start , end: start+nt } ,function() {
 		start = nt;
 		cview = "GetTweetsFromUser";
-	});
-	
-	/* Infinite scrolling */
-	$(window).scroll(function(event) {
-		event.preventDefault();
-		if(Math.ceil($(window).scrollTop()) == $(document).outerHeight() - $(window).outerHeight()) {
-			$.post( cview , { uid: uid, start: start , end: start+nt } , function(data) {
-	    	  	$("#dtweets").append(data);
-	    		start = start + nt;
-	   		});
-	    }
 	});
 	
 	// *******************************************************************************************//
@@ -44,7 +34,9 @@ $('#navigation').load('MenuController', function(){
 	$(".vT").click(function(event){
 		event.preventDefault();
 		$.post("changeSessionVar", {setVar: "viewuser", getVar:"user", mode: 1}, function(data){
-			$("#content").load( "ViewLoginDone.jsp");
+			$.post("changeSessionVar", {setVar: "defaultDtweets", getVar: "GetTweetsFromUser", mode: 2}, function(data){
+				$("#content").load( "ViewLoginDone.jsp");
+			});
 		});
 	});
 	
@@ -53,6 +45,8 @@ $('#navigation').load('MenuController', function(){
 		event.preventDefault();
 		$.post("changeSessionVar", {setVar: "viewuser", getVar:"user", mode: 1}, function(data){
 			$.post("changeSessionVar", {setVar: "defaultDtweets", getVar: "GetAllTweets", mode: 2}, function(data){
+				start=0;
+				nt=4;
 				$("#content").load( "ViewLoginDone.jsp", function(){
 				});
 			});

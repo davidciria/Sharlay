@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="true"%>
 
 <script>
-var start = 0;
-var nt = 4;
+start = 0;
+nt = 4;
 var cview = "${defaultDtweets}";
 var uid = "${user.uid}";
 	
@@ -14,16 +14,7 @@ $('#navigation').load('MenuController', function(){
 		cview = "${defaultDtweets}";
 	});
 	
-	/* Infinite scrolling */
-	$(window).scroll(function(event) {
-		event.preventDefault();
-		if(Math.ceil($(window).scrollTop()) == $(document).outerHeight() - $(window).outerHeight()) {
-			$.post( cview , { uid: uid, start: start , end: start+nt } , function(data) {
-	    	  	$("#dtweets").append(data);
-	    		start = start + nt;
-	   		});
-	    }
-	});
+//Scrolling
 	
 	// *******************************************************************************************//
 	// Elements $("#id").click(...)  caputure clicks of elements that have been statically loaded //

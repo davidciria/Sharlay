@@ -18,6 +18,8 @@
 
 var start = 0;
 var nt = 4;
+var cview;
+var uid;
 
 $(document).ready(function(){
 	$.ajaxSetup({ cache: false }); //Avoids Internet Explorer caching!	
@@ -36,6 +38,19 @@ $(document).ready(function(){
 	// ***************************************************************************************************//
 	// Elements $("body").on("click","...)  caputure clicks of elements that have been dinamically loaded //
 	// ***************************************************************************************************//
+	
+	/* Infinite scrolling */
+	$(window).scroll(function(event) {
+		event.preventDefault();
+		console.log("From "+start+" to "+nt)
+		if(Math.ceil($(window).scrollTop()) == $(document).outerHeight() - $(window).outerHeight()) {
+			$.post( cview , { uid: uid, start: start , end: start+nt } , function(data) {
+				$("#dtweets").append(data);
+				console.log("Appending");
+	    		start = start + nt;
+	   		});
+	    }
+	});
 	
 	/* Delete tweet from user */
 	$("body").on("click",".dT",function(event){
@@ -165,12 +180,14 @@ $(document).ready(function(){
 		});
 	});
 	
+	/*View user profile*/
 	$("body").on("click", ".uVw", function(event){
 		event.preventDefault();
 		//event.stopImmediatePropagation();
 		console.log("clicking");
 		$("#content").load( "ViewUser", { viewusername: $(this).text() } , function(data) {
 			start = 0;
+			nt=4;
 			cview = "ViewUser";
 		});
 	});
@@ -180,6 +197,7 @@ $(document).ready(function(){
 		event.preventDefault();
 		//event.stopImmediatePropagation();
 		console.log("times");
+		console.log(nt);
 		var user = $(this).parent().parent().parent().parent();
 		$.post("changeSessionVar", {setVar: "defaultDtweets", getVar:"GetFollows", mode: 2}, function(data){
 			$("#dtweets").load( "GetFollows", { uid: user.attr("id"), start: 0 , end: nt } , function(data) {
