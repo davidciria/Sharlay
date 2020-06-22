@@ -214,6 +214,18 @@ $('#navigation').load('MenuController', function(){
 	  	});
 	});
 	
+	/* Unfollow user */
+	$("body").on("click",".uF",function(event){
+		event.preventDefault();
+		event.stopImmediatePropagation();
+		console.log("button unfollow");
+		var unfollowButton = $(this);
+		var user = $(this).parent().parent();
+		$.post( "UnfollowUser", { uid: user.attr("id") } , function(data) {
+			user.remove();
+	  	});
+	});
+	
 	/* Edit Profile */
 	$("body").on("click", ".eP",function(event){
 		event.preventDefault();
