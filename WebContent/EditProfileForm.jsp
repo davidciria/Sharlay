@@ -67,24 +67,29 @@ $(document).ready(function(){
 		});
 	});
 	
+	$("#confirmDialog").dialog({
+        autoOpen: false,
+        modal: true
+      });
+	
+	
 	 $("#deleteAccount").click(function(e) {
 	       e.preventDefault();
-	       var targetUrl = $(this).attr("href");
 
 	       $("#confirmDialog").dialog({
-	         buttons : {
-	           "Confirm" : function() {
-	             //Delete account.
-	             $(this).dialog("close");
-	             $("#content").load("DeleteUser", {userToDeleteUid: "${uid}"});
-	           },
-	           "Cancel" : function() {
-	             $(this).dialog("close");
+	           buttons : {
+	             "Confirm" : function() {
+	               //Delete account.
+	               $(this).dialog("close");
+	               $("#content").load("DeleteUser", {userToDeleteUid: "${uid}"});
+	             },
+	             "Cancel" : function() {
+	               $(this).dialog("close");
+	             }
 	           }
-	         }
-	       });
-
-	       $("#confirmDialog").dialog("open");
+	         });
+	       
+	       $("#confirmDialog").dialog('open');
 	  });
 	
 });
