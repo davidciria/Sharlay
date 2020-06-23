@@ -35,6 +35,17 @@ $(document).ready(function(){
 		}
 	});
 	
+	$(".vTa").click(function(event){
+		event.preventDefault();
+		event.stopImmediatePropagation();
+		$.post("changeSessionVar", {setVar: "defaultDtweets", getVar: "GetAllTweets", mode: 2}, function(data){
+			$("#dtweets").load( "GetAllTweetsFromAnonymouse", { start: 0 , end: nt } , function(data) {
+				start = nt;
+				cview = "GetAllTweetsFromAnonymouse";
+			});
+		});
+	});
+	
 	// ***************************************************************************************************//
 	// Elements $("body").on("click","...)  caputure clicks of elements that have been dinamically loaded //
 	// ***************************************************************************************************//
