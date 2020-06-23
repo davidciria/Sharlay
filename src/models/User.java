@@ -32,6 +32,7 @@ public class User implements java.io.Serializable {
 	private Integer followers = null;
 	private Integer following = null;
 	private Boolean isVerified = null;
+	private Boolean isAdmin = null;
 	
 	//no sabem si treure-ho
 	private String pwd1 = "";
@@ -269,6 +270,13 @@ public class User implements java.io.Serializable {
 		this.isVerified = isVerified;
 	}
 	
+	public Boolean getIsAdmin() {
+		return isAdmin;
+	}
+	
+	public void setIsAdmin(Boolean isAdmin) {
+		this.isAdmin = isAdmin;
+	}
 	
 
 }

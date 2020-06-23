@@ -8,6 +8,9 @@
 <title> Sharlay </title>
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-purple.css">
@@ -189,8 +192,11 @@ $(document).ready(function(){
 	/* Edit Profile */
 	$("body").on("click", ".eP",function(event){
 		event.preventDefault();
+		var uid = $(this).parent().parent().parent().attr("id");
+		
+		console.log(uid);
 		//event.stopImmediatePropagation();
-		$("#dtweets").load( "EditProfileForm", {firstname: null, lastname: null, username: null } , function(data) {
+		$("#dtweets").load( "EditProfileForm", { uid: uid, firstCall: true } , function(data) {
 			start = nt;
 			cview = "EditProfileForm";
 		});

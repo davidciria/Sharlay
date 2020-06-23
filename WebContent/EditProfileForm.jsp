@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="models.User" session="true"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="models.User" session="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!-- Parsley JS -->
@@ -51,20 +51,45 @@ $(document).ready(function(){
 	  
 	$(".editForm").submit( function(event) {
 		event.preventDefault();
+		var uid = $(this).attr("id");
 		var formParams = $(this).serializeArray();
-		var firstname = "${user.firstname}";
-		var lastname = "${user.lastname}";
-		var username = "${user.username}";
+		var firstname = "${editUser.firstname}";
+		var lastname = "${editUser.lastname}";
+		var username = "${editUser.username}";
 		var newfirstname = null;
 		var newlastname = null;
 		var newusername = null;
 		if(firstname != formParams[0].value) newfirstname = formParams[0].value;
 		if(lastname != formParams[1].value) newlastname = formParams[1].value;
 		if(username != formParams[2].value) newusername = formParams[2].value;
-		$('#dtweets').load("EditProfileForm",{firstname: newfirstname, lastname: newlastname, username: newusername}, function(data){
+		$('#dtweets').load("EditProfileForm",{firstname: newfirstname, lastname: newlastname, username: newusername, uid: "${uid}",firstCall: false}, function(data){
 			$("#duser").load( "GetUserInfo", { uid:  uid } ,function() {});
 		});
 	});
+	
+	$("#dialog").dialog({
+        autoOpen: false,
+        modal: true
+      });
+    });
+
+    $(".confirmLink").click(function(e) {
+      e.preventDefault();
+      var targetUrl = $(this).attr("href");
+
+      $("#dialog").dialog({
+        buttons : {
+          "Confirm" : function() {
+            window.location.href = targetUrl;
+          },
+          "Cancel" : function() {
+            $(this).dialog("close");
+          }
+        }
+      });
+
+      $("#dialog").dialog("open");
+	
 	});
 </script>
 
@@ -91,17 +116,28 @@ $(document).ready(function(){
 </ul>
 <div class="w3-container w3-card w3-white w3-round w3-margin w3-animate-opacity">
 
-<form data-parsley-validate action="#" method="POST" class="editForm">
-	<p>      
-    <label class="w3-text-red"><b> First Name </b></label>
-    <input class="editinput w3-input w3-border w3-light-grey" type="text" id="firstname" name="firstname" placeholder="First Name" value="${user.firstname}" required pattern="^[a-zA-Z0-9_ ]+$" data-parsley-maxlength="50"></p>
-    <p>     
-    <label class="w3-text-red"><b> Last Name </b></label>
-    <input class="editinput w3-input w3-border w3-light-grey" type="text" id="lastname" name="lastname" placeholder="Last Name" value="${user.lastname}" required pattern="^[a-zA-Z0-9_ ]+$" data-parsley-maxlength="50"></p>
-    <p>    
-    <label class="w3-text-red"><b> Username </b></label>
-    <input class="editinput w3-input w3-border w3-light-grey" type="text" id="username" name="username" placeholder="Username" value="${user.username}" required pattern="^[a-zA-Z0-9_]+$"></p>
-    <p>
-    <input class="editinput w3-btn w3-red" type="submit" name="submit" value="Update"></p>
-</form>
+<div id="dialog" title="Confirmation Required">
+     Are you sure about this?
 </div>
+
+<form id="${uid}" data-parsley-validate action="#" method="POST" class="editForm">
+	<p>      
+    <label class="w3-text-purple"><b> First Name </b></label>
+    <input class="editinput w3-input w3-border w3-light-grey" type="text" id="firstname" name="firstname" placeholder="First Name" value="${firstname}" required pattern="^[a-zA-Z0-9_ ]+$" data-parsley-maxlength="50"></p>
+    <p>     
+    <label class="w3-text-purple"><b> Last Name </b></label>
+    <input class="editinput w3-input w3-border w3-light-grey" type="text" id="lastname" name="lastname" placeholder="Last Name" value="${lastname}" required pattern="^[a-zA-Z0-9_ ]+$" data-parsley-maxlength="50"></p>
+    <p>    
+    <label class="w3-text-purple"><b> Username </b></label>
+    <input class="editinput w3-input w3-border w3-light-grey" type="text" id="username" name="username" placeholder="Username" value="${username}" required pattern="^[a-zA-Z0-9_]+$"></p>
+    <p>
+    <input class="editinput w3-button w3-round-medium w3-purple" type="submit" name="submit" value="Update"></p>
+</form>
+
+<c:if test="${isAdmin}">
+ <button type="button" class="w3-button w3-margin-bottom w3-round-medium w3-red"><i class="fa fa-warning"></i> &nbsp;Delete account</button>
+</c:if>
+</div>
+
+<a class="confirmLink" href="http://someLinkWhichRequiresConfirmation.com">Click here</a>
+<a class="confirmLink" href="http://anotherSensitiveLink">Or, you could click here</a>

@@ -39,6 +39,7 @@ public class GetUserInfo extends HttpServlet {
 		ManageUser userManager = new ManageUser();
 		
 		if ( session != null) {
+			//Mirar el cas de admin
 			int uid = (int)session.getAttribute("uid");
 			cview = "/viewUserInfo.jsp";
 			User user = (User)session.getAttribute("user");

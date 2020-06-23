@@ -299,6 +299,7 @@ public class ManageUser {
 	      	user.setFollowers(rs.getInt("followers"));
 	      	user.setFollowing(rs.getInt("following"));
 	      	user.setIsVerified(rs.getBoolean("isVerified"));
+	      	user.setIsAdmin(rs.getBoolean("isAdmin"));
 		}
 	
 		return user;
