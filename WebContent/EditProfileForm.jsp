@@ -70,12 +70,11 @@ $(document).ready(function(){
 	$("#confirmDialog").dialog({
         autoOpen: false,
         modal: true
-      });
-	
+      }).prev(".ui-dialog-titlebar").css("background","purple");
 	
 	 $("#deleteAccount").click(function(e) {
 	       e.preventDefault();
-
+			
 	       $("#confirmDialog").dialog({
 	           buttons : {
 	             "Confirm" : function() {
