@@ -37,13 +37,12 @@ $(document).ready(function(){
 	
 	$(".vTa").click(function(event){
 		event.preventDefault();
-		event.stopImmediatePropagation();
-		$.post("changeSessionVar", {setVar: "defaultDtweets", getVar: "GetAllTweets", mode: 2}, function(data){
-			$("#dtweets").load( "GetAllTweetsFromAnonymouse", { start: 0 , end: nt } , function(data) {
+		//$.post("changeSessionVar", {setVar: "defaultDtweets", getVar: "GetAllTweets", mode: 2}, function(data){
+			$("#content").load( "GetAllTweetsFromAnonymouse", { start: 0 , end: nt } , function(data) {
 				start = nt;
 				cview = "GetAllTweetsFromAnonymouse";
 			});
-		});
+		//});
 	});
 	
 	// ***************************************************************************************************//
@@ -56,7 +55,12 @@ $(document).ready(function(){
 		console.log("From "+start+" to "+nt)
 		if(Math.ceil($(window).scrollTop()) == $(document).outerHeight() - $(window).outerHeight()) {
 			$.post( cview , { uid: uid, start: start , end: nt } , function(data) {
-				$("#dtweets").append(data);
+				if(cview != "GetAllTweetsFromAnonymouse"){
+					$("#dtweets").append(data);
+				}
+				else {
+					$("#content").append(data);
+				}
 				//console.log("Appending");
 	    		start = start + nt;
 	   		});
@@ -196,6 +200,7 @@ $(document).ready(function(){
 		event.preventDefault();
 		//event.stopImmediatePropagation();
 		console.log("clicking");
+		console.log($(this).text());
 		$("#content").load( "ViewUser", { viewusername: $(this).text() } , function(data) {
 			start = 0;
 			nt=4;

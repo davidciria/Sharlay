@@ -42,26 +42,49 @@ public class GetTweetsFromUser extends HttpServlet {
 		dTmodel dt = new dTmodel();
 		List<Tweet> tweets = Collections.emptyList();
 		
-		HttpSession session = request.getSession();
-		int uid = (int)session.getAttribute("uid");
+		HttpSession session = request.getSession(false);
+		ManageTweet tweetManager = new ManageTweet();
 		
-		try {
-			BeanUtils.populate(dt, request.getParameterMap());
-			ManageTweet tweetManager = new ManageTweet();
+		String cview = "";
+		
+		if(session != null) {
+			int uid = (int)session.getAttribute("uid");
+			cview = "/viewTweetsFromUser.jsp";
 			try {
-				tweets = tweetManager.getUserTweets(dt.getUid(),dt.getStart(),dt.getEnd(), uid);
+				BeanUtils.populate(dt, request.getParameterMap());
+				try {
+					tweets = tweetManager.getUserTweets(dt.getUid(),dt.getStart(),dt.getEnd(), uid);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				tweetManager.finalize();
+			
+			} catch (IllegalAccessException | InvocationTargetException e) {
+				e.printStackTrace();
+			}
+			System.out.println("getting tweets from" + dt.getUid() + " " + dt.getStart() + " " + dt.getEnd());
+			request.setAttribute("tweets",tweets);
+		}
+		else {
+			cview = "/viewTweetsFromUserAnonymouse.jsp";
+			try {
+				BeanUtils.populate(dt, request.getParameterMap());
+			} catch (IllegalAccessException | InvocationTargetException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			try {
+				tweets = tweetManager.getUserTweetsAnonymouse(dt.getUid(),dt.getStart(),dt.getEnd());
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			tweetManager.finalize();
-		
-		} catch (IllegalAccessException | InvocationTargetException e) {
-			e.printStackTrace();
+			request.setAttribute("tweets",tweets);
 		}
-		System.out.println("getting tweets from" + dt.getUid() + " " + dt.getStart() + " " + dt.getEnd());
-		request.setAttribute("tweets",tweets);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/viewTweetsFromUser.jsp"); 
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher(cview); 
 		dispatcher.forward(request,response);
 		
 	}

@@ -51,7 +51,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 		}
 
 		request.setAttribute("tweets",tweets);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/viewAllTweets.jsp"); 
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/viewAllTweetsFromAnonymouse.jsp"); 
 		dispatcher.forward(request,response);
 		
 	}

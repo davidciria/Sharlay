@@ -37,36 +37,50 @@ public class ViewUser extends HttpServlet {
 		String viewusername = request.getParameter("viewusername").replace(" ", "");
 		
 		HttpSession session = request.getSession(false);
-		User user = (User)session.getAttribute("user");
+		User user;
+		String cview = "";
+		ManageUser userManager = new ManageUser();
 		
-		String content = "";
-		if(viewusername.equals(user.getUsername())) {
-			System.out.println("Same user");
-			session.setAttribute("viewuser", user);
-			content = "ViewLoginDone.jsp";
-		}else {
-			ManageUser userManager = new ManageUser();
-			User viewuser = null;
-			Boolean isFollowed = null;
-			try {
-				viewuser = userManager.getUser(viewusername);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		if(session != null) {
+			user = (User)session.getAttribute("user");
+			if(viewusername.equals(user.getUsername())) {
+				System.out.println("Same user");
+				session.setAttribute("viewuser", user);
+				cview = "ViewLoginDone.jsp";
+			}else {
+				User viewuser = null;
+				Boolean isFollowed = null;
+				try {
+					viewuser = userManager.getUser(viewusername);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				try {
+					isFollowed = userManager.userIsFollowed(user.getUid(), viewuser.getUid());
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				userManager.finalize();
+				session.setAttribute("viewuser", viewuser);
+				session.setAttribute("isFollowed", isFollowed);
+				cview = "ProfileUserView.jsp";
 			}
+
+		} else {
+			System.out.println("session null");
 			try {
-				isFollowed = userManager.userIsFollowed(user.getUid(), viewuser.getUid());
+				request.setAttribute("viewuser", userManager.getUser(viewusername));
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			userManager.finalize();
-			session.setAttribute("viewuser", viewuser);
-			session.setAttribute("isFollowed", isFollowed);
-			content = "ProfileUserView.jsp";
+			cview = "ProfileUserViewFromAnonymouse.jsp";
 		}
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher(content);
+		RequestDispatcher dispatcher = request.getRequestDispatcher(cview);
 		dispatcher.forward(request, response);
 	}
 

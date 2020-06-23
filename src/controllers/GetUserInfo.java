@@ -35,45 +35,57 @@ public class GetUserInfo extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		HttpSession session = request.getSession(false);
-		int uid = (int)session.getAttribute("uid");
+		String cview = "";
+		ManageUser userManager = new ManageUser();
 		
-		User user = (User)session.getAttribute("user");
-		User viewuser = (User)session.getAttribute("viewuser");
-		if(user.getUid() == viewuser.getUid()) {
-			User newuser = new User();
-			
+		if ( session != null) {
+			int uid = (int)session.getAttribute("uid");
+			cview = "/viewUserInfo.jsp";
+			User user = (User)session.getAttribute("user");
+			User viewuser = (User)session.getAttribute("viewuser");
+			if(user.getUid() == viewuser.getUid()) {
+				User newuser = new User();
+				
+				try {
+					BeanUtils.populate(newuser, request.getParameterMap());
+					newuser = userManager.getUser(uid);
+					userManager.finalize();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+				request.setAttribute("user",newuser);
+			}else {
+			//Un usuari ha deixat de ser seguit.
+				User newuser = new User();
+				
+				try {
+					BeanUtils.populate(newuser, request.getParameterMap());
+					newuser = userManager.getUser(viewuser.getUid());
+					session.setAttribute("isFollowed", userManager.userIsFollowed(uid, viewuser.getUid()));
+					userManager.finalize();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				System.out.println(viewuser.getUid());
+				session.setAttribute("viewuser",newuser);
+				
+			}
+		}
+		else {
 			try {
-				BeanUtils.populate(newuser, request.getParameterMap());
-				ManageUser userManager = new ManageUser();
-				newuser = userManager.getUser(uid);
+				request.setAttribute("viewuser", userManager.getUser(Integer.parseInt(request.getParameter("uid"))));
 				userManager.finalize();
 			} catch (Exception e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-			request.setAttribute("user",newuser);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/viewUserInfo.jsp"); 
-			dispatcher.include(request,response);
-		}else {
-		//Un usuari ha deixat de ser seguit.
-			User newuser = new User();
-			
-			try {
-				BeanUtils.populate(newuser, request.getParameterMap());
-				ManageUser userManager = new ManageUser();
-				newuser = userManager.getUser(viewuser.getUid());
-				session.setAttribute("isFollowed", userManager.userIsFollowed(uid, viewuser.getUid()));
-				userManager.finalize();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			System.out.println(viewuser.getUid());
-			session.setAttribute("viewuser",newuser);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/viewUserInfo.jsp"); 
-			dispatcher.include(request,response);
+			cview = "/viewUserInfoAnonymouse.jsp";
 		}
 		
-
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher(cview); 
+		dispatcher.include(request,response);
 	}
 
 	/**
