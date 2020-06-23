@@ -414,6 +414,62 @@ public class ManageUser {
 		return users;
 	}
 	
+	public void deleteUser(int uid) {
+		/*Delete tweets*/
+		String query = "DELETE FROM Tweets WHERE uid=?;";
+		
+		PreparedStatement statement = null; 
+		
+		try {
+			statement = db.prepareStatement(query);
+			statement.setInt(1, uid);
+			statement.executeUpdate();
+			statement.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		/*Delete follows*/
+		query = "DELETE FROM Follows WHERE uid1=? OR uid2=?;";
+		statement = null; 
+		
+		try {
+			statement = db.prepareStatement(query);
+			statement.setInt(1, uid);
+			statement.setInt(2, uid);
+			statement.executeUpdate();
+			statement.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		/*Delete likes*/
+		query = "DELETE FROM Likes WHERE uid=?;";
+		statement = null; 
+		
+		try {
+			statement = db.prepareStatement(query);
+			statement.setInt(1, uid);
+			statement.executeUpdate();
+			statement.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		/*Delete user*/
+		query = "DELETE FROM Users WHERE uid=?;";
+		statement = null; 
+		
+		try {
+			statement = db.prepareStatement(query);
+			statement.setInt(1, uid);
+			statement.executeUpdate();
+			statement.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	//TODO: hasPermission returns isAdmin related to extended class admin
 	
 	

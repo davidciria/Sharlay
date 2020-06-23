@@ -67,30 +67,27 @@ $(document).ready(function(){
 		});
 	});
 	
-	$("#dialog").dialog({
-        autoOpen: false,
-        modal: true
-      });
-    });
+	 $("#deleteAccount").click(function(e) {
+	       e.preventDefault();
+	       var targetUrl = $(this).attr("href");
 
-    $(".confirmLink").click(function(e) {
-      e.preventDefault();
-      var targetUrl = $(this).attr("href");
+	       $("#confirmDialog").dialog({
+	         buttons : {
+	           "Confirm" : function() {
+	             //Delete account.
+	             $(this).dialog("close");
+	             $("#content").load("DeleteUser", {userToDeleteUid: "${uid}"});
+	           },
+	           "Cancel" : function() {
+	             $(this).dialog("close");
+	           }
+	         }
+	       });
 
-      $("#dialog").dialog({
-        buttons : {
-          "Confirm" : function() {
-            window.location.href = targetUrl;
-          },
-          "Cancel" : function() {
-            $(this).dialog("close");
-          }
-        }
-      });
-
-      $("#dialog").dialog("open");
+	       $("#confirmDialog").dialog("open");
+	  });
 	
-	});
+});
 </script>
 
 
@@ -114,11 +111,10 @@ $(document).ready(function(){
 	<li> You are not yet 16 years old </li>
 </c:if>
 </ul>
-<div class="w3-container w3-card w3-white w3-round w3-margin w3-animate-opacity">
 
-<div id="dialog" title="Confirmation Required">
-     Are you sure about this?
-</div>
+<div id="confirmDialog">Are you sure?</div>
+
+<div class="w3-container w3-card w3-white w3-round w3-margin w3-animate-opacity">
 
 <form id="${uid}" data-parsley-validate action="#" method="POST" class="editForm">
 	<p>      
@@ -135,9 +131,6 @@ $(document).ready(function(){
 </form>
 
 <c:if test="${isAdmin}">
- <button type="button" class="w3-button w3-margin-bottom w3-round-medium w3-red"><i class="fa fa-warning"></i> &nbsp;Delete account</button>
+ <button type="button" id="deleteAccount" class="w3-button w3-margin-bottom w3-round-medium w3-red"><i class="fa fa-warning"></i> &nbsp;Delete account</button>
 </c:if>
 </div>
-
-<a class="confirmLink" href="http://someLinkWhichRequiresConfirmation.com">Click here</a>
-<a class="confirmLink" href="http://anotherSensitiveLink">Or, you could click here</a>
