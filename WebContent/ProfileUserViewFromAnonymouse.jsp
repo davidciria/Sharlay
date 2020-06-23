@@ -23,12 +23,12 @@ $('#navigation').load('MenuController', function(){
 	/* Get and visualize user follows*/
 	$(".vF").click(function(event){
 		event.preventDefault();
-		$.post("changeSessionVar", {setVar: "viewuser", getVar:"user", mode: 1}, function(data){
+		//$.post("changeSessionVar", {setVar: "viewuser", getVar:"user", mode: 1}, function(data){
 			$.post("changeSessionVar", {setVar: "defaultDtweets", getVar:"GetFollows", mode: 2}, function(data){
 				$("#content").load( "ViewLoginDone.jsp", function(){
 				});
 			});
-		});
+		//});
 	});
 	/* Get and visualize Tweets from a given user */
 	$(".vT").click(function(event){
