@@ -55,9 +55,9 @@ $(document).ready(function(){
 		event.preventDefault();
 		console.log("From "+start+" to "+nt)
 		if(Math.ceil($(window).scrollTop()) == $(document).outerHeight() - $(window).outerHeight()) {
-			$.post( cview , { uid: uid, start: start , end: start+nt } , function(data) {
+			$.post( cview , { uid: uid, start: start , end: nt } , function(data) {
 				$("#dtweets").append(data);
-				console.log("Appending");
+				//console.log("Appending");
 	    		start = start + nt;
 	   		});
 	    }
