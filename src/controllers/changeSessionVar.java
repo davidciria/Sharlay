@@ -29,12 +29,14 @@ public class changeSessionVar extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession(false);
-		if(Integer.parseInt(request.getParameter("mode")) == 1) {
-			session.setAttribute(request.getParameter("setVar"), session.getAttribute(request.getParameter("getVar")));
-		}else {
-			session.setAttribute(request.getParameter("setVar"), request.getParameter("getVar"));
+		if(session != null) {
+			if(Integer.parseInt(request.getParameter("mode")) == 1) {
+				session.setAttribute(request.getParameter("setVar"), session.getAttribute(request.getParameter("getVar")));
+			}else {
+				session.setAttribute(request.getParameter("setVar"), request.getParameter("getVar"));
+			}
+			System.out.print("Var setted correctly");
 		}
-		System.out.print("Var setted correctly");
 	}
 
 	/**

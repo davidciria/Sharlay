@@ -216,12 +216,12 @@ $(document).ready(function(){
 		console.log("times");
 		console.log(nt);
 		var user = $(this).parent().parent().parent().parent();
-		//$.post("changeSessionVar", {setVar: "defaultDtweets", getVar:"GetFollows", mode: 2}, function(data){
+		$.post("changeSessionVar", {setVar: "defaultDtweets", getVar:"GetFollows", mode: 2}, function(data){
 			$("#dtweets").load( "GetFollows", { uid: user.attr("id"), start: 0 , end: nt } , function(data) {
 				start = nt;
 				cview = "GetFollows";
 			});
-		//});
+		});
 	});
 	/* Get and visualize user followers*/
 	$("body").on("click",".vS",function(event){
