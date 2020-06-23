@@ -23,7 +23,7 @@ $('#navigation').load('MenuController', function(){
 	/* Get and visualize Tweets from a given user */
 	$(".vT").click(function(event){
 		event.preventDefault();
-		event.stopImmediatePropagation();
+		console.log("hii");
 		$.post("changeSessionVar", {setVar: "defaultDtweets", getVar: "GetTweetsFromUser", mode: 2}, function(data){
 			$("#dtweets").load( "GetTweetsFromUser", { uid: uid, start: 0 , end: nt } , function(data) {
 				start = nt;
@@ -35,7 +35,6 @@ $('#navigation').load('MenuController', function(){
 	/* Get and visualize Tweets from a given user */
 	$(".vTl").click(function(event){
 		event.preventDefault();
-		event.stopImmediatePropagation();
 		$.post("changeSessionVar", {setVar: "defaultDtweets", getVar: "GetAllTweets", mode: 2}, function(data){
 			$("#dtweets").load( "GetAllTweets", { uid: uid, start: 0 , end: nt } , function(data) {
 				start = nt;
@@ -47,9 +46,8 @@ $('#navigation').load('MenuController', function(){
 	/* Add tweet and reload Tweet Visualitzation */
 	$("#aT").click(function(event){
 		event.preventDefault();
-		event.stopImmediatePropagation();
 		$.post( "AddTweetFromUser", { uid: uid, text: $("#cT").text() } , function(data) {
-			$("#dtweets").load( "GetTweetsFromUser", { uid: uid, start: 0 , end: nt } ,function() {
+			$("#dtweets").load( "${defaultDtweets}", { uid: uid, start: 0, end: nt } ,function() {
 				start = nt;
 				cview = "GetTweetsFromUser";
 			});
