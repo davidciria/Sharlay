@@ -5,6 +5,8 @@
 <script src="parsley/parsley.min.js"></script>
 <!-- Scripts -->
 <script type="text/javascript">
+var globaluid;
+
 /* add validation for minimum age */
 window.Parsley.addValidator("minAge", {
 	validateString: function(value, requirements) {
@@ -35,6 +37,10 @@ window.Parsley.addValidator("minAge", {
 </script>
 <script>
 $(document).ready(function(){
+		var srcImg; 
+
+		srcImg = document.getElementById("myImage");
+		console.log(srcImg);
 	
 	  $(".editinput").keyup(function(){
 		  var instance = $(".editinput").parsley();
@@ -71,6 +77,7 @@ $(document).ready(function(){
 	      evt.preventDefault();
 	      var formData = new FormData($(this)[0]);
 	      formData.append("uid", $(this).attr("id"));
+	      globaluid = $(this).attr("id");
 	   $.ajax({
 	       url: 'UploadProfileImage',
 	       type: 'POST',
@@ -81,8 +88,9 @@ $(document).ready(function(){
 	       enctype: 'multipart/form-data',
 	       processData: false,
 	       success: function (response) {
-	         alert(response);
-	         //Show success updating profile image.
+	    	   //$(srcImg).removeAttr("src").attr("src", "ProfileImages/" + globaluid + ".png?random=" + new Date().valueOf());
+	    	   //Show success updating profile image.
+	    	   alert(response);
 	       }
 	   });
 	   
@@ -138,7 +146,7 @@ $(document).ready(function(){
 </c:if>
 </ul>
 
-<div id="confirmDialog">Are you sure?</div>
+<div id="confirmDialog">Are you sure you want to delete your account?</div>
 
 <div class="w3-container w3-card w3-white w3-round w3-margin w3-animate-opacity">
 
@@ -157,9 +165,15 @@ $(document).ready(function(){
 </form>
 
 <form id="${uid}" class="uploadProfileImage" action = "UploadProfileImage" method = "post" enctype = "multipart/form-data">
-     <input type="file" name="file" size = "50" />
+     <label class="w3-text-purple"><b> Profile Image </b></label>
+     <br /><br />
+     <label for="fileButton" class="w3-button w3-round-medium w3-purple">
+    	Select file
+	 </label>
+	 <span>You must upload a .png file</span>
+     <input id="fileButton" type="file" style="display:none" name="file" size = "50" />
      <br />
-     <input type="submit" value="Upload File" />
+     <input type="submit" class="w3-button w3-round-medium w3-purple" style="margin-top: 25px; margin-bottom: 10px;" value="Upload File" />
  </form>
 
 <c:if test="${isAdmin}">
