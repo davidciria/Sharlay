@@ -34,7 +34,7 @@ $(document).ready(function(){
 	});
 	
 	$("body").on("submit","form", function(event) {
-		if($(this).attr('action') != "#"){
+		if($(this).attr('action') != "#" && $(this).attr('action') != "UploadProfileImage"){
 			$('#content').load($(this).attr('action'),$(this).serialize());
 		    event.preventDefault();
 		}

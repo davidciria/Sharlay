@@ -67,6 +67,28 @@ $(document).ready(function(){
 		});
 	});
 	
+	$(".uploadProfileImage").submit(function(evt){	 
+	      evt.preventDefault();
+	      var formData = new FormData($(this)[0]);
+	      formData.append("uid", $(this).attr("id"));
+	   $.ajax({
+	       url: 'UploadProfileImage',
+	       type: 'POST',
+	       data: formData,
+	       async: false,
+	       cache: false,
+	       contentType: false,
+	       enctype: 'multipart/form-data',
+	       processData: false,
+	       success: function (response) {
+	         alert(response);
+	         //Show success updating profile image.
+	       }
+	   });
+	   
+	});
+	
+	
 	$("#confirmDialog").dialog({
         autoOpen: false,
         modal: true
@@ -133,6 +155,12 @@ $(document).ready(function(){
     <p>
     <input class="editinput w3-button w3-round-medium w3-purple" type="submit" name="submit" value="Update"></p>
 </form>
+
+<form id="${uid}" class="uploadProfileImage" action = "UploadProfileImage" method = "post" enctype = "multipart/form-data">
+     <input type="file" name="file" size = "50" />
+     <br />
+     <input type="submit" value="Upload File" />
+ </form>
 
 <c:if test="${isAdmin}">
  <button type="button" id="deleteAccount" class="w3-button w3-margin-bottom w3-round-medium w3-red"><i class="fa fa-warning"></i> &nbsp;Delete account</button>
