@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="w3-row">
-  	<div class="w3-container w3-card w3-light-gray w3-round w3-margin w3-animate-opacity w3-col m4 w3-center">
+  	<div class="w3-container w3-card w3-theme-l5 w3-round w3-margin w3-animate-opacity w3-col m4 w3-center">
 	  	<div >
 	  		<img src="img/logo_fusion_cut.png" class="w3-circle" style="height:335px; width:335px; margin-top: 5%; margin-bottom: 5%;" alt="Sharlay's logo">
 	  		<p><b class="w3-text-purple w3-large">Sharlay, Share & Play</b></p>
@@ -19,7 +19,7 @@
 	  	  	<p>Start sharing with <b class="w3-text-purple">Sharlay</b>:</p>
 	  	  	<button type="button" class="menu w3-button w3-theme w3-round-xxlarge w3-center w3-xxlarge" id="RegisterController" href=#><i class="fa fa-user-plus"></i> &nbsp;Register</button> 
 	  	  	<p>or if you are already have an account:</p>
-	  	  	<button type="button" class="menu w3-button w3-2019-paloma w3-round-xxlarge w3-center w3-xlarge" style="margin-bottom: 28px"  id="LoginController" href=#><i class="fa fa-sign-in"></i> &nbsp;Login</button>
+	  	  	<button type="button" class="menu w3-button w3-theme-l5 w3-round-xxlarge w3-center w3-xlarge" style="margin-bottom: 28px"  id="LoginController" href=#><i class="fa fa-sign-in"></i> &nbsp;Login</button>
 	  	  	<p>People are already enjoying <b class="w3-text-purple">Sharlay</b>, take a look!</p>
 	  	  	<button type="button" class="vTa w3-button w3-theme w3-round-xxlarge w3-center w3-xxlarge" style="margin-bottom: 40px"><i class="fa fa-globe"></i> &nbsp;Enter to Sharlay</button> 
 	</div>
