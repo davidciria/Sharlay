@@ -38,11 +38,11 @@ $(document).ready(function(){
 			    });
 	});
      </script>
-	<li> User has been registered correctly, please verify your email before login </li>
+	<li class="w3-center w3-green"> User has been registered correctly, please verify your email before login </li>
 </c:if>
 </ul>
 
-<ul>
+<ul class="w3-center w3-green">
 <c:if test = "${verified == 1}">
 	<li> User has been verified correctly, now you can log in </li>
 </c:if>
@@ -51,7 +51,7 @@ $(document).ready(function(){
 </c:if>
 </ul>
 
-<ul class="server-errors-list">
+<ul class="server-errors-list w3-center">
 <c:if test = "${login.error[0]}">
 	<li> Mail format is not correct </li>
 </c:if>
