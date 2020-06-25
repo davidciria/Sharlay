@@ -32,7 +32,7 @@
 <div class="w3-card w3-round w3-white"  id="${viewuser.uid}">
   <div class="w3-container">
    <h4 class="w3-center"> ${viewuser.firstname} ${viewuser.lastname}</h4>
-   <p class="w3-center"><img src="w3images/avatar3.png" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
+   <p class="w3-center"><img src="ProfileImages/${viewuser.uid}.png" id="profileImage" class="w3-circle" style="height:106px;width:106px" alt="Avatar" onerror="javascript:this.src='ProfileImages/default.png'"></p>
    <hr>
    <p id="name"><i class="fa fa-user fa-fw w3-margin-right w3-text-theme"></i> ${viewuser.username} </p>
 	<p id="birthday"><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> ${viewuser.birth} </p>
