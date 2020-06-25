@@ -3,7 +3,7 @@ package models;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
-public class Tweet {
+public class Tweet implements Comparable<Tweet> {
 
 	private Integer uid = null;
 	private Integer tweetid = null;
@@ -13,8 +13,9 @@ public class Tweet {
 	private Integer comments;
 	private Timestamp createdAt = null;
 	private Integer parentTweet = null;
-	private boolean isLiked = false;
+	private boolean isLiked = false; //Per saber si el tweet te un like del usuari que ha fet login. No existeix en el model de la bbdd s'assigna dinamicament.
 	private String username;
+	private String retweetedBy = ""; //Per saber si es tracta d'un retweet. No existeix en el model de la bbdd s'assigna dinamicament.
 
 	public Integer getUid() {
 		return uid;
@@ -97,6 +98,18 @@ public class Tweet {
 	
 	public void setUsername(String username) {
 		this.username = username;	
+	}
+	
+	public String getRetweetedBy() {
+		return this.retweetedBy;
+	}
+	
+	public void setRetweetedBy(String retweetedBy) {
+		this.retweetedBy = retweetedBy;
+	}
+	@Override
+	public int compareTo(Tweet o) {
+		return this.getCreatedAt().compareTo(o.getCreatedAt());
 	}
 	
 	/*public boolean isComplete() {

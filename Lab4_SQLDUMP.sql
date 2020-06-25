@@ -104,6 +104,7 @@ DROP TABLE IF EXISTS `Retweets`;
 CREATE TABLE `Retweets` (
   `uid` int(11) NOT NULL,
   `tweetid` int(11) NOT NULL,  
+  `createdAt` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`uid`,`tweetid`),
   KEY `uid_retweet_fk` (`uid`),
   KEY `tweetid_retweet_fk` (`tweetid`),
@@ -118,7 +119,7 @@ DROP TABLE IF EXISTS `Likes`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Likes` (
   `uid` int(11) NOT NULL,
-  `tweetid` int(11) NOT NULL,  
+  `tweetid` int(11) NOT NULL, 
   PRIMARY KEY (`uid`,`tweetid`),
   KEY `uid_like_fk` (`uid`),
   KEY `tweetid_like_fk` (`tweetid`),

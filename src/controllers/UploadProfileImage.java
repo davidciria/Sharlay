@@ -66,10 +66,6 @@ public class UploadProfileImage extends HttpServlet {
 	    
 	    String fileFormat = splittedFileName[splittedFileName.length - 1];
 	    
-	    //System.out.println(fileFormat);
-	    
-	    //System.out.println(request.getParameter("uid"));
-	    
 	    if(fileFormat.equals("png")) {
 	    	fileName = request.getParameter("uid") + ".png";
 		    OutputStream out = null;
@@ -88,7 +84,7 @@ public class UploadProfileImage extends HttpServlet {
 		            out.write(bytes, 0, read);
 		        }
 		        out.flush();
-		        writer.println("New file " + fileName + " created at " + path);
+		        writer.println("success");
 		    } catch (FileNotFoundException fne) {
 		        writer.println("You either did not specify a file to upload or are "
 		                + "trying to upload a file to a protected or nonexistent "
@@ -107,7 +103,7 @@ public class UploadProfileImage extends HttpServlet {
 		    }
 	    }else {
 	    	final PrintWriter writer = response.getWriter();
-	    	writer.println("Please upload a file with .png format");
+	    	writer.println("fail");
 	    }
 	}
 
