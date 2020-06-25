@@ -126,6 +126,7 @@ $(document).ready(function(){
 		event.preventDefault();
 		//event.stopImmediatePropagation();
 		var tweet = $(this).parent();
+		console.log("Show" + $(this).parent().attr("id"));
 		var icon = $(this);
 		$.post( "RetweetTweet", { tweetid: $(this).parent().attr("id") } , function(data, status) {
 			if(status == "success"){

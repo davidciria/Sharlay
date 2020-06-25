@@ -14,10 +14,10 @@
 	   <c:if test="${!t.isLiked}">
 	   <button type="button" class="lT w3-button w3-theme-l5 w3-margin-bottom w3-round-medium"><i class="fa fa-thumbs-up"></i> &nbsp;Like</button>
 	   </c:if>
-	   <c:if test="${false}">
+	   <c:if test="${t.isRetweeted}">
 	   <button type="button" class="urT w3-button w3-theme w3-margin-bottom w3-round-medium"><i class="fa fa-retweet"></i> &nbsp;Retweet</button>
 	   </c:if>
-	   <c:if test="${true}">
+	   <c:if test="${!t.isRetweeted}">
 	   <button type="button" class="rT w3-button w3-theme-l5 w3-margin-bottom w3-round-medium"><i class="fa fa-retweet"></i> &nbsp;Retweet</button>
 	   </c:if>
 	   <c:if test="${viewuser.uid == user.uid || user.isAdmin}">

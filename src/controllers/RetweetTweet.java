@@ -8,7 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.beanutils.BeanUtils;
+
 import managers.ManageTweet;
+import models.Tweet;
 
 /**
  * Servlet implementation class RetweetTweet
@@ -29,14 +32,14 @@ public class RetweetTweet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int tweet_id = Integer.parseInt(request.getParameter("tweetId"));
-		
+
 		HttpSession session = request.getSession(false);
 		int uid = (int)session.getAttribute("uid");
-		
+		Tweet tweet = new Tweet();
 		ManageTweet tweetManager = new ManageTweet();
 		try {
-			tweetManager.retweetTweet(tweet_id, uid);
+			BeanUtils.populate(tweet, request.getParameterMap());
+			tweetManager.retweetTweet(tweet.getTweetid(), uid);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

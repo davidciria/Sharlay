@@ -125,6 +125,7 @@ public class ManageTweet {
 				tweet.setCreatedAt(rs.getTimestamp("createdAt"));
 				tweet.setText(rs.getString("text"));
 				tweet.setIsLiked(tweetIsLiked(tweet.getUid(), tweet.getTweetid()));
+				tweet.setIsRetweeted(tweetIsRetweeted(tweet.getUid(), tweet.getTweetid()));
 				ManageUser manager = new ManageUser();
 			    User usertweet = manager.getUser(tweet.getUid());
 			    
@@ -159,6 +160,7 @@ public class ManageTweet {
 					tweet.setCreatedAt(rs.getTimestamp("createdAt"));
 					tweet.setText(rs.getString("text"));
 					tweet.setIsLiked(tweetIsLiked(tweet.getUid(), tweet.getTweetid()));
+					tweet.setIsRetweeted(tweetIsRetweeted(tweet.getUid(), tweet.getTweetid()));
 					ManageUser manager = new ManageUser();
 				    User usertweet = manager.getUser(tweet.getUid());
 				    
@@ -193,6 +195,7 @@ public class ManageTweet {
 					tweet.setCreatedAt(rs.getTimestamp("createdAt"));
 					tweet.setText(rs.getString("text"));
 					tweet.setIsLiked(tweetIsLiked(likeUid, tweet.getTweetid()));
+					tweet.setIsRetweeted(tweetIsRetweeted(likeUid, tweet.getTweetid())); //Change variable name
 					ManageUser manager = new ManageUser();
 				    User usertweet = manager.getUser(tweet.getUid());
 				    
@@ -550,6 +553,7 @@ public class ManageTweet {
 		      tweet.setCreatedAt(rs.getTimestamp("createdAt"));
 		      tweet.setParentTweet(rs.getInt("parentTweet"));
 		      tweet.setIsLiked(this.tweetIsLiked(uid, tweet.getTweetid()));
+		      tweet.setIsRetweeted(tweetIsRetweeted(uid, tweet.getTweetid()));
 		      
 		      ManageUser manager = new ManageUser();
 		      User usertweet = manager.getUser(tweet.getUid());
@@ -586,6 +590,7 @@ public class ManageTweet {
 		      tweet.setCreatedAt(rs.getTimestamp("createdAt"));
 		      tweet.setParentTweet(rs.getInt("parentTweet"));
 		      tweet.setIsLiked(this.tweetIsLiked(uid, tweet.getTweetid()));
+		      tweet.setIsRetweeted(tweetIsRetweeted(uid, tweet.getTweetid()));
 		      
 		      ManageUser manager = new ManageUser();
 		      User usertweet = manager.getUser(tweet.getUid());
@@ -637,6 +642,7 @@ public class ManageTweet {
 		      tweet.setCreatedAt(rs.getTimestamp("createdAt"));
 		      tweet.setParentTweet(rs.getInt("parentTweet"));
 		      tweet.setIsLiked(false);
+		      tweet.setIsRetweeted(false);
 		      
 		      ManageUser manager = new ManageUser();
 		      User usertweet = manager.getUser(tweet.getUid());
@@ -675,6 +681,7 @@ public class ManageTweet {
 		      tweet.setCreatedAt(rs.getTimestamp("createdAt"));
 		      tweet.setParentTweet(rs.getInt("parentTweet"));
 		      tweet.setIsLiked(false);
+		      tweet.setIsRetweeted(false);
 		      
 		      ManageUser manager = new ManageUser();
 		      User usertweet = manager.getUser(tweet.getUid());
@@ -725,6 +732,7 @@ public class ManageTweet {
 		      tweet.setCreatedAt(rs.getTimestamp("createdAt"));
 		      tweet.setParentTweet(rs.getInt("parentTweet"));
 		      tweet.setIsLiked(this.tweetIsLiked(uid, tweet.getTweetid()));
+		      tweet.setIsRetweeted(tweetIsRetweeted(uid, tweet.getTweetid()));
 		      
 		      ManageUser manager = new ManageUser();
 		      User usertweet = manager.getUser(tweet.getUid());
@@ -763,6 +771,7 @@ public class ManageTweet {
 		      tweet.setCreatedAt(rs.getTimestamp("createdAt"));
 		      tweet.setParentTweet(rs.getInt("parentTweet"));
 		      tweet.setIsLiked(this.tweetIsLiked(uid, tweet.getTweetid()));
+		      tweet.setIsRetweeted(tweetIsRetweeted(uid, tweet.getTweetid()));
 		      
 		      ManageUser manager = new ManageUser();
 		      User usertweet = manager.getUser(tweet.getUid());
@@ -821,6 +830,7 @@ public class ManageTweet {
 		      tweet.setCreatedAt(rs.getTimestamp("createdAt"));
 		      tweet.setParentTweet(rs.getInt("parentTweet"));
 		      tweet.setIsLiked(this.tweetIsLiked(uid, tweet.getTweetid()));
+		      tweet.setIsRetweeted(tweetIsRetweeted(uid, tweet.getTweetid()));
 		      
 		      ManageUser manager = new ManageUser();
 		      User usertweet = manager.getUser(tweet.getUid());
