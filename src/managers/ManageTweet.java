@@ -3,6 +3,7 @@ package managers;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -409,13 +410,14 @@ public class ManageTweet {
 	public void retweetTweet(Integer tweetid, Integer uid) throws Exception{
 		
 		//Afegeix retweet a la taula de retweets.
-		String query1 = "INSERT INTO Retweets (uid,tweetid) VALUES (?,?)";
+		String query1 = "INSERT INTO Retweets (uid,tweetid, createdAt) VALUES (?,?,?)";
 		PreparedStatement statement1 = null;
 		
 		try {
 			statement1 = db.prepareStatement(query1);
 			statement1.setInt(1, uid);
 			statement1.setInt(2, tweetid);
+			statement1.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
 			statement1.executeUpdate();
 			statement1.close();
 		} catch (SQLException e) {
