@@ -274,6 +274,19 @@ public class ManageTweet {
 			return;
 		}
 		
+		String query5 = "DELETE FROM Retweets WHERE tweetid = ?";
+		PreparedStatement statement5 = null; //treu like a la taula de likes
+		
+		try {
+			statement5 = db.prepareStatement(query4);
+			statement5.setInt(1, tweetid);
+			statement5.executeUpdate();
+			statement5.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return;
+		}
+		
 		String query2 = "DELETE FROM Tweets WHERE tweetid = ?";
 
 		PreparedStatement statement2 = null;
