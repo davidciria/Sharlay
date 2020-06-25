@@ -121,6 +121,38 @@ $(document).ready(function(){
 	  	});
 	});
 	
+	/* Retweet tweet from user */
+	$("body").on("click",".rT",function(event){
+		event.preventDefault();
+		//event.stopImmediatePropagation();
+		var tweet = $(this).parent();
+		var icon = $(this);
+		$.post( "RetweetTweet", { tweetid: $(this).parent().attr("id") } , function(data, status) {
+			if(status == "success"){
+				icon.removeClass("lT").addClass("dlT");
+				icon.removeClass("w3-theme-l5").addClass("w3-theme");
+			}
+	  	}).fail(function(response, status) {
+	  		console.log("Some problem trying to retweet the tweet.");
+	  	});
+	});
+	
+	/* Unretweet tweet from user */
+	$("body").on("click",".urT",function(event){
+		event.preventDefault();
+		//event.stopImmediatePropagation();
+		var tweet = $(this).parent();
+		var icon = $(this);
+		$.post( "UnRetweetTweet", { tweetid: $(this).parent().attr("id") } , function(data, status) {
+			if(status == "success"){
+				icon.removeClass("dlT").addClass("lT");
+				icon.removeClass("w3-theme").addClass("w3-theme-l5");
+			}
+		}).fail(function(response, status) {
+			console.log("Some problem trying to unretweet the tweet.");
+	  	});
+	});
+	
 	/* Edit tweet from user */
 	$("body").on("click",".eT",function(event){
 		event.preventDefault();

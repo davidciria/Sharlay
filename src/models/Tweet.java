@@ -14,6 +14,7 @@ public class Tweet  {
 	private Timestamp createdAt = null;
 	private Integer parentTweet = null;
 	private boolean isLiked = false; //Per saber si el tweet te un like del usuari que ha fet login. No existeix en el model de la bbdd s'assigna dinamicament.
+	private boolean isRetweeted = false; //Per saber si el tweet te un retweet del usuari que ha fet login. No existeix en el model de la bbdd s'assigna dinamicament.
 	private String username;
 	private String retweetedBy = ""; //Per saber si es tracta d'un retweet. No existeix en el model de la bbdd s'assigna dinamicament.
 
@@ -90,6 +91,14 @@ public class Tweet  {
 	
 	public void setIsLiked(boolean isLiked) {
 		this.isLiked = isLiked;
+	}
+	
+	public boolean getIsRetweeted() {
+		return this.isRetweeted;
+	}
+	
+	public void setIsRetweeted(boolean isRetweeted) {
+		this.isRetweeted = isRetweeted;
 	}
 	
 	public String getUsername() {
