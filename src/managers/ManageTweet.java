@@ -174,19 +174,25 @@ public class ManageTweet {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} 
-			return  l;
+			
+			Collections.sort(l, new SortTweetsByTime()); //Sort tweets array.
+			
+			if(start + end >= l.size()) {
+				return l.subList(start, l.size());
+			}else {
+				return l.subList(start, start + end);
+			}
+			
 		}
 	
 	// Get tweets from a user given start and end
 		public List<Tweet> getUserTweets(Integer uid,Integer start, Integer end, Integer loggedUid) throws Exception {
-			String query = "SELECT Tweets.tweetid,Tweets.uid,Tweets.createdAt,Tweets.text FROM Tweets WHERE Tweets.uid = ? ORDER BY Tweets.createdAt DESC LIMIT ?,? ;";
+			String query = "SELECT * FROM Tweets WHERE Tweets.uid = ?;";
 			PreparedStatement statement = null;
 			List<Tweet> l = new ArrayList<Tweet>();
 			try {
 				statement = db.prepareStatement(query);
 				statement.setInt(1,uid);
-				statement.setInt(2,start);
-				statement.setInt(3,end);
 				ResultSet rs = statement.executeQuery();
 				while (rs.next()) {
 					Tweet tweet = new Tweet();
@@ -194,6 +200,9 @@ public class ManageTweet {
 					tweet.setUid(rs.getInt("uid"));
 					tweet.setCreatedAt(rs.getTimestamp("createdAt"));
 					tweet.setText(rs.getString("text"));
+					tweet.setLikes(rs.getInt("likes"));
+					tweet.setLikes(rs.getInt("comments"));
+					tweet.setParentTweet(rs.getInt("parentTweet"));
 					tweet.setIsLiked(tweetIsLiked(loggedUid, tweet.getTweetid()));
 					tweet.setIsRetweeted(tweetIsRetweeted(loggedUid, tweet.getTweetid())); //Change variable name
 					ManageUser manager = new ManageUser();
@@ -209,7 +218,52 @@ public class ManageTweet {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} 
-			return  l;
+			
+			query = "SELECT t.uid, r.uid AS ruid, t.tweetid,t.uid,r.createdAt,t.text, t.likes, t.retweets, t.parentTweet, t.comments FROM Tweets t JOIN Retweets r ON r.tweetid=t.tweetid WHERE r.uid = ?;";
+			statement = null;
+			try {
+				statement = db.prepareStatement(query);
+				statement.setInt(1,uid);
+				ResultSet rs = statement.executeQuery();
+				while (rs.next()) {
+					Tweet tweet = new Tweet();
+		       		tweet.setTweetid(rs.getInt("tweetid"));
+					tweet.setUid(rs.getInt("uid"));
+					tweet.setCreatedAt(rs.getTimestamp("createdAt"));
+					tweet.setText(rs.getString("text"));
+					tweet.setLikes(rs.getInt("likes"));
+					tweet.setLikes(rs.getInt("comments"));
+					tweet.setParentTweet(rs.getInt("parentTweet"));
+					
+					tweet.setIsLiked(tweetIsLiked(loggedUid, tweet.getTweetid()));
+					tweet.setIsRetweeted(tweetIsRetweeted(loggedUid, tweet.getTweetid())); //Change variable name
+					ManageUser manager = new ManageUser();
+				    User usertweet = manager.getUser(tweet.getUid());
+				    User retweetedusertweet = manager.getUser(rs.getInt("ruid"));
+				    
+				    manager.finalize();
+				      
+				    tweet.setUsername(usertweet.getUsername());
+				    tweet.setRetweetedBy(retweetedusertweet.getUsername());
+					l.add(tweet);
+				}
+				rs.close();
+				statement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} 
+			
+			Collections.sort(l, new SortTweetsByTime()); //Sort tweets array.
+			
+			if(start + end >= l.size()) {
+				if(start == l.size() - 1) return l.subList(l.size() - 1, l.size());
+				else if(start < l.size() - 1) return l.subList(start, l.size());
+				else return Collections.emptyList();
+				
+			}else {
+				return l.subList(start, start + end);
+			}
+			
 		}
 	
 	public boolean tweetIsLiked(int uid, int tweetid) {
@@ -481,8 +535,8 @@ public class ManageTweet {
 		
 		try {
 			statement1 = db.prepareStatement(query1);
-			statement1.setInt(1, uid);
-			statement1.setInt(2, tweetid);
+			statement1.setInt(1, tweetid);
+			statement1.setInt(2, uid);
 			statement1.executeUpdate();
 			statement1.close();
 		} catch (SQLException e) {
@@ -806,7 +860,10 @@ public class ManageTweet {
 		Collections.sort(tweets, new SortTweetsByTime()); //Sort tweets array.
 		
 		if(start + end >= tweets.size()) {
-			return tweets.subList(start, tweets.size());
+			if(start == tweets.size() - 1) return tweets.subList(tweets.size() - 1, tweets.size());
+			else if(start < tweets.size() - 1) return tweets.subList(start, tweets.size());
+			else return Collections.emptyList();
+			
 		}else {
 			return tweets.subList(start, start + end);
 		}

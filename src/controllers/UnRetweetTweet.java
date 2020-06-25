@@ -32,14 +32,14 @@ public class UnRetweetTweet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		System.out.println("Unretweeting tweet");
 		HttpSession session = request.getSession(false);
 		int uid = (int)session.getAttribute("uid");
 		Tweet tweet = new Tweet();
 		ManageTweet tweetManager = new ManageTweet();
 		try {
 			BeanUtils.populate(tweet, request.getParameterMap());
-			tweetManager.unretweetTweet(tweet.getUid(), uid);
+			tweetManager.unretweetTweet(tweet.getTweetid(), uid);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
