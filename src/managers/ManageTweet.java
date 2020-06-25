@@ -633,14 +633,15 @@ public class ManageTweet {
 
 		List<Tweet> tweets = new ArrayList<Tweet>();
 		
-		String query = "SELECT * FROM (SELECT uid2 AS uid FROM Follows f WHERE f.uid1=?) AS fIDs INNER JOIN Tweets t ON t.uid=fIDs.uid ORDER BY createdAt DESC LIMIT ?,?;";
+		String query = "SELECT * FROM ((SELECT uid2 AS uid FROM Follows f WHERE f.uid1=?) UNION (SELECT ?)) AS fIDs INNER JOIN Tweets t ON t.uid=fIDs.uid ORDER BY createdAt DESC LIMIT ?,?;";
 
 		PreparedStatement statement = null;
 		try {
 			statement = db.prepareStatement(query);
 			statement.setInt(1, uid);
-			statement.setInt(2, start);
-			statement.setInt(3, end);
+			statement.setInt(2, uid);
+			statement.setInt(3, start);
+			statement.setInt(4, end);
 			ResultSet rs = statement.executeQuery();
 
 			while (rs.next()) {
