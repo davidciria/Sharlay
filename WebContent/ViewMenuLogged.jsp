@@ -35,7 +35,7 @@
 	<a class="vTl menu w3-bar-item w3-button" id="GlTimeline" href=#> Global Timeline </a>
 	<a class="vFTl w3-bar-item w3-button" id="PTimeline" href=#> Personalized Timeline </a>
 	<a class="menu w3-bar-item w3-button" id="LogoutController" href=#> Logout </a>
-	<form class="sU" style="user-select: none; margin-top: 5px; margin-left: 40%" action="#" method="POST" target="_blank">
+	<form class="sU w3-margin" style="user-select: none; margin-top: 5px" action="#" method="POST" target="_blank">
 	<input class="w3-input w3-border form-bg w3-text" type="search" name="searchWords" id="searchWords" placeholder="Search for users">
 	<input type="submit" class="w3-button w3-small w3-padding-small w3-theme  w3-round-xxlarge" style="margin-bottom: 3px" value="Search">
 	</form>
