@@ -47,8 +47,14 @@ public class EditProfileForm extends HttpServlet {
 		
 		HttpSession session = request.getSession(false);
 		boolean isAdmin = ((User)session.getAttribute("user")).getIsAdmin();
+		boolean isLoggedUser = false;
+		
+		if(((User)session.getAttribute("user")).getUid() == ((User)session.getAttribute("viewuser")).getUid()) {
+			isLoggedUser = true;
+		}
 		
 		request.setAttribute("isAdmin", isAdmin);
+		request.setAttribute("isLoggedUser", isLoggedUser);
 		
 		ManageUser userManager = new ManageUser();
 		User user = null;

@@ -172,7 +172,7 @@ $(document).ready(function(){
      <input type="submit" class="w3-button w3-round-medium w3-purple" style="margin-top: 25px; margin-bottom: 10px;" value="Upload File" />
  </form>
 
-<c:if test="${isAdmin}">
+<c:if test="${isAdmin || isLoggedUser}">
  <button type="button" id="deleteAccount" class="w3-button w3-margin-bottom w3-round-medium w3-red"><i class="fa fa-warning"></i> &nbsp;Delete account</button>
 </c:if>
 </div>
