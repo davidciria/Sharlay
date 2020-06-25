@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="icon" type="image" href="favicon.ico"/>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title> Sharlay </title>
 <!-- jQuery library -->
@@ -14,6 +15,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-colors-2019.css">
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-purple.css">
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
