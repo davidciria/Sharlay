@@ -34,7 +34,7 @@
 	   <h4 class="w3-center"> ${user.firstname} ${user.lastname}
 	   	<button type="button" class="eP w3-button w3-tiny w3-padding-small w3-theme w3-round-xxlarge" style="margin-top: -5px"><i class="fa fa-pencil"></i></button> 
 	   </h4>
-	   <p class="w3-center"><img src="ProfileImages/${user.uid}.png?random=" id="myImage" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
+	   <p class="w3-center"><img src="ProfileImages/${user.uid}.png?random=" id="profileImage" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
 	   <hr>
 	   <p id="name"><i class="fa fa-user fa-fw w3-margin-right w3-text-theme"></i> ${user.username} </p>
 	   <p id="birthday"><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> ${user.birth} </p>

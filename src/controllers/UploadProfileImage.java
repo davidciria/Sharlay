@@ -58,7 +58,7 @@ public class UploadProfileImage extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 
 	    // Create path components to save the file (you have to change this)
-	    String path = "C://Users//angel//eclipse-workspace//Sharlay//WebContent//ProfileImages";
+	    String path = "C://Users//david//eclipse-workspace//Sharlay//WebContent//ProfileImages";
 		final Part filePart = request.getPart("file");
 	    String fileName = getFileName(filePart);
 	    System.out.print(fileName);
@@ -87,6 +87,7 @@ public class UploadProfileImage extends HttpServlet {
 		        while ((read = filecontent.read(bytes)) != -1) {
 		            out.write(bytes, 0, read);
 		        }
+		        out.flush();
 		        writer.println("New file " + fileName + " created at " + path);
 		    } catch (FileNotFoundException fne) {
 		        writer.println("You either did not specify a file to upload or are "

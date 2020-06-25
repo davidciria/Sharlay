@@ -5,7 +5,6 @@
 <script src="parsley/parsley.min.js"></script>
 <!-- Scripts -->
 <script type="text/javascript">
-var globaluid;
 
 /* add validation for minimum age */
 window.Parsley.addValidator("minAge", {
@@ -37,10 +36,6 @@ window.Parsley.addValidator("minAge", {
 </script>
 <script>
 $(document).ready(function(){
-		var srcImg; 
-
-		srcImg = document.getElementById("myImage");
-		console.log(srcImg);
 	
 	  $(".editinput").keyup(function(){
 		  var instance = $(".editinput").parsley();
@@ -77,7 +72,7 @@ $(document).ready(function(){
 	      evt.preventDefault();
 	      var formData = new FormData($(this)[0]);
 	      formData.append("uid", $(this).attr("id"));
-	      globaluid = $(this).attr("id");
+	      var globaluid = $(this).attr("id");
 	   $.ajax({
 	       url: 'UploadProfileImage',
 	       type: 'POST',
@@ -88,7 +83,8 @@ $(document).ready(function(){
 	       enctype: 'multipart/form-data',
 	       processData: false,
 	       success: function (response) {
-	    	   //$(srcImg).removeAttr("src").attr("src", "ProfileImages/" + globaluid + ".png?random=" + new Date().valueOf());
+	    	   var d = new Date();
+	    	   $("#profileImage").attr("src", "ProfileImages/" + globaluid + ".png?" + d.getTime());
 	    	   //Show success updating profile image.
 	    	   alert(response);
 	       }
