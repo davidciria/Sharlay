@@ -332,7 +332,7 @@ public class ManageTweet {
 		PreparedStatement statement5 = null; //treu like a la taula de likes
 		
 		try {
-			statement5 = db.prepareStatement(query4);
+			statement5 = db.prepareStatement(query5);
 			statement5.setInt(1, tweetid);
 			statement5.executeUpdate();
 			statement5.close();
