@@ -74,29 +74,36 @@ $(document).ready(function(){
 	<li> You are not yet 16 years old </li>
 </c:if>
 </ul>
-
-<form data-parsley-validate action="RegisterController" method="POST">
-	<p>      
-    <label class="w3-text-purple"><b> First Name </b></label>
-    <input class="w3-input w3-border w3-light-grey" type="text" id="firstname" name="firstname" placeholder="First Name" value="${model.firstname}" required pattern="^[a-zA-Z0-9_ ]+$" data-parsley-maxlength="50"></p>
-    <p>     
-    <label class="w3-text-purple"><b> Last Name </b></label>
-    <input class="w3-input w3-border w3-light-grey" type="text" id="lastname" name="lastname" placeholder="Last Name" value="${model.lastname}" required pattern="^[a-zA-Z0-9_ ]+$" data-parsley-maxlength="50"></p>
-    <p>    
-    <label class="w3-text-purple"><b> Username </b></label>
-    <input class="w3-input w3-border w3-light-grey" type="text" id="username" name="username" placeholder="Username" value="${model.username}" required pattern="^[a-zA-Z0-9_]+$"></p>
-    <p>
-    <label class="w3-text-purple"><b> Mail address </b></label>
-    <input class="w3-input w3-border w3-light-grey" type="email" id="mail" name="mail" placeholder="Email" value="${model.mail}" required></p>
-    <p>
-    <label class="w3-text-purple"><b> Password </b></label>
-    <input class="w3-input w3-border w3-light-grey" type="password" id="pwd1" name="pwd1" placeholder="Password" value="${model.pwd1}" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"></p>
-    <p>
-    <label class="w3-text-purple"><b> Confirm password </b></label>
-    <input class="w3-input w3-border w3-light-grey" type="password" id="pwd2" name="pwd2" placeholder="Confirm Password" value="${model.pwd2}" required data-parsley-equalto="#pwd1"></p>
-    <p>
-    <label class="w3-text-purple"><b> Birthday </b></label>
-    <input class="w3-input w3-border w3-light-grey" type="date" id="birth" name="birth" value="${model.birth}" required data-parsley-min-age="16"></p>
-    <p>
-    <input class="w3-button w3-purple w3-round-medium" type="submit" name="sumbit" value="Submit"></p>
-</form>
+ <div class="w3-row">
+  	<div class="w3-container w3-quarter">
+	</div> 
+	<div  class="w3-container w3-card w3-white w3-round w3-margin w3-animate-opacity w3-half">  
+		<form data-parsley-validate action="RegisterController" method="POST">
+			<p>      
+		    <label class="w3-text-purple"><b> First Name </b></label>
+		    <input class="w3-input w3-border w3-light-grey" type="text" id="firstname" name="firstname" placeholder="First Name" value="${model.firstname}" required pattern="^[a-zA-Z0-9_ ]+$" data-parsley-maxlength="50"></p>
+		    <p>     
+		    <label class="w3-text-purple"><b> Last Name </b></label>
+		    <input class="w3-input w3-border w3-light-grey" type="text" id="lastname" name="lastname" placeholder="Last Name" value="${model.lastname}" required pattern="^[a-zA-Z0-9_ ]+$" data-parsley-maxlength="50"></p>
+		    <p>    
+		    <label class="w3-text-purple"><b> Username </b></label>
+		    <input class="w3-input w3-border w3-light-grey" type="text" id="username" name="username" placeholder="Username" value="${model.username}" required pattern="^[a-zA-Z0-9_]+$"></p>
+		    <p>
+		    <label class="w3-text-purple"><b> Mail address </b></label>
+		    <input class="w3-input w3-border w3-light-grey" type="email" id="mail" name="mail" placeholder="Email" value="${model.mail}" required></p>
+		    <p>
+		    <label class="w3-text-purple"><b> Password </b></label>
+		    <input class="w3-input w3-border w3-light-grey" type="password" id="pwd1" name="pwd1" placeholder="Password" value="${model.pwd1}" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"></p>
+		    <p>
+		    <label class="w3-text-purple"><b> Confirm password </b></label>
+		    <input class="w3-input w3-border w3-light-grey" type="password" id="pwd2" name="pwd2" placeholder="Confirm Password" value="${model.pwd2}" required data-parsley-equalto="#pwd1"></p>
+		    <p>
+		    <label class="w3-text-purple"><b> Birthday </b></label>
+		    <input class="w3-input w3-border w3-light-grey" type="date" id="birth" name="birth" value="${model.birth}" required data-parsley-min-age="16"></p>
+		    <p>
+		    <input class="w3-button w3-purple w3-round-medium" type="submit" name="sumbit" value="Submit"></p>
+		</form>
+	</div>
+	<div class="w3-container w3-quarter">
+	</div>
+</div>   

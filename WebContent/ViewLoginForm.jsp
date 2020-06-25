@@ -71,15 +71,22 @@ $(document).ready(function(){
 	<li> You have to verify your email </li>
 </c:if>
 </ul>
-
-<form action="LoginController" method="POST">
-	<p>      
-    <label class="w3-text-purple"><b> Email </b></label>
-    <input class="w3-input w3-border w3-light-grey" type="email" name="mail" value="${login.mail}" required></p>
-    <p>
-    <p>      
-    <label class="w3-text-purple"><b> Password </b></label>
-    <input class="w3-input w3-border w3-light-grey" type="password" name="pwd" value="${login.pwd}" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"></p>
-    <p>
-    <input class="w3-button w3-purple w3-round-medium" type="submit" name="sumbit" value="Submit"></p>
-</form>
+<div class="w3-row">
+  	<div class="w3-container w3-quarter">
+	</div> 
+	<div  class="w3-container w3-card w3-white w3-round w3-margin w3-animate-opacity w3-half">  
+		<form action="LoginController" method="POST">
+			<p>      
+		    <label class="w3-text-purple"><b> Email </b></label>
+		    <input class="w3-input w3-border w3-light-grey" type="email" name="mail" value="${login.mail}" required></p>
+		    <p>
+		    <p>      
+		    <label class="w3-text-purple"><b> Password </b></label>
+		    <input class="w3-input w3-border w3-light-grey" type="password" name="pwd" value="${login.pwd}" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"></p>
+		    <p>
+		    <input class="w3-button w3-purple w3-round-medium" type="submit" name="sumbit" value="Submit"></p>
+		</form>
+	</div>
+	<div class="w3-container w3-quarter">
+	</div>
+</div>   
