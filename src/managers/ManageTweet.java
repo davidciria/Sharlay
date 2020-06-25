@@ -124,6 +124,8 @@ public class ManageTweet {
 				tweet.setIsLiked(tweetIsLiked(tweet.getUid(), tweet.getTweetid()));
 				ManageUser manager = new ManageUser();
 			    User usertweet = manager.getUser(tweet.getUid());
+			    
+			    manager.finalize();
 			      
 			    tweet.setUsername(usertweet.getUsername());
 				l.add(tweet);
@@ -156,6 +158,8 @@ public class ManageTweet {
 					tweet.setIsLiked(tweetIsLiked(tweet.getUid(), tweet.getTweetid()));
 					ManageUser manager = new ManageUser();
 				    User usertweet = manager.getUser(tweet.getUid());
+				    
+				    manager.finalize();
 				      
 				    tweet.setUsername(usertweet.getUsername());
 					l.add(tweet);
@@ -188,6 +192,8 @@ public class ManageTweet {
 					tweet.setIsLiked(tweetIsLiked(likeUid, tweet.getTweetid()));
 					ManageUser manager = new ManageUser();
 				    User usertweet = manager.getUser(tweet.getUid());
+				    
+				    manager.finalize();
 				      
 				    tweet.setUsername(usertweet.getUsername());
 					l.add(tweet);
@@ -526,6 +532,8 @@ public class ManageTweet {
 		      ManageUser manager = new ManageUser();
 		      User usertweet = manager.getUser(tweet.getUid());
 		      
+		      manager.finalize();
+		      
 		      tweet.setUsername(usertweet.getUsername());
 		      
 		      /*Afegim el tweet a la llista de tweets*/
@@ -570,6 +578,8 @@ public class ManageTweet {
 		      ManageUser manager = new ManageUser();
 		      User usertweet = manager.getUser(tweet.getUid());
 		      
+		      manager.finalize();
+		      
 		      tweet.setUsername(usertweet.getUsername());
 		      
 		      /*Afegim el tweet a la llista de tweets*/
@@ -613,6 +623,8 @@ public class ManageTweet {
 		      
 		      ManageUser manager = new ManageUser();
 		      User usertweet = manager.getUser(tweet.getUid());
+		      
+		      manager.finalize();
 		      
 		      tweet.setUsername(usertweet.getUsername());
 		      
@@ -660,6 +672,8 @@ public class ManageTweet {
 		      
 		      ManageUser manager = new ManageUser();
 		      User usertweet = manager.getUser(tweet.getUid());
+		      
+		      manager.finalize();
 		      
 		      tweet.setUsername(usertweet.getUsername());
 		      
