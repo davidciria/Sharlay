@@ -43,6 +43,17 @@ $('#navigation').load('MenuController', function(){
 		});
 	});
 	
+	/* Get and visualize Tweets from a given user */
+	$(".vFTl").click(function(event){
+		event.preventDefault();
+		$.post("changeSessionVar", {setVar: "defaultDtweets", getVar: "GetAllTweetsFollowing", mode: 2}, function(data){
+			$("#dtweets").load( "GetAllTweetsFollowing", { uid: uid, start: 0 , end: nt } , function(data) {
+				start = nt;
+				cview = "GetAllTweetsFollowing";
+			});
+		});
+	});
+	
 	/* Add tweet and reload Tweet Visualitzation */
 	$("#aT").click(function(event){
 		event.preventDefault();
