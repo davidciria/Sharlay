@@ -47,9 +47,11 @@ textarea.parsley-error {
 }
 .form-bg{
 	background-color: #666666;
+}::placeholder{
+	color: #AAAAAA;
 }
-.form-text{
-	color: #9c27b0;
+.imp-text{
+	color: #8947df;
 }
 .w3-card {
 	background-color: #222222;
@@ -57,6 +59,14 @@ textarea.parsley-error {
 .w3-text {
 	color: white;
 }
-
+.w3-theme {
+	background-color: #8947df!important;
+}
+.w3-theme-d3 {
+	background-color: #8947df!important;
+}
+.w3-theme-d5 {
+	background-color: #4d0ba3!important;
+}
  /**/
  

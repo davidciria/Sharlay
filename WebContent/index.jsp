@@ -98,7 +98,7 @@ $(document).ready(function(){
 		$.post( "LikeTweet", { tweetid: $(this).parent().attr("id") } , function(data, status) {
 			if(status == "success"){
 				icon.removeClass("lT").addClass("dlT");
-				icon.removeClass("w3-theme-l5").addClass("w3-theme-d1");
+				icon.removeClass("w3-theme-l5").addClass("w3-theme");
 			}
 	  	}).fail(function(response, status) {
 	  		console.log("Some problem trying to like tweet.");
@@ -114,7 +114,7 @@ $(document).ready(function(){
 		$.post( "DislikeTweet", { tweetid: $(this).parent().attr("id") } , function(data, status) {
 			if(status == "success"){
 				icon.removeClass("dlT").addClass("lT");
-				icon.removeClass("w3-theme-d1").addClass("w3-theme-l5");
+				icon.removeClass("w3-theme").addClass("w3-theme-l5");
 			}
 		}).fail(function(response, status) {
 			console.log("Some problem trying to dislike tweet.");
@@ -255,7 +255,7 @@ $(document).ready(function(){
 <body class="global-bg">
 
  	<!-- Begin Navigation -->
- 	<div class="w3-bar w3-purple" id="navigation">
+ 	<div class="w3-bar w3-theme" id="navigation">
     <jsp:include page="${menu}" />
  	</div>
  	<!-- End Navigation -->

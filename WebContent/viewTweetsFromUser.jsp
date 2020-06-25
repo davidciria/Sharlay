@@ -9,14 +9,14 @@
 	   <hr class="w3-clear" style="margin-top: -5px">
 	   <p id="tweetText"> ${t.text} </p>
 	   <c:if test="${t.isLiked}">
-	   <button type="button" class="dlT w3-button w3-theme-d1 w3-margin-bottom w3-round-medium"><i class="fa fa-thumbs-up"></i> &nbsp;Like</button>
+	   <button type="button" class="dlT w3-button w3-theme w3-margin-bottom w3-round-medium"><i class="fa fa-thumbs-up"></i> &nbsp;Like</button>
 	   </c:if>
 	   <c:if test="${!t.isLiked}">
 	   <button type="button" class="lT w3-button w3-theme-l5 w3-margin-bottom w3-round-medium"><i class="fa fa-thumbs-up"></i> &nbsp;Like</button>
 	   </c:if>
 	   <c:if test="${viewuser.uid == user.uid || user.isAdmin}">
-	   		<button type="button" class="dT w3-button w3-theme-d1 w3-margin-bottom w3-right w3-round-medium" style="margin-left: -5px"><i class="fa fa-trash"></i></button>
-	   		<button type="button" class="eT w3-button w3-theme-d1 w3-margin-bottom w3-right w3-round-medium"><i class="fa fa-pencil"></i></button>  
+	   		<button type="button" class="dT w3-button w3-theme w3-margin-bottom w3-right w3-round-medium" style="margin-left: -5px"><i class="fa fa-trash"></i></button>
+	   		<button type="button" class="eT w3-button w3-theme w3-margin-bottom w3-right w3-round-medium"><i class="fa fa-pencil"></i></button>  
 	   </c:if>
 	 </div>
 	</c:forEach>

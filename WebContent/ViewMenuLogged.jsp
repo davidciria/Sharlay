@@ -15,7 +15,7 @@
  });
 </script>
 
-<div class="w3-bar w3-purple">
+<div class="w3-bar w3-theme">
 	<a class="vT w3-bar-item w3-button w3-hide-small" id="Timeline" href="#"> <i class="fa fa-home w3-large" aria-hidden="true"></i> </a>
 	<a class="vTl w3-bar-item w3-button w3-hide-small" id="GlTimeline" href=#><i class="fa fa-globe w3-large" aria-hidden="true"></i> </a>
 	<a class="vFTl w3-bar-item w3-button w3-hide-small" id="PTimeline" href=#><i class="fa fa-users w3-large" aria-hidden="true"></i> </a>
@@ -30,7 +30,7 @@
 	<a href="javascript:void(0)" class="w3-bar-item w3-button w3-hide-large w3-hide-medium w3-left" onclick="stack()">&#9776;</a>
 </div>
 
-<div id="stack" class="w3-bar-block w3-purple w3-hide w3-hide-large w3-hide-medium">
+<div id="stack" class="w3-bar-block w3-theme w3-hide w3-hide-large w3-hide-medium">
 	<a class="vT menu w3-bar-item w3-button" id="Timeline" href=#> Personal Page </a>
 	<a class="vTl menu w3-bar-item w3-button" id="GlTimeline" href=#> Global Timeline </a>
 	<a class="vFTl w3-bar-item w3-button" id="PTimeline" href=#> Personalized Timeline </a>

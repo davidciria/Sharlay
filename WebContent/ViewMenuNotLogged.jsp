@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" session="false"%>
     
-<div class="w3-bar w3-purple">
+<div class="w3-bar w3-theme">
 	<a class="w3-bar-item w3-button w3-hide-small" id="LogoutController" href="MainController"> <i class="fa fa-home w3-large" aria-hidden="true"></i> </a>
 	<a class="vTa w3-bar-item w3-button w3-hide-small" id="GlTimeline" href=#><i class="fa fa-globe w3-large" aria-hidden="true"></i> </a>
 	<a class="menu w3-bar-item w3-button w3-hide-small" id="RegisterController" href=#><i class="fa fa-user-plus w3-large" aria-hidden="true"></i> </a> 
@@ -12,7 +12,7 @@
 	<a href="javascript:void(0)" class="w3-bar-item w3-button w3-left w3-hide-large w3-hide-medium" onclick="stack()">&#9776;</a>
 </div>
 
-<div id="stack" class="w3-bar-block w3-purple w3-hide w3-hide-large w3-hide-medium">
+<div id="stack" class="w3-bar-block w3-theme w3-hide w3-hide-large w3-hide-medium">
 	<a class="vTa menu w3-bar-item w3-button" id="GlTimeline" href=#> Global Timeline </a>
 	<a class="menu w3-bar-item w3-button" id="RegisterController" href=#> Registration </a> 
 	<a class="menu w3-bar-item w3-button" id="LoginController" href=#> Login </a> 
