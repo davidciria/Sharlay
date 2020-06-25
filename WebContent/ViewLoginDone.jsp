@@ -103,7 +103,7 @@ $('#navigation').load('MenuController', function(){
 
 <!-- Footer -->
 <footer class="w3-container w3-theme-d3 w3-padding-16">
-  <h5> Avís legal </h5>
+  <h5> Legal warning </h5>
 </footer>
 
 <footer class="w3-container w3-theme-d5">
