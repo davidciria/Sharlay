@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="true" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-	<c:forEach var="t" items="${tweets}">       
+	<c:forEach var="t" items="${tweets}"> 
+		<c:if test="${t.retweetedBy != \"\"}">
+	 		<div class="w3-container w3-text  w3-margin w3-animate-opacity">
+	 			<i class="fa fa-retweet"></i> Retweeted by ${t.retweetedBy}
+	 		</div>
+	 	</c:if>      
 	 <div id="${t.tweetid}" class="w3-container w3-card w3-text w3-round w3-margin w3-animate-opacity"><br>
 	   <img src="ProfileImages/${t.uid}.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px" onerror="javascript:this.src='ProfileImages/default.png'">
 	   <span class="w3-right w3-opacity"> ${t.createdAt} </span>

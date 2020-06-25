@@ -244,8 +244,7 @@ public class ManageTweet {
 			e.printStackTrace();
 		}
 	}
-	
-	
+		
 	public void deleteTweet(int tweetid) throws Exception{
 		
 		String query = "SELECT uid FROM Tweets WHERE tweetid = ?";
@@ -829,7 +828,7 @@ public class ManageTweet {
 		      tweet.setCreatedAt(rs.getTimestamp("createdAt"));
 		      tweet.setParentTweet(rs.getInt("parentTweet"));
 		      tweet.setIsLiked(this.tweetIsLiked(uid, tweet.getTweetid()));
-		      tweet.setIsRetweeted(tweetIsRetweeted(uid, tweet.getTweetid()));
+		      tweet.setIsRetweeted(this.tweetIsRetweeted(uid, tweet.getTweetid()));
 		      
 		      ManageUser manager = new ManageUser();
 		      User usertweet = manager.getUser(tweet.getUid());
@@ -868,6 +867,7 @@ public class ManageTweet {
 		      tweet.setCreatedAt(rs.getTimestamp("createdAt"));
 		      tweet.setParentTweet(rs.getInt("parentTweet"));
 		      tweet.setIsLiked(this.tweetIsLiked(uid, tweet.getTweetid()));
+		      tweet.setIsRetweeted(this.tweetIsRetweeted(uid, tweet.getTweetid()));
 		      
 		      ManageUser manager = new ManageUser();
 		      User usertweet = manager.getUser(tweet.getUid());
