@@ -54,7 +54,7 @@ $(document).ready(function(){
 </script>
 
 
-<ul class="server-errors-list">
+<ul class="server-errors-list w3-center">
 <c:if test = "${model.error[0]}">
 	<li> First or Last name format is not correct </li>
 </c:if>
