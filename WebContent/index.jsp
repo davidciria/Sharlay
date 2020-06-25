@@ -61,11 +61,14 @@ $(document).ready(function(){
 		console.log("From "+start+" to "+nt)
 		if(Math.ceil($(window).scrollTop()) == $(document).outerHeight() - $(window).outerHeight()) {
 			$.post( cview , { uid: uid, start: start , end: nt } , function(data) {
-				if(cview != "GetAllTweetsFromAnonymouse"){
-					$("#dtweets").append(data);
-				}
-				else {
-					$("#content").append(data);
+				
+				if(cview != "EditProfileForm"){
+					if(cview != "GetAllTweetsFromAnonymouse"){
+						$("#dtweets").append(data);
+					}else {
+						console.log("entering3");
+						$("#content").append(data);
+					}
 				}
 				//console.log("Appending");
 	    		start = start + nt;
