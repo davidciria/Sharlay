@@ -3,7 +3,7 @@ package models;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
-public class Tweet implements Comparable<Tweet> {
+public class Tweet  {
 
 	private Integer uid = null;
 	private Integer tweetid = null;
@@ -116,10 +116,7 @@ public class Tweet implements Comparable<Tweet> {
 	public void setRetweetedBy(String retweetedBy) {
 		this.retweetedBy = retweetedBy;
 	}
-	@Override
-	public int compareTo(Tweet o) {
-		return this.getCreatedAt().compareTo(o.getCreatedAt());
-	}
+	
 	
 	/*public boolean isComplete() {
 		return (this.hasValue(this.getUsername()) && this.hasValue(this.getContent()) && this.hasValue(this.getSecondName()) && this.hasValue(this.getPassword()) &&
