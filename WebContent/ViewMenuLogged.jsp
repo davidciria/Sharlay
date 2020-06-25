@@ -31,9 +31,9 @@
 </div>
 
 <div id="stack" class="w3-bar-block w3-purple w3-hide w3-hide-large w3-hide-medium">
-	<a class="vT menu w3-bar-item w3-button" id="Timeline" href=#> Timeline </a>
+	<a class="vT menu w3-bar-item w3-button" id="Timeline" href=#> Personal Page </a>
 	<a class="vTl menu w3-bar-item w3-button" id="GlTimeline" href=#> Global Timeline </a>
-	<a class="vFTl w3-bar-item w3-button w3-hide-small" id="PTimeline" href=#> Personalized Timeline </a>
+	<a class="vFTl w3-bar-item w3-button" id="PTimeline" href=#> Personalized Timeline </a>
 	<a class="menu w3-bar-item w3-button" id="LogoutController" href=#> Logout </a>
 	<form class="sU" style="user-select: none; margin-top: 5px; margin-left: 40%" action="#" method="POST" target="_blank">
 	<input type="search" name="searchWords" id="searchWords" placeholder="Search for users">
