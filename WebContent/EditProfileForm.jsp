@@ -86,7 +86,16 @@ $(document).ready(function(){
 	    	   var d = new Date();
 	    	   $("#profileImage").attr("src", "ProfileImages/" + globaluid + ".png?" + d.getTime());
 	    	   //Show success updating profile image.
-	    	   alert(response);
+	    	   if(response.trim() == "success"){
+	    		   $("#uploadedSuccessful").removeClass("w3-text-red").addClass("w3-text-green");
+	    		   $("#uploadedSuccessful").text("Profile photo uploaded successfully");
+	    	   }
+	    	   else{
+	    		   $("#uploadedSuccessful").removeClass("w3-text-green").addClass("w3-text-red");
+	    		   $("#uploadedSuccessful").text("Please upload a file with .png format");
+	    	   }
+	    	   
+	    	   $("#uploadedSuccessful").show();
 	       }
 	   });
 	   
@@ -170,6 +179,7 @@ $(document).ready(function(){
      <input id="fileButton" type="file" style="display:none" name="file" size = "50" />
      <br />
      <input type="submit" class="w3-button w3-round-medium w3-purple" style="margin-top: 25px; margin-bottom: 10px;" value="Upload File" />
+     <div class="w3-text-green" style="display:none" id="uploadedSuccessful"></div>
  </form>
 
 <c:if test="${isAdmin || isLoggedUser}">
