@@ -1,8 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" session="true"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
     <c:forEach var="t" items="${tweets}">       
 	 <div id="${t.tweetid}" class="w3-container w3-card w3-text w3-round w3-margin w3-animate-opacity"><br>
+	 	<c:if test="${t.retweetedBy != \"\"}">
+	 		<i class="material-icons">refresh</i>
+	 		Retweeted by ${t.retweetedBy}
+	 	</c:if>
+	 	
 	   <img src="ProfileImages/${t.uid}.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px" onerror="javascript:this.src='ProfileImages/default.png'">
 	   <span class="w3-right w3-opacity"> ${t.createdAt} </span>
 	   <h4 class="uVw" style="text-decoration:none" onmouseover="style='text-decoration:underline; cursor:pointer'" onmouseout="style='text-decoration:none'"> ${t.username} </h4><br>
