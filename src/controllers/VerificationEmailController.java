@@ -49,12 +49,16 @@ public class VerificationEmailController extends HttpServlet {
 			if (verificationStatus) {
 				//Verificacio ha anat correctament.
 				request.setAttribute("verified", 1);
-				RequestDispatcher dispatcher = request.getRequestDispatcher("ViewLoginForm.jsp");
+				request.setAttribute("menu","ViewMenuNotLogged.jsp");
+				request.setAttribute("content","ViewLoginForm.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
 			    dispatcher.forward(request, response);
 			} else {
 				// Servlet error en la verificacio.
 				request.setAttribute("verified", 2);
-				RequestDispatcher dispatcher = request.getRequestDispatcher("ViewLoginForm.jsp");
+				request.setAttribute("menu","ViewMenuNotLogged.jsp");
+				request.setAttribute("content","ViewLoginForm.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
 			    dispatcher.forward(request, response);
 			}
 		}
