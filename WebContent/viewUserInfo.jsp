@@ -5,7 +5,7 @@
 <style> 
 	.line-in-middle {
 	   background-image: linear-gradient(#FFF, #FFF);
-			background-size: 0.5px 100%;
+			background-size: 0.5px 75%;
 			background-repeat: no-repeat;
 			background-position: center center;
 			opacity: 0.6;
@@ -19,7 +19,7 @@
 	    margin-bottom: -5px;
 	}.splitscreen .center {
 	    flex: 0.1;
-	    margin-top: -20px;
+	    margin-top: -31px;
 	}
 	.splitscreen .right {
 	    flex: 0.45;
