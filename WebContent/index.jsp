@@ -252,10 +252,10 @@ $(document).ready(function(){
 });
 </script>
 </head>
-<body>
+<body class="global-bg">
 
  	<!-- Begin Navigation -->
- 	<div class="w3-bar w3-red" id="navigation">
+ 	<div class="w3-bar w3-purple" id="navigation">
     <jsp:include page="${menu}" />
  	</div>
  	<!-- End Navigation -->

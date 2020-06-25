@@ -77,7 +77,7 @@ $(document).ready(function(){
  <div class="w3-row">
   	<div class="w3-container w3-quarter">
 	</div> 
-	<div  class="w3-container w3-card w3-white w3-round w3-margin w3-animate-opacity w3-half">  
+	<div  class="w3-container w3-card w3-text w3-round w3-margin w3-animate-opacity w3-half">  
 		<form data-parsley-validate action="RegisterController" method="POST">
 			<p>      
 		    <label class="w3-text-purple"><b> First Name </b></label>

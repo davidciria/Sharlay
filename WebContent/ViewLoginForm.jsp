@@ -13,10 +13,10 @@ $(document).ready(function(){
 		  for(var i = 0; i < instance.length - 1; i++){
 			console.log(i, instance[i].isValid());
 			if($("input").eq(i).val() == ""){
-				$("input").eq(i).attr("class", "w3-input w3-border w3-light-grey");
+				$("input").eq(i).attr("class", "w3-input w3-border form-bg w3-text");
 			}else{
-				if(instance[i].isValid()) $("input").eq(i).attr("class", "w3-input w3-border w3-border-green w3-hover-border-green w3-light-grey");
-				else $("input").eq(i).attr("class", "w3-input w3-border w3-border-red w3-light-grey");
+				if(instance[i].isValid()) $("input").eq(i).attr("class", "w3-input w3-border w3-border-green w3-hover-border-green form-bg w3-text");
+				else $("input").eq(i).attr("class", "w3-input w3-border w3-border-red form-bg w3-text");
 			}
 		  }
 	  });
@@ -74,15 +74,15 @@ $(document).ready(function(){
 <div class="w3-row">
   	<div class="w3-container w3-quarter">
 	</div> 
-	<div  class="w3-container w3-card w3-white w3-round w3-margin w3-animate-opacity w3-half">  
+	<div  class="w3-container w3-card w3-text w3-round w3-margin w3-animate-opacity w3-half">  
 		<form action="LoginController" method="POST">
 			<p>      
 		    <label class="w3-text-purple"><b> Email </b></label>
-		    <input class="w3-input w3-border w3-light-grey" type="email" name="mail" value="${login.mail}" required></p>
+		    <input class="w3-input w3-border form-bg w3-text" type="email" name="mail" value="${login.mail}" required></p>
 		    <p>
 		    <p>      
 		    <label class="w3-text-purple"><b> Password </b></label>
-		    <input class="w3-input w3-border w3-light-grey" type="password" name="pwd" value="${login.pwd}" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"></p>
+		    <input class="w3-input w3-border form-bg w3-text" type="password" name="pwd" value="${login.pwd}" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"></p>
 		    <p>
 		    <input class="w3-button w3-purple w3-round-medium" type="submit" name="sumbit" value="Submit"></p>
 		</form>

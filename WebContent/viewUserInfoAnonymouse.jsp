@@ -29,7 +29,7 @@
 </style> 
 
 
-<div class="w3-card w3-round w3-white"  id="${viewuser.uid}">
+<div class="w3-card w3-round w3-text"  id="${viewuser.uid}">
   <div class="w3-container">
    <h4 class="w3-center"> ${viewuser.firstname} ${viewuser.lastname}</h4>
    <p class="w3-center"><img src="ProfileImages/${viewuser.uid}.png" id="profileImage" class="w3-circle" style="height:106px;width:106px" alt="Avatar" onerror="javascript:this.src='ProfileImages/default.png'"></p>

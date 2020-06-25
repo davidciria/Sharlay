@@ -144,7 +144,7 @@ $(document).ready(function(){
 
 <div id="confirmDialog">Are you sure you want to delete your account?</div>
 
-<div class="w3-container w3-card w3-white w3-round w3-margin w3-animate-opacity">
+<div class="w3-container w3-card w3-text w3-round w3-margin w3-animate-opacity">
 
 <form id="${uid}" data-parsley-validate action="#" method="POST" class="editForm">
 	<p>      

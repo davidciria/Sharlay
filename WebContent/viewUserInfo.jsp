@@ -29,7 +29,7 @@
 </style> 
 
 <c:if test="${viewuser.uid == user.uid}">
-	<div class="w3-card w3-round w3-white" id="${user.uid}">
+	<div class="w3-card w3-round w3-text" id="${user.uid}">
 	  <div class="w3-container">
 	   <h4 class="w3-center"> ${user.firstname} ${user.lastname}
 	   	<button type="button" class="eP w3-button w3-tiny w3-padding-small w3-theme w3-round-xxlarge" style="margin-top: -5px"><i class="fa fa-pencil"></i></button> 
@@ -55,7 +55,7 @@
 	<br>
 </c:if>
 <c:if test="${viewuser.uid != user.uid}">
-	<div class="w3-card w3-round w3-white"  id="${viewuser.uid}">
+	<div class="w3-card w3-round w3-text"  id="${viewuser.uid}">
 	  <div class="w3-container">
 	   <h4 class="w3-center"> ${viewuser.firstname} ${viewuser.lastname}
 	   <c:if test="${user.isAdmin}">

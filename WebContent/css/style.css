@@ -42,7 +42,21 @@ textarea.parsley-error {
   opacity: 1;
   display:inline-block;
 }
-
+.global-bg{
+	background-color: #464646;
+}
+.form-bg{
+	background-color: #666666;
+}
+.form-text{
+	color: #9c27b0;
+}
+.w3-card {
+	background-color: #222222;
+}
+.w3-text {
+	color: white;
+}
 
  /**/
  

@@ -8,13 +8,13 @@
 </head>
 <body>
 <div class="w3-row">
-  	<div class="w3-container w3-card w3-theme-l5 w3-round w3-margin w3-animate-opacity w3-col m4 w3-center">
+  	<div class="w3-container w3-card w3-text w3-round w3-margin w3-animate-opacity w3-col m4 w3-center">
 	  	<div >
 	  		<img src="img/logo_fusion_cut.png" class="w3-circle" style="height:335px; width:335px; margin-top: 5%; margin-bottom: 5%;" alt="Sharlay's logo">
 	  		<p><b class="w3-text-purple w3-large">Sharlay, Share & Play</b></p>
 	  	</div>
 	</div> 
-	<div  class="w3-container w3-card w3-white w3-round w3-margin w3-animate-opacity w3-col m7 w3-center">
+	<div  class="w3-container w3-card w3-text w3-round w3-margin w3-animate-opacity w3-col m7 w3-center">
 	  	  	<p>Join <b class="w3-text-purple">Sharlay</b>, where you can share everything about your games.</p>
 	  	  	<p>Start sharing with <b class="w3-text-purple">Sharlay</b>:</p>
 	  	  	<button type="button" class="menu w3-button w3-theme w3-round-xxlarge w3-center w3-xxlarge" id="RegisterController" href=#><i class="fa fa-user-plus"></i> &nbsp;Register</button> 
