@@ -4,11 +4,11 @@
 <!-- style to create vertical line -->
 <style> 
 	.line-in-middle {
-	   background-image: linear-gradient(#000, #000);
+	   background-image: linear-gradient(#FFF, #FFF);
 			background-size: 0.5px 100%;
 			background-repeat: no-repeat;
 			background-position: center center;
-			opacity: 0.1;
+			opacity: 0.6;
 	}
 	.splitscreen {
     	display:flex;
