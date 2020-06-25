@@ -193,6 +193,7 @@ $(document).ready(function(){
 		var user = $(this).parent().parent();
 		$.post( "UnfollowUser", { uid: user.attr("id") } , function(data) {
 			user.remove();
+			$("#duser").load( "GetUserInfo", { uid:  user.attr("id") } ,function() {});
 	  	});
 	});
 	
