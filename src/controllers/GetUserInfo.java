@@ -40,11 +40,12 @@ public class GetUserInfo extends HttpServlet {
 		
 		if ( session != null) {
 			//Mirar el cas de admin
-			int uid = (int)session.getAttribute("uid");
 			cview = "/viewUserInfo.jsp";
 			User user = (User)session.getAttribute("user");
 			User viewuser = (User)session.getAttribute("viewuser");
+			int uid = user.getUid(); //Uid del usuari loggejat.
 			if(user.getUid() == viewuser.getUid()) {
+			//Visualitzant perfil personal.
 				User newuser = new User();
 				
 				try {
@@ -57,7 +58,7 @@ public class GetUserInfo extends HttpServlet {
 				
 				request.setAttribute("user",newuser);
 			}else {
-			//Un usuari ha deixat de ser seguit.
+			//Visualitzant perfil d'un altre usuari.
 				User newuser = new User();
 				
 				try {
