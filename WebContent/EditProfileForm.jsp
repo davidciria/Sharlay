@@ -178,8 +178,10 @@ $(document).ready(function(){
 	 <span>You must upload a .png file</span>
      <input id="fileButton" type="file" style="display:none" name="file" size = "50" />
      <br />
-     <input type="submit" class="w3-button w3-round-medium w3-purple" style="margin-top: 25px; margin-bottom: 10px;" value="Upload File" />
-     <div class="w3-text-green" style="display:none" id="uploadedSuccessful"></div>
+     <div style="margin-top: 25px; margin-bottom: 10px;">
+     <input type="submit" class="w3-button w3-round-medium w3-purple" value="Upload File" />
+     <span class="w3-text-green" style="display:none;" id="uploadedSuccessful"></span>
+     </div>
  </form>
 
 <c:if test="${isAdmin || isLoggedUser}">
