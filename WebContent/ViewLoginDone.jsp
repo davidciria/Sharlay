@@ -93,7 +93,7 @@ $('#navigation').load('MenuController', function(){
           <div class="w3-card w3-round w3-text">
             <div class="w3-container w3-padding">
               <h6 class="w3-opacity">What do you want to share?</h6>
-              <p id="cT" contenteditable="true" class="w3-border w3-padding">I'm enjoying Sharlay!</p>
+              <p id="cT" contenteditable="true" class="w3-border w3-padding global-bg w3-text">I'm enjoying Sharlay!</p>
               <button id="aT" type="button" class="w3-button w3-theme w3-round-medium w3-right"><i class="fa Example of arrow-circle-o-down fa-arrow-down"></i> &nbsp;Post</button> 
             </div>
           </div>

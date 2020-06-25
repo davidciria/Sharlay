@@ -42,10 +42,10 @@ $(document).ready(function(){
 		  for(var i = 0; i < instance.length - 1; i++){
 			console.log(i, instance[i].isValid());
 			if($(".editinput").eq(i).val() == ""){
-				$(".editinput").eq(i).attr("class", "w3-input w3-border w3-light-grey");
+				$(".editinput").eq(i).attr("class", "w3-input w3-border form-bg w3-text");
 			}else{
-				if(instance[i].isValid()) $(".editinput").eq(i).attr("class", "w3-input w3-border w3-border-green w3-hover-border-green w3-light-grey");
-				else $(".editinput").eq(i).attr("class", "w3-input w3-border w3-border-red w3-light-grey");
+				if(instance[i].isValid()) $(".editinput").eq(i).attr("class", "w3-input w3-border w3-border-green w3-hover-border-green form-bg w3-text");
+				else $(".editinput").eq(i).attr("class", "w3-input w3-border w3-border-red form-bg w3-text");
 			}
 		  }
 	  });
@@ -157,29 +157,29 @@ $(document).ready(function(){
 
 <form id="${uid}" data-parsley-validate action="#" method="POST" class="editForm">
 	<p>      
-    <label class="w3-text-purple"><b> First Name </b></label>
-    <input class="editinput w3-input w3-border w3-light-grey" type="text" id="firstname" name="firstname" placeholder="First Name" value="${firstname}" required pattern="^[a-zA-Z0-9_ ]+$" data-parsley-maxlength="50"></p>
+    <label class="imp-text"><b> First Name </b></label>
+    <input class="editinput w3-input w3-border form-bg w3-text" type="text" id="firstname" name="firstname" placeholder="First Name" value="${firstname}" required pattern="^[a-zA-Z0-9_ ]+$" data-parsley-maxlength="50"></p>
     <p>     
-    <label class="w3-text-purple"><b> Last Name </b></label>
-    <input class="editinput w3-input w3-border w3-light-grey" type="text" id="lastname" name="lastname" placeholder="Last Name" value="${lastname}" required pattern="^[a-zA-Z0-9_ ]+$" data-parsley-maxlength="50"></p>
+    <label class="imp-text"><b> Last Name </b></label>
+    <input class="editinput w3-input w3-border form-bg w3-text" type="text" id="lastname" name="lastname" placeholder="Last Name" value="${lastname}" required pattern="^[a-zA-Z0-9_ ]+$" data-parsley-maxlength="50"></p>
     <p>    
-    <label class="w3-text-purple"><b> Username </b></label>
-    <input class="editinput w3-input w3-border w3-light-grey" type="text" id="username" name="username" placeholder="Username" value="${username}" required pattern="^[a-zA-Z0-9_]+$"></p>
+    <label class="imp-text"><b> Username </b></label>
+    <input class="editinput w3-input w3-border form-bg w3-text" type="text" id="username" name="username" placeholder="Username" value="${username}" required pattern="^[a-zA-Z0-9_]+$"></p>
     <p>
-    <input class="editinput w3-button w3-round-medium w3-purple" type="submit" name="submit" value="Update"></p>
+    <input class="editinput w3-button w3-round-medium w3-theme" type="submit" name="submit" value="Update"></p>
 </form>
 
 <form id="${uid}" class="uploadProfileImage" action = "UploadProfileImage" method = "post" enctype = "multipart/form-data">
-     <label class="w3-text-purple"><b> Profile Image </b></label>
+     <label class="imp-text"><b> Profile Image </b></label>
      <br /><br />
-     <label for="fileButton" class="w3-button w3-round-medium w3-purple">
+     <label for="fileButton" class="w3-button w3-round-medium w3-theme">
     	Select file
 	 </label>
 	 <span>You must upload a .png file</span>
      <input id="fileButton" type="file" style="display:none" name="file" size = "50" />
      <br />
      <div style="margin-top: 25px; margin-bottom: 10px;">
-     <input type="submit" class="w3-button w3-round-medium w3-purple" value="Upload File" />
+     <input type="submit" class="w3-button w3-round-medium w3-theme" value="Upload File" />
      <span class="w3-text-green" style="display:none;" id="uploadedSuccessful"></span>
      </div>
  </form>
