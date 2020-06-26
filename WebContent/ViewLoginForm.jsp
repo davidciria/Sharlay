@@ -41,12 +41,18 @@ $(document).ready(function(){
 
 <div class="w3-center w3-text-green">
 <c:if test = "${verified == 1}">
-	 User has been verified correctly, now you can log in 
+	 User has been verified correctly, now you can log in <br>
 </c:if>
-<c:if test = "${verified == 2}">
-	There has been a problem verifiying user, please try again later
+<c:if test = "${verified == 3}">
+	User already verified <br>
 </c:if>
 </div>
+<div class="w3-center w3-text-red">
+<c:if test = "${verified == 2}">
+	There has been a problem verifiying user, please try again later <br>
+</c:if>
+</div>
+
 
 <div class="server-errors-list w3-center">
 <c:if test = "${login.error[0]}">
