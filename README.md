@@ -1,5 +1,5 @@
 # Sharlay
-## Share and Play
+### Share and Play
 
 ## Universitat Pompeu Fabra (UPF) 2020
 
