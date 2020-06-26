@@ -210,7 +210,7 @@ $(document).ready(function(){
 		var followButton = $(this);
 		var user = $(this).parent().parent();
 		var unfollowButton;
-		if(cview == "searchUsers"){
+		if(cview == "searchUsers" || cview == "GetFollowers"){
 			unfollowButton = $('<button type="button" class="uU w3-button w3-right w3-red w3-margin-bottom w3-round-medium"><i class="fa fa-minus-circle"></i>&nbsp;Unfollow</button>');	
 		}else{
 			unfollowButton = $('<button type="button" class="uU w3-button w3-red w3-margin-bottom"><i class="fa fa-minus-circle"></i>&nbsp;Unfollow</button>');	
@@ -232,7 +232,7 @@ $(document).ready(function(){
 		var user = $(this).parent().parent();
 		console.log(user.attr("id"));
 		var followButton;
-		if(cview == "searchUsers"){
+		if(cview == "searchUsers" || cview == "GetFollowers"){
 			followButton = $('<button type="button" class="fU w3-button w3-right w3-green w3-margin-bottom w3-round-medium"><i class="fa fa-plus-circle"></i>&nbsp;Follow</button>');	
 		}else{
 			followButton = $('<button type="button" class="fU w3-button w3-green w3-margin-bottom"><i class="fa fa-plus-circle"></i>&nbsp;Follow</button>');

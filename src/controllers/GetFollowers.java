@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.beanutils.BeanUtils;
 
@@ -42,19 +43,39 @@ public class GetFollowers extends HttpServlet {
 		dTmodel dt = new dTmodel();
 		System.out.println(request.getParameter("uid"));
 		int viewuid = Integer.parseInt(request.getParameter("uid"));
+		HttpSession session = request.getSession(false);
 		
-		try {
-			BeanUtils.populate(dt, request.getParameterMap());
+		if(session != null) {
 			ManageUser userManager = new ManageUser();
-			users = userManager.getUserFollowers(viewuid,dt.getStart(),dt.getEnd());
+			try {
+				BeanUtils.populate(dt, request.getParameterMap());
+				users = userManager.getUserFollowers(viewuid,dt.getStart(),dt.getEnd());
+			} catch (IllegalAccessException | InvocationTargetException e) {
+				e.printStackTrace();
+			}
+			
+			for(int i = 0; i < users.size(); i++) {
+				users.get(i).setIsFollowed(userManager.userIsFollowed((int)session.getAttribute("uid"), users.get(i).getUid()));
+			}
+			
 			userManager.finalize();
-		} catch (IllegalAccessException | InvocationTargetException e) {
-			e.printStackTrace();
+			request.setAttribute("users",users);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/viewFollowers.jsp"); 
+			dispatcher.forward(request,response);
+		}else {
+			ManageUser userManager = new ManageUser();
+			try {
+				BeanUtils.populate(dt, request.getParameterMap());
+				users = userManager.getUserFollowers(viewuid,dt.getStart(),dt.getEnd());
+			} catch (IllegalAccessException | InvocationTargetException e) {
+				e.printStackTrace();
+			}
+			
+			userManager.finalize();
+			request.setAttribute("users",users);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/viewFollowersFromAnonymouse.jsp"); 
+			dispatcher.forward(request,response);
 		}
-
-		request.setAttribute("users",users);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/viewFollowers.jsp"); 
-		dispatcher.forward(request,response);
 	}
 
 	/**
