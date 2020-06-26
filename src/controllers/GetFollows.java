@@ -20,6 +20,9 @@ import models.User;
 import models.dTmodel;
 /**
  * Servlet implementation class GetFollows
+ * 
+ * Servlet per obtenir els usuaris als que segueix un usuari.
+ * 
  */
 @WebServlet("/GetFollows")
 public class GetFollows extends HttpServlet {
@@ -42,7 +45,11 @@ public class GetFollows extends HttpServlet {
 		
 		HttpSession session = request.getSession(false);
 		String cview = "";
+		
+		ManageUser userManager = new ManageUser();
+		
 		if(session != null) {
+			//Usuari loggejat.
 			cview = "/viewFollows.jsp";
 			int uid = (int)session.getAttribute("uid");
 			
@@ -50,7 +57,6 @@ public class GetFollows extends HttpServlet {
 			
 			try {
 				BeanUtils.populate(dt, request.getParameterMap());
-				ManageUser userManager = new ManageUser();
 				users = userManager.getUserFollows(viewuid,dt.getStart(),dt.getEnd());
 				userManager.finalize();
 			
@@ -68,14 +74,13 @@ public class GetFollows extends HttpServlet {
 			request.setAttribute("users",users);
 			request.setAttribute("mainUser",mainUser);
 		}else {
+			//Usuari anonymous.
 			cview = "/viewFollowsFromAnonymouse.jsp";
 			int viewuid = Integer.parseInt(request.getParameter("uid"));
 			
 			try {
 				BeanUtils.populate(dt, request.getParameterMap());
-				ManageUser userManager = new ManageUser();
 				users = userManager.getUserFollows(viewuid,dt.getStart(),dt.getEnd());
-				userManager.finalize();
 			
 			} catch (IllegalAccessException | InvocationTargetException e) {
 				e.printStackTrace();
@@ -84,6 +89,8 @@ public class GetFollows extends HttpServlet {
 			request.setAttribute("users",users);
 			
 		}
+		
+		userManager.finalize();
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(cview); 
 		dispatcher.forward(request,response);

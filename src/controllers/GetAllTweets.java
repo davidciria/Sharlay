@@ -18,7 +18,10 @@ import models.Tweet;
 import models.dTmodel;
 
 /**
- * Servlet implementation class dTcontroller
+ * Servlet implementation class GetAllTweets
+ * 
+ * Servlet per obtenir tots els tweets.
+ * 
  */
 @WebServlet("/GetAllTweets")
 public class GetAllTweets extends HttpServlet {
@@ -39,16 +42,16 @@ public class GetAllTweets extends HttpServlet {
 
 		dTmodel dt = new dTmodel();
 		List<Tweet> tweets = Collections.emptyList();
+		ManageTweet tweetManager = new ManageTweet();
 		
 		try {
 			BeanUtils.populate(dt, request.getParameterMap());
-			ManageTweet tweetManager = new ManageTweet();
 			tweets = tweetManager.getAllTweets(dt.getUid(), dt.getStart(), dt.getEnd());
-			tweetManager.finalize();
-		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		tweetManager.finalize();
 
 		request.setAttribute("tweets",tweets);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/viewAllTweets.jsp"); 

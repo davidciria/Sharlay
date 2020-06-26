@@ -12,6 +12,9 @@ import managers.ManageUser;
 
 /**
  * Servlet implementation class FollowUser
+ * 
+ * Servlet per seguir a un usuari.
+ * 
  */
 @WebServlet("/FollowUser")
 public class FollowUser extends HttpServlet {
@@ -32,18 +35,22 @@ public class FollowUser extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		int uid = (int)session.getAttribute("uid");
 		Integer userToFollow = Integer.parseInt(request.getParameter("uid"));
+		
+		ManageUser userManager = new ManageUser();
+		
 		try {
-			ManageUser userManager = new ManageUser();
 			boolean result = false;
 			if(!userManager.userIsFollowed(uid, userToFollow)) result = userManager.follow(uid, userToFollow);
+			/*Verifiquem si hi ha hagut algun error.*/
 			if(result) response.setStatus(HttpServletResponse.SC_ACCEPTED);
 			else{
 				response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			}
-			userManager.finalize();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		userManager.finalize();
 	}
 
 	/**

@@ -21,6 +21,9 @@ import models.dTmodel;
 
 /**
  * Servlet implementation class GetFollowers
+ * 
+ * Servlet per obtenir tots els followers dun usuari.
+ * 
  */
 @WebServlet("/GetFollowers")
 public class GetFollowers extends HttpServlet {
@@ -43,8 +46,10 @@ public class GetFollowers extends HttpServlet {
 		int viewuid = Integer.parseInt(request.getParameter("uid"));
 		HttpSession session = request.getSession(false);
 		
+		ManageUser userManager = new ManageUser();
+		
 		if(session != null) {
-			ManageUser userManager = new ManageUser();
+			//Usuari loggejat.
 			try {
 				BeanUtils.populate(dt, request.getParameterMap());
 				users = userManager.getUserFollowers(viewuid,dt.getStart(),dt.getEnd());
@@ -61,7 +66,7 @@ public class GetFollowers extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/viewFollowers.jsp"); 
 			dispatcher.forward(request,response);
 		}else {
-			ManageUser userManager = new ManageUser();
+			//Vista usuari anonymous.
 			try {
 				BeanUtils.populate(dt, request.getParameterMap());
 				users = userManager.getUserFollowers(viewuid,dt.getStart(),dt.getEnd());

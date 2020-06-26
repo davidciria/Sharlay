@@ -19,6 +19,9 @@ import models.dTmodel;
 
 /**
  * Servlet implementation class GetAllTweetsFollowing
+ * 
+ * Servlet per obtenir tots els tweets dels usuaris als que segueix un usuari.
+ * 
  */
 @WebServlet("/GetAllTweetsFollowing")
 public class GetAllTweetsFollowing extends HttpServlet {
@@ -39,17 +42,17 @@ public class GetAllTweetsFollowing extends HttpServlet {
 		
 		dTmodel dt = new dTmodel();
 		List<Tweet> tweets = Collections.emptyList();
+		ManageTweet tweetManager = new ManageTweet();
 		
 		try {
 			BeanUtils.populate(dt, request.getParameterMap());
-			ManageTweet tweetManager = new ManageTweet();
 			tweets = tweetManager.getAllTweetsFollowing(dt.getUid(), dt.getStart(), dt.getEnd());
-			tweetManager.finalize();
-		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		
+		tweetManager.finalize();
+		
 		request.setAttribute("tweets",tweets);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/viewAllTweets.jsp"); 
 		dispatcher.forward(request,response);

@@ -14,6 +14,9 @@ import models.User;
 
 /**
  * Servlet implementation class EditProfileForm
+ * 
+ * Editar dades personals.
+ * 
  */
 @WebServlet("/EditProfileForm")
 public class EditProfileForm extends HttpServlet {
@@ -31,16 +34,20 @@ public class EditProfileForm extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		/*Parametres que rebem per request*/
 		String username = request.getParameter("username");
 		String firstname = request.getParameter("firstname");
 		String lastname = request.getParameter("lastname");
 		String birth = request.getParameter("birth");
+		/**/
+		
 		int uid = Integer.parseInt(request.getParameter("uid"));
 		
 		HttpSession session = request.getSession(false);
-		boolean isAdmin = ((User)session.getAttribute("user")).getIsAdmin();
+		boolean isAdmin = ((User)session.getAttribute("user")).getIsAdmin(); //Saber si l'usuari loggejat es admin. Podra editar tots els perfils.
 		boolean isLoggedUser = false;
+		
+		/*Saber si es tracta del edit d'un usuari loggejat (podra eliminar el seu perfil)*/
 		if(((User)session.getAttribute("user")).getUid() == ((User)session.getAttribute("viewuser")).getUid()) {
 			isLoggedUser = true;
 		}
@@ -50,6 +57,7 @@ public class EditProfileForm extends HttpServlet {
 		
 		ManageUser userManager = new ManageUser();
 		User user = null;
+		
 		try {
 			user = userManager.getUser(uid);
 		} catch (Exception e) {
@@ -57,6 +65,7 @@ public class EditProfileForm extends HttpServlet {
 			e.printStackTrace();
 		}
 		
+		/*Si hi ha algun parametre que no esta buit vol dir que l'usuari ha modificat algun camp.*/
 		if((username != "" && username != null) || (firstname != "" && firstname != null)|| (lastname != "" && lastname != null) || (birth != "" && birth != null)) {
 			
 			user.setUsername(username);
@@ -65,15 +74,17 @@ public class EditProfileForm extends HttpServlet {
 			user.setBirth(birth);
 
 			userManager.editUser(uid, username, firstname, lastname, birth);
-			
-			userManager.finalize();
 		}
 		
+		/*Setejem els nous parametres.*/
 		request.setAttribute("username", user.getUsername());
 		request.setAttribute("firstname", user.getFirstname());
 		request.setAttribute("lastname", user.getLastname());
 		request.setAttribute("uid", user.getUid());
 		request.setAttribute("birth",user.getBirth());
+		/**/
+		
+		userManager.finalize();
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("EditProfileForm.jsp");
 	    if (dispatcher != null) dispatcher.forward(request, response);

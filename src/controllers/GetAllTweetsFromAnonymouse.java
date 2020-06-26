@@ -19,6 +19,9 @@ import models.dTmodel;
 
 /**
  * Servlet implementation class GetAllTweetsFromAnonymouse
+ * 
+ * Servlet per obtenir tots els tweets (global timeline) desde l'usuari anonymous.
+ * 
  */
 @WebServlet("/GetAllTweetsFromAnonymouse")
 public class GetAllTweetsFromAnonymouse extends HttpServlet {
@@ -39,17 +42,16 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 		
 		dTmodel dt = new dTmodel();
 		List<Tweet> tweets = Collections.emptyList();
-		
+		ManageTweet tweetManager = new ManageTweet();
 		try {
 			BeanUtils.populate(dt, request.getParameterMap());
-			ManageTweet tweetManager = new ManageTweet();
 			tweets = tweetManager.getAllTweetsAnonymouse(dt.getStart(), dt.getEnd());
-			tweetManager.finalize();
-		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
+		tweetManager.finalize();
+		
 		request.setAttribute("tweets",tweets);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/viewAllTweetsFromAnonymouse.jsp"); 
 		dispatcher.forward(request,response);
