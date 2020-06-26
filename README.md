@@ -20,7 +20,7 @@
 
 # Introduccion d'ús en local
 
-## Instalació
+# Instalació
 
 ## Eclipse
 
@@ -33,7 +33,7 @@ Per al desenvolupament de l'aplicació s'ha usat el servidor Tomcat en la versi�
 
 Seguir el següent link per la seva instal·lació: http://www.coreservlets.com/Apache-Tomcat-Tutorial/tomcat-7-with-eclipse.html
 
-## Descàrrega del projecte
+##  Projecte
 
 Existeixen dues alternatives per descarregar el projecte:
 
