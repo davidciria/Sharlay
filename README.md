@@ -76,4 +76,8 @@ Dins del fitxer afegirem la següent linia dins l'etiqueta `<Host>` especificant
 
 <img src="https://github.com/davidciria/Sharlay/blob/master/readme_images/tutorial_context2.png?raw=true">
 
+També caldrà modificar la ruta al controlador UploadProfileImage.java
 
+Cambiar la variable path per la ruta local del projecte on es troben les imatges (la mateixa que l'anterior):
+
+<img src="https://github.com/davidciria/Sharlay/blob/master/readme_images/tutorial_context3.png?raw=true">
