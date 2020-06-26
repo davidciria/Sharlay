@@ -36,6 +36,7 @@ public class ManageTweet {
 		}
 	}
 	
+	/*Insertar un nou tweet*/
 	public void insertTweet(Tweet tweet) throws Exception{
 		
 		String query = "INSERT INTO Tweets (uid,text,likes,retweets,comments,createdAt,parentTweet) VALUES (?,?,?,?,?,?,?)";
@@ -59,7 +60,6 @@ public class ManageTweet {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return;
 		}
 		
 		
@@ -74,40 +74,11 @@ public class ManageTweet {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return;
 		}
 	}
 	
-	//Aquesta funcio s'ha de revisar !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	public List<Tweet> getTweet(Integer tweetid) throws Exception {
-
-		List<Tweet> tweets = new ArrayList<Tweet>();
 	
-		String query = "SELECT * FROM Tweets WHERE tweetid = ? ORDER BY createdAt DESC";
-
-		PreparedStatement statement = null;
-		
-		statement = db.prepareStatement(query);
-		statement.setInt(1, tweetid);
-		
-		ResultSet rs = statement.executeQuery();
-
-		while (rs.next()) {
-	      Tweet tweet = new Tweet();
-	      tweet.setUid(rs.getInt("uid"));
-	      tweet.setTweetid(rs.getInt("tweetid"));
-	      tweet.setText(rs.getString("text"));
-	      tweet.setLikes(rs.getInt("likes"));
-	      tweet.setRetweets(rs.getInt("retweets"));
-	      tweet.setComments(rs.getInt("comments"));
-	      tweet.setCreatedAt(rs.getTimestamp("createdAt"));
-	      tweet.setParentTweet(rs.getInt("parentTweet"));
-	      tweets.add(tweet);
-		}
-		return tweets;
-	}
-	
-	// Get tweets from a user given start and end
+	//Obtenir tweets del usuari desde start fins a start+end (visio anonymous).
 		public List<Tweet> getUserTweetsAnonymouse(Integer uid,Integer start, Integer end) throws Exception {
 			String query = "SELECT * FROM Tweets WHERE Tweets.uid = ?";
 			PreparedStatement statement = null;
@@ -134,7 +105,7 @@ public class ManageTweet {
 				    tweet.setUsername(usertweet.getUsername());
 					l.add(tweet);
 				}
-				rs.close();
+				
 				statement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -165,7 +136,7 @@ public class ManageTweet {
 				    tweet.setRetweetedBy(retweetuser.getUsername());
 					l.add(tweet);
 				}
-				rs.close();
+				
 				statement.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -186,7 +157,7 @@ public class ManageTweet {
 			
 		}
 	
-	// Get tweets from a user given start and end
+		//Obtenir tweets del usuari desde start fins a start+end.
 		public List<Tweet> getUserTweets(Integer uid,Integer start, Integer end, Integer loggedUid) throws Exception {
 			String query = "SELECT * FROM Tweets WHERE Tweets.uid = ?;";
 			PreparedStatement statement = null;
@@ -268,6 +239,7 @@ public class ManageTweet {
 			
 		}
 	
+		/*Saber si un tweet te un like del usuari amb uid*/
 	public boolean tweetIsLiked(int uid, int tweetid) {
 		String query = "SELECT * FROM Likes WHERE uid=? AND tweetid=?";
 
@@ -277,8 +249,14 @@ public class ManageTweet {
 			statement.setInt(1, uid);
 			statement.setInt(2, tweetid);
 			ResultSet rs = statement.executeQuery();
-			if(rs.next()) return true;
-			else return false;
+			if(rs.next()) {
+				statement.close();
+				return true;
+			}
+			else{
+				statement.close();
+				return false;
+			}
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -286,6 +264,7 @@ public class ManageTweet {
 		return false;
 	}
 	
+	/*Editar un tweet*/
 	public void editTweet(int tweetid, String text) {
 		String query = "UPDATE Tweets SET text=? WHERE tweetid=?";
 		
@@ -300,9 +279,11 @@ public class ManageTweet {
 			e.printStackTrace();
 		}
 	}
-		
+
+	/*Eliminar un tweet*/
 	public void deleteTweet(int tweetid) throws Exception{
 		
+		/*Obtenir el id del creador del tweet*/
 		String query = "SELECT uid FROM Tweets WHERE tweetid = ?";
 
 		PreparedStatement statement = null;
@@ -317,6 +298,7 @@ public class ManageTweet {
 			return;
 		}
 		
+		/*Eliminar els likes al tweet.*/
 		String query4 = "DELETE FROM Likes WHERE tweetid = ?";
 		PreparedStatement statement4 = null; //treu like a la taula de likes
 		
@@ -330,6 +312,7 @@ public class ManageTweet {
 			return;
 		}
 		
+		/*Eliminar els retweets al tweet*/
 		String query5 = "DELETE FROM Retweets WHERE tweetid = ?";
 		PreparedStatement statement5 = null; //treu like a la taula de likes
 		
@@ -343,6 +326,7 @@ public class ManageTweet {
 			return;
 		}
 		
+		/*Eliminar el tweet de la base de dades*/
 		String query2 = "DELETE FROM Tweets WHERE tweetid = ?";
 
 		PreparedStatement statement2 = null;
@@ -356,6 +340,7 @@ public class ManageTweet {
 			return;
 		}
 		
+		/*Decrementar en un els tweets del usuari.*/
 		String query3 = "UPDATE Users SET tweets = tweets - 1 WHERE uid = ?";
 		PreparedStatement statement3 = null; //treure el tweet a la pagina del user q ha retuitat
 
@@ -372,6 +357,7 @@ public class ManageTweet {
 			
 	}
 	
+	/*Funcionalitat de comentaris (finalment no implementada per la falta de temps)
 	public void addComent(Tweet commentTweet) throws Exception{
 		
 		//Afegim el comentari com a tweet
@@ -410,12 +396,14 @@ public class ManageTweet {
 		}
 		
 	}	
- 
-
-	public boolean dislikeTweet(Integer tweetid, Integer uid) throws Exception{
+ */
 	
+	//Dislike a un tweet.
+	public boolean dislikeTweet(Integer tweetid, Integer uid) throws Exception{
+		
+		//Eliminar like a la taula de likes
 		String query1 = "DELETE FROM Likes WHERE tweetid = ? and uid = ?";
-		PreparedStatement statement1 = null; //afegeix like a la taula de likes
+		PreparedStatement statement1 = null; 
 		int rows_modified = 0;
 		try {
 			statement1 = db.prepareStatement(query1);
@@ -429,10 +417,12 @@ public class ManageTweet {
 			return false;
 		}
 		
+		//Si no sha eliminat cap hi ha hagut un error.
 		if(rows_modified == 0) return false;
 		
+		//Decrementem comptador de likes a liked tweet 
 		String query2 = "UPDATE Tweets SET likes = likes - 1 WHERE tweetid = ?";
-		PreparedStatement statement2 = null; //decrementem comptador de likes a liked tweet 
+		PreparedStatement statement2 = null;
 		
 		try {
 			statement2 = db.prepareStatement(query2);
@@ -447,8 +437,7 @@ public class ManageTweet {
 		return true;
 	}
 	
-
-
+	//Donar like a un tweet.
 	public boolean likeTweet(Integer tweetid, Integer uid) throws Exception{
 	
 		String query1 = "INSERT INTO Likes (uid,tweetid) VALUES (?,?)";
@@ -481,8 +470,7 @@ public class ManageTweet {
 		return true;
 	}
 	
-	
-
+	//Retweetejar un tweet.
 	public boolean retweetTweet(Integer tweetid, Integer uid) throws Exception{
 		
 		//Afegeix retweet a la taula de retweets.
@@ -534,6 +522,7 @@ public class ManageTweet {
 		
 	}
 	
+	//Unretweetejar un tweet.
 	public boolean unretweetTweet(Integer tweetid, Integer uid) throws Exception{
 		
 		//Eliminem retweet a la taula de retweets
@@ -587,6 +576,7 @@ public class ManageTweet {
 		return true;
 	}
 	
+	/*Verificar si un tweet esta retwtejat per un usuari.*/
 	public boolean tweetIsRetweeted(int uid, int tweetid) {
 		String query = "SELECT * FROM Retweets WHERE uid=? AND tweetid=?";
 
@@ -605,6 +595,7 @@ public class ManageTweet {
 		return false;
 	}
 	
+	/*Obtenir tots els tweets (global timeline) visio anonymous. Desde start fins start+end*/
 	public List<Tweet> getAllTweetsAnonymouse(int start, int end) throws Exception {
 
 		List<Tweet> tweets = new ArrayList<Tweet>();
@@ -641,6 +632,8 @@ public class ManageTweet {
 		      /*Afegim el tweet a la llista de tweets*/
 		      tweets.add(tweet);
 			}
+			
+			statement.close();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -682,6 +675,8 @@ public class ManageTweet {
 		      tweets.add(tweet);
 			}
 			
+			statement.close();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -690,10 +685,18 @@ public class ManageTweet {
 		
 		Collections.sort(tweets, new SortTweetsByTime()); //Sort tweets array.
 		
-		return tweets;
+		if(start + end >= tweets.size()) {
+			if(start == tweets.size() - 1) return tweets.subList(tweets.size() - 1, tweets.size());
+			else if(start < tweets.size() - 1) return tweets.subList(start, tweets.size());
+			else return Collections.emptyList();
+			
+		}else {
+			return tweets.subList(start, start + end);
+		}
 		
 	}
 	
+	// Obtenir tots els tweets global timeline usuari loggejat. Desde start fins start+end;
 	public List<Tweet> getAllTweets(int uid,int start, int end) throws Exception {
 
 		List<Tweet> tweets = new ArrayList<Tweet>();
@@ -730,6 +733,8 @@ public class ManageTweet {
 		      /*Afegim el tweet a la llista de tweets*/
 		      tweets.add(tweet);
 			}
+			
+			statement.close();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -769,6 +774,8 @@ public class ManageTweet {
 		      tweets.add(tweet);
 			}
 			
+			statement.close();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -788,7 +795,7 @@ public class ManageTweet {
 		
 	}
 	
-	
+	// Obtenir tots els tweets dels usuaris que esta seguint un usuari desde start fins start+end.
 	public List<Tweet> getAllTweetsFollowing(int uid,int start, int end) throws Exception {
 
 		List<Tweet> tweets = new ArrayList<Tweet>();
@@ -825,6 +832,8 @@ public class ManageTweet {
 		      /*Afegim el tweet a la llista de tweets*/
 		      tweets.add(tweet);
 			}
+			
+			statement.close();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -863,6 +872,8 @@ public class ManageTweet {
 		      /*Afegim el tweet a la llista de tweets*/
 		      tweets.add(tweet);
 			}
+			
+			statement.close();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
