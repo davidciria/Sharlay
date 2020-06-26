@@ -43,7 +43,7 @@ $('#navigation').load('MenuController', function(){
 		});
 	});
 	
-	/* Get and visualize Tweets from a given user */
+	/* Get and visualize Tweets from users that is following */
 	$(".vFTl").click(function(event){
 		event.preventDefault();
 		$.post("changeSessionVar", {setVar: "defaultDtweets", getVar: "GetAllTweetsFollowing", mode: 2}, function(data){

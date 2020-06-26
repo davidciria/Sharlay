@@ -35,6 +35,8 @@ $('#navigation').load('MenuController', function(){
 		event.preventDefault();
 		$.post("changeSessionVar", {setVar: "viewuser", getVar:"user", mode: 1}, function(data){
 			$.post("changeSessionVar", {setVar: "defaultDtweets", getVar: "GetTweetsFromUser", mode: 2}, function(data){
+				start=0;
+				nt=4;
 				$("#content").load( "ViewLoginDone.jsp");
 			});
 		});
@@ -47,8 +49,19 @@ $('#navigation').load('MenuController', function(){
 			$.post("changeSessionVar", {setVar: "defaultDtweets", getVar: "GetAllTweets", mode: 2}, function(data){
 				start=0;
 				nt=4;
-				$("#content").load( "ViewLoginDone.jsp", function(){
-				});
+				$("#content").load( "ViewLoginDone.jsp");
+			});
+		});
+	});
+	
+	/* Get and visualize Tweets from users that is following */
+	$(".vFTl").click(function(event){
+		event.preventDefault();
+		$.post("changeSessionVar", {setVar: "viewuser", getVar:"user", mode: 1}, function(data){
+			$.post("changeSessionVar", {setVar: "defaultDtweets", getVar: "GetAllTweetsFollowing", mode: 2}, function(data){
+				start=0;
+				nt=4;
+				$("#content").load( "ViewLoginDone.jsp");
 			});
 		});
 	});
