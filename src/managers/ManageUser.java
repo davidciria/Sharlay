@@ -505,23 +505,10 @@ public class ManageUser {
 	
 	//Eliminar un usuari.
 	public void deleteUser(int uid) {
-		/*Eliminar tweets*/
-		String query = "DELETE FROM Tweets WHERE uid=?;";
-		
-		PreparedStatement statement = null; 
-		
-		try {
-			statement = db.prepareStatement(query);
-			statement.setInt(1, uid);
-			statement.executeUpdate();
-			statement.close();
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
 		
 		/*Eliminar follows*/
-		query = "DELETE FROM Follows WHERE uid1=? OR uid2=?;";
-		statement = null; 
+		String query = "DELETE FROM Follows WHERE uid1=? OR uid2=?;";
+		PreparedStatement statement = null; 
 		
 		try {
 			statement = db.prepareStatement(query);
@@ -559,6 +546,20 @@ public class ManageUser {
 			e.printStackTrace();
 		}
 		
+		/*Eliminar likes als seus tweets*/
+		
+		query = "DELETE FROM Likes WHERE tweetid IN (SELECT tweetid FROM Tweets WHERE uid=?);";
+		statement = null; 
+		
+		try {
+			statement = db.prepareStatement(query);
+			statement.setInt(1, uid);
+			statement.executeUpdate();
+			statement.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 		/*Eliminar retweets dels retweets*/
 		query = "UPDATE Tweets SET retweets = retweets - 1 WHERE tweetid IN (SELECT tweetid FROM Retweets WHERE uid=?);";
 		statement = null; 
@@ -585,6 +586,34 @@ public class ManageUser {
 			e.printStackTrace();
 		}
 		
+		/*Eliminar retweets als seus tweets*/
+		
+		query = "DELETE FROM Retweets WHERE tweetid IN (SELECT tweetid FROM Tweets WHERE uid=?);";
+		statement = null; 
+		
+		try {
+			statement = db.prepareStatement(query);
+			statement.setInt(1, uid);
+			statement.executeUpdate();
+			statement.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		/*Eliminar tweets*/
+		query = "DELETE FROM Tweets WHERE uid=?;";
+		
+		statement = null; 
+		
+		try {
+			statement = db.prepareStatement(query);
+			statement.setInt(1, uid);
+			statement.executeUpdate();
+			statement.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 		/*Eliminar usuari*/
 		query = "DELETE FROM Users WHERE uid=?;";
 		statement = null; 
@@ -597,6 +626,7 @@ public class ManageUser {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+		
 	}
 	
 	
