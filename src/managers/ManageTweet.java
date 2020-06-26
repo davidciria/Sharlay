@@ -637,48 +637,6 @@ public class ManageTweet {
 			e.printStackTrace();
 		}
 		
-
-		query = "SELECT r.uid AS ruid, t.uid, r.createdAt, t.tweetid, t.text, t.likes, t.retweets, t.comments, t.parentTweet FROM Retweets r JOIN Tweets t ON r.tweetid=t.tweetid LIMIT ?,?;";
-
-		statement = null;
-		try {
-			statement = db.prepareStatement(query);
-			statement.setInt(1, start);
-			statement.setInt(2, end);
-			ResultSet rs = statement.executeQuery();
-
-			while (rs.next()) {
-		      Tweet tweet = new Tweet();
-		      
-		      /*Omplim les dades del tweet*/
-		      tweet.setUid(rs.getInt("uid"));
-		      tweet.setTweetid(rs.getInt("tweetid"));
-		      tweet.setText(rs.getString("text"));
-		      tweet.setLikes(rs.getInt("likes"));
-		      tweet.setRetweets(rs.getInt("retweets"));
-		      tweet.setComments(rs.getInt("comments"));
-		      tweet.setCreatedAt(rs.getTimestamp("createdAt"));
-		      tweet.setParentTweet(rs.getInt("parentTweet"));
-		      tweet.setIsLiked(false);
-		      tweet.setIsRetweeted(false);
-		      
-		      User usertweet = manager.getUser(tweet.getUid());
-		      User userretweet = manager.getUser(rs.getInt("ruid"));
-		      
-		      
-		      tweet.setUsername(usertweet.getUsername());
-		      tweet.setRetweetedBy(userretweet.getUsername());
-		      
-		      /*Afegim el tweet a la llista de tweets*/
-		      tweets.add(tweet);
-			}
-			
-			statement.close();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
 		manager.finalize();
 		
 		Collections.sort(tweets, new SortTweetsByTime()); //Sort tweets array.
