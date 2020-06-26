@@ -35,12 +35,13 @@ public class EditProfileForm extends HttpServlet {
 		String username = request.getParameter("username");
 		String firstname = request.getParameter("firstname");
 		String lastname = request.getParameter("lastname");
+		String birth = request.getParameter("birth");
 		int uid = Integer.parseInt(request.getParameter("uid"));
 		
 		HttpSession session = request.getSession(false);
 		boolean isAdmin = ((User)session.getAttribute("user")).getIsAdmin();
 		boolean isLoggedUser = false;
-		
+		System.out.println(birth);
 		if(((User)session.getAttribute("user")).getUid() == ((User)session.getAttribute("viewuser")).getUid()) {
 			isLoggedUser = true;
 		}
@@ -59,18 +60,14 @@ public class EditProfileForm extends HttpServlet {
 		
 		System.out.println(username+ " " +firstname + " " + lastname + " ");
 		
-		if((username != "" && username != null) || (firstname != "" && firstname != null)|| (lastname != "" && lastname != null)) {
+		if((username != "" && username != null) || (firstname != "" && firstname != null)|| (lastname != "" && lastname != null) || (birth != "" && birth != null)) {
 			
 			user.setUsername(username);
 			user.setFirstname(firstname);
 			user.setLastname(lastname);
-			
-			request.setAttribute("username", user.getUsername());
-			request.setAttribute("firstname", user.getFirstname());
-			request.setAttribute("lastname", user.getLastname());
-			request.setAttribute("uid", user.getUid());
+			user.setBirth(birth);
 
-			userManager.editUser(uid, username, firstname, lastname);
+			userManager.editUser(uid, username, firstname, lastname, birth);
 			
 			userManager.finalize();
 		}
@@ -79,6 +76,7 @@ public class EditProfileForm extends HttpServlet {
 		request.setAttribute("firstname", user.getFirstname());
 		request.setAttribute("lastname", user.getLastname());
 		request.setAttribute("uid", user.getUid());
+		request.setAttribute("birth",user.getBirth());
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("EditProfileForm.jsp");
 	    if (dispatcher != null) dispatcher.forward(request, response);

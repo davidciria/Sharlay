@@ -335,7 +335,7 @@ public class ManageUser {
 		return user;
 	}
 	
-	public void editUser(Integer uid, String username, String firstname, String lastname) {
+	public void editUser(Integer uid, String username, String firstname, String lastname, String birth) {
 		
 		if(hasValue(username)) {
 			String query1 = "UPDATE Users SET username = ? WHERE uid = ?";
@@ -380,6 +380,24 @@ public class ManageUser {
 				statement3.setInt(2, uid);
 				statement3.executeUpdate();
 				statement3.close();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return;
+			}
+			
+		}
+		
+		
+		if(hasValue(birth)) {
+			String query4 = "UPDATE Users SET birth = ? WHERE uid = ?";
+			PreparedStatement statement4 = null; 
+			try {
+				statement4 = db.prepareStatement(query4);
+				statement4.setString(1, birth);
+				statement4.setInt(2, uid);
+				statement4.executeUpdate();
+				statement4.close();
 				
 			} catch (SQLException e) {
 				e.printStackTrace();
