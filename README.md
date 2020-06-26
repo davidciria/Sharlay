@@ -84,9 +84,7 @@ Cambiar la variable path per la ruta local del projecte on es troben les imatges
 
 ## Execució
 
-Ja tenim tot el workspace llest, podem executar el projecte desde eclipse fent clic al icone del play. Assegurat d'utilitzar Tomcat en la versió 9 per executar el projecte.
-
-<img src="https://github.com/davidciria/Sharlay/blob/master/readme_images/play_icon.png?raw=true">
+Ja tenim tot el workspace llest, podem executar el projecte desde eclipse fent clic al icone del play (<img src="https://github.com/davidciria/Sharlay/blob/master/readme_images/play_icon.png?raw=true">). Assegurat d'utilitzar Tomcat en la versió 9 per executar el projecte.
 
 ## Email de verificació
 
