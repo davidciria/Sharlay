@@ -146,14 +146,12 @@ public class ManageTweet {
 	
 	// Get tweets from a user given start and end
 		public List<Tweet> getUserTweetsAnonymouse(Integer uid,Integer start, Integer end) throws Exception {
-			String query = "SELECT * FROM Tweets WHERE Tweets.uid = ? ORDER BY Tweets.createdAt DESC LIMIT ?,? ;";
+			String query = "SELECT * FROM Tweets WHERE Tweets.uid = ?";
 			PreparedStatement statement = null;
 			List<Tweet> l = new ArrayList<Tweet>();
 			try {
 				statement = db.prepareStatement(query);
 				statement.setInt(1,uid);
-				statement.setInt(2,start);
-				statement.setInt(3,end);
 				ResultSet rs = statement.executeQuery();
 				while (rs.next()) {
 					Tweet tweet = new Tweet();
@@ -172,6 +170,39 @@ public class ManageTweet {
 				    manager.finalize();
 				      
 				    tweet.setUsername(usertweet.getUsername());
+					l.add(tweet);
+				}
+				rs.close();
+				statement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} 
+			
+			query = "SELECT t.uid, r.uid AS ruid, t.tweetid,t.uid,r.createdAt,t.text, t.likes, t.retweets, t.parentTweet, t.comments FROM Tweets t JOIN Retweets r ON r.tweetid=t.tweetid WHERE r.uid = ?;";
+			statement = null;
+			try {
+				statement = db.prepareStatement(query);
+				statement.setInt(1,uid);
+				ResultSet rs = statement.executeQuery();
+				while (rs.next()) {
+					Tweet tweet = new Tweet();
+		       		tweet.setTweetid(rs.getInt("tweetid"));
+					tweet.setUid(rs.getInt("uid"));
+					tweet.setCreatedAt(rs.getTimestamp("createdAt"));
+					tweet.setLikes(rs.getInt("likes"));
+					tweet.setComments(rs.getInt("comments"));
+					tweet.setRetweets(rs.getInt("retweets"));
+					tweet.setText(rs.getString("text"));
+					tweet.setIsLiked(tweetIsLiked(tweet.getUid(), tweet.getTweetid()));
+					tweet.setIsRetweeted(tweetIsRetweeted(tweet.getUid(), tweet.getTweetid()));
+					ManageUser manager = new ManageUser();
+				    User usertweet = manager.getUser(tweet.getUid());
+				    User retweetuser = manager.getUser(rs.getInt("ruid"));
+				    
+				    manager.finalize();
+				      
+				    tweet.setUsername(usertweet.getUsername());
+				    tweet.setRetweetedBy(retweetuser.getUsername());
 					l.add(tweet);
 				}
 				rs.close();
