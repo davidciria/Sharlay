@@ -43,7 +43,6 @@ $(document).ready(function(){
 	
 	$("body").on("click",".vTa",function(event){
 		event.preventDefault();
-			console.log("calling");
 			$("#content").load( "GetAllTweetsFromAnonymouse", { start: 0 , end: nt } , function(data) {
 				start = nt;
 				cview = "GetAllTweetsFromAnonymouse";
@@ -64,7 +63,6 @@ $(document).ready(function(){
 					if(cview != "GetAllTweetsFromAnonymouse"){
 						$("#dtweets").append(data);
 					}else {
-						console.log("entering3");
 						$("#content").append(data);
 					}
 				}
@@ -98,7 +96,7 @@ $(document).ready(function(){
 				numLikes.html("<b>" + (preNum + 1) + "</b>");
 			}
 	  	}).fail(function(response, status) {
-	  		console.log("Some problem trying to like tweet.");
+	  		console.error("Some problem trying to like tweet.");
 	  	});
 	});
 	
@@ -118,7 +116,7 @@ $(document).ready(function(){
 				}
 			}
 		}).fail(function(response, status) {
-			console.log("Some problem trying to dislike tweet.");
+			console.error("Some problem trying to dislike tweet.");
 	  	});
 	});
 	
@@ -136,7 +134,7 @@ $(document).ready(function(){
 				numRTs.html("<b>" + (preNum + 1) + "</b>");
 			}
 	  	}).fail(function(response, status) {
-	  		console.log("Some problem trying to retweet the tweet.");
+	  		console.error("Some problem trying to retweet the tweet.");
 	  	});
 	});
 	
@@ -146,7 +144,6 @@ $(document).ready(function(){
 		var tweet = $(this).parent();
 		var icon = $(this);
 		var numRTs = $(this).next();
-		console.log(numRTs);
 		$.post( "UnRetweetTweet", { tweetid: $(this).parent().attr("id") } , function(data, status) {
 			if(status == "success"){
 				icon.removeClass("urT").addClass("rT");
@@ -157,7 +154,7 @@ $(document).ready(function(){
 				}
 			}
 		}).fail(function(response, status) {
-			console.log("Some problem trying to unretweet the tweet.");
+			console.error("Some problem trying to unretweet the tweet.");
 	  	});
 	});
 	
@@ -195,7 +192,6 @@ $(document).ready(function(){
 	/* Follow user */
 	$("body").on("click",".fU",function(event){
 		event.preventDefault();
-		console.log("button follow" + "${viewuser.username}");
 		var followButton = $(this);
 		var user = $(this).parent().parent();
 		var unfollowButton;
@@ -204,8 +200,6 @@ $(document).ready(function(){
 		}else{
 			unfollowButton = $('<button type="button" class="uU w3-button w3-red w3-margin-bottom"><i class="fa fa-minus-circle"></i>&nbsp;Unfollow</button>');	
 		}
-		
-		console.log(user.attr("id"));
 		$.post( "FollowUser", { uid: user.attr("id") } , function(data) {
 			followButton.replaceWith(unfollowButton);
 			$("#duser").load( "GetUserInfo", { uid:  user.attr("id") } ,function() {});
@@ -215,10 +209,8 @@ $(document).ready(function(){
 	/* Unfollow user */
 	$("body").on("click",".uU",function(event){
 		event.preventDefault();
-		console.log("button unfollow");
 		var unfollowButton = $(this);
 		var user = $(this).parent().parent();
-		console.log(user.attr("id"));
 		var followButton;
 		if(cview == "searchUsers" || cview == "GetFollowers"){
 			followButton = $('<button type="button" class="fU w3-button w3-right w3-green w3-margin-bottom w3-round-medium"><i class="fa fa-plus-circle"></i>&nbsp;Follow</button>');	
@@ -234,7 +226,6 @@ $(document).ready(function(){
 	/* Unfollow user */
 	$("body").on("click",".uF",function(event){
 		event.preventDefault();
-		console.log("button unfollow");
 		var unfollowButton = $(this);
 		var user = $(this).parent();
 		$.post( "UnfollowUser", { uid: user.attr("id") } , function(data) {
