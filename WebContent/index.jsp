@@ -247,7 +247,7 @@ $(document).ready(function(){
 		
 		console.log(uid);
 		//event.stopImmediatePropagation();
-		$.post("changeSessionVar", {setVar: "defaultDtweets", getVar: "GetTweetsFromUser", mode: 2}, function(data){
+		$.post("changeSessionVar", {setVar: "defaultDtweets", getVar: "EditProfileForm", mode: 2}, function(data){
 			$("#dtweets").load( "EditProfileForm", { uid: uid } , function(data) {
 				start = nt;
 				cview = "EditProfileForm";
@@ -260,10 +260,13 @@ $(document).ready(function(){
 		event.preventDefault();
 		//event.stopImmediatePropagation();
 		console.log($(this).text());
-		$("#content").load( "ViewUser", { viewusername: $(this).text() } , function(data) {
-			start = 0;
-			nt=4;
-			cview = "ViewUser";
+		var viewusername = $(this).text();
+		$.post("changeSessionVar", {setVar: "defaultDtweets", getVar: "GetTweetsFromUser", mode: 2}, function(data){
+			$("#content").load( "ViewUser", { viewusername: viewusername } , function(data) {
+				start = 0;
+				nt=4;
+				cview = "ViewUser";
+			});
 		});
 	});
 	
