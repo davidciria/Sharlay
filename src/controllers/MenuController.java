@@ -12,6 +12,9 @@ import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class MenuController
+ * 
+ * Controlador del menu.
+ * 
  */
 @WebServlet("/MenuController")
 public class MenuController extends HttpServlet {

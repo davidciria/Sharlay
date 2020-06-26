@@ -12,6 +12,9 @@ import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class MainController
+ * 
+ * Servlet principal de la web.
+ * 
  */
 @WebServlet("/MainController")
 public class MainController extends HttpServlet {
@@ -34,8 +37,6 @@ public class MainController extends HttpServlet {
 		if (session==null || session.getAttribute("uid")==null) {
 			System.out.println("MainController: NO active session has been found,");
 			request.setAttribute("menu","ViewMenuNotLogged.jsp");
-			//request.setAttribute("content","ViewLoginForm.jsp");
-			//request.setAttribute("content","ViewRegisterForm.jsp");
 			request.setAttribute("content","initPage.jsp");
 		}
 		else {

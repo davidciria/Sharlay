@@ -15,6 +15,9 @@ import models.Tweet;
 
 /**
  * Servlet implementation class LikeTweet
+ * 
+ * Servlet per donar like a un tweet.
+ * 
  */
 @WebServlet("/LikeTweet")
 public class LikeTweet extends HttpServlet {
@@ -36,19 +39,22 @@ public class LikeTweet extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		int uid = (int)session.getAttribute("uid");
 		Tweet tweet = new Tweet();
+		ManageTweet tweetManager = new ManageTweet();
+		
 		try {
 			BeanUtils.populate(tweet, request.getParameterMap());
-			ManageTweet tweetManager = new ManageTweet();
 			boolean result = false;
 			if(!tweetManager.tweetIsLiked(uid, tweet.getTweetid())) result = tweetManager.likeTweet(tweet.getTweetid(), uid);
+			/*Verificar si hi ha hagut algun error.*/
 			if(result) response.setStatus(HttpServletResponse.SC_ACCEPTED);
 			else{
 				response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			}
-			tweetManager.finalize();
 		}catch(Throwable e) {
 			e.printStackTrace();
 		}
+		
+		tweetManager.finalize();
 		
 	}
 

@@ -44,7 +44,8 @@ public class LoginController extends HttpServlet {
 	    	User user = manager.getUser(manager.getUserID(login.getMail()));
 	    	
 	    	Integer loginResult = null;
-	
+	    	
+	    	/*Verificar que les dades de login estan omplertes i verificar el email i password del usuari*/
 	    	if ( login.isComplete() && (loginResult = manager.checkLogin(login.getMail(), login.getPwd())) == 0 ) {
 		    	
 	    		System.out.println("login OK, forwarding to ViewLoginDone ");
@@ -54,7 +55,7 @@ public class LoginController extends HttpServlet {
 		    	session.setAttribute("user", user);
 		    	session.setAttribute("defaultDtweets", "GetTweetsFromUser");
 		    	manager.finalize();
-		    	RequestDispatcher dispatcher = request.getRequestDispatcher("ViewLoginDone.jsp");
+		    	RequestDispatcher dispatcher = request.getRequestDispatcher("ViewLoginDone.jsp"); //Redirigim a la pagina principal del usuari.
 			    dispatcher.forward(request, response);
 			    
 		    } 
@@ -66,7 +67,7 @@ public class LoginController extends HttpServlet {
 				}
 				manager.finalize();
 				request.setAttribute("login",login);
-			    RequestDispatcher dispatcher = request.getRequestDispatcher("ViewLoginForm.jsp");
+			    RequestDispatcher dispatcher = request.getRequestDispatcher("ViewLoginForm.jsp"); //Tornem a redirigir al formulari dinici de sessio.
 			    dispatcher.forward(request, response);
 		    	
 		    }

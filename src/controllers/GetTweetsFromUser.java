@@ -20,7 +20,10 @@ import models.Tweet;
 import models.dTmodel;
 
 /**
- * Servlet implementation class dTcontroller
+ * Servlet implementation class GetTweetsFromUser
+ * 
+ * Servlet per obtenir tweets dun usuari.
+ * 
  */
 @WebServlet("/GetTweetsFromUser")
 public class GetTweetsFromUser extends HttpServlet {
@@ -48,6 +51,7 @@ public class GetTweetsFromUser extends HttpServlet {
 		String cview = "";
 		
 		if(session != null) {
+			//Usuari loggejat.
 			int uid = (int)session.getAttribute("uid");
 			cview = "/viewTweetsFromUser.jsp";
 			try {
@@ -58,7 +62,6 @@ public class GetTweetsFromUser extends HttpServlet {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				tweetManager.finalize();
 			
 			} catch (IllegalAccessException | InvocationTargetException e) {
 				e.printStackTrace();
@@ -67,6 +70,7 @@ public class GetTweetsFromUser extends HttpServlet {
 			request.setAttribute("tweets",tweets);
 		}
 		else {
+			//Usuari anonymouse.
 			cview = "/viewTweetsFromUserAnonymouse.jsp";
 			try {
 				BeanUtils.populate(dt, request.getParameterMap());
@@ -80,9 +84,11 @@ public class GetTweetsFromUser extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			tweetManager.finalize();
+			
 			request.setAttribute("tweets",tweets);
 		}
+		
+		tweetManager.finalize();
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(cview); 
 		dispatcher.forward(request,response);

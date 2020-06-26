@@ -33,12 +33,12 @@ public class LogoutController extends HttpServlet {
 		
 		System.out.println("LogoutController: deleting session and forwarding to ViewLogoutDone");
 
-		
+		//Invalidar la sessio.
 		if (session!=null) {
 			session.invalidate();
 		}
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("ViewLogoutDone.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("ViewLogoutDone.jsp"); //Anem a la visio de sessio tancada.
 	    if (dispatcher != null) dispatcher.forward(request, response);
 	}
 

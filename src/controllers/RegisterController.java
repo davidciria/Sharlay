@@ -16,6 +16,9 @@ import models.User;
 
 /**
  * Servlet implementation class FormController
+ * 
+ * Controlador del formulari de registre. Verifica que les dades siguin valides i afageix lusuari a la base de dades.
+ * 
  */
 @WebServlet("/RegisterController")
 public class RegisterController extends HttpServlet {
@@ -38,19 +41,21 @@ public class RegisterController extends HttpServlet {
 		User model = new User();
 		String view = "ViewRegisterForm.jsp";
 		
+		ManageUser manager = new ManageUser();
 		
 		try {
 			BeanUtils.populate(model, request.getParameterMap());
-			ManageUser manager = new ManageUser();
+			//El formulari esta complert.
 			if (manager.isComplete(model)) {
 				boolean userAdded = manager.addUser(model, model.getPwd1());
-				manager.finalize();
 				if (userAdded) {
+					//Lusuari sha afegit correctament.
 					view = "ViewLoginForm.jsp";
 					request.setAttribute("registered", true);
 					request.setAttribute("username", model.getUsername());
 					request.setAttribute("mail", model.getMail());
 				} else {
+					//Assignacio d'errors.
 					model.setError(1, true);
 					model.setError(2, true);
 					model.userExists();
@@ -59,8 +64,10 @@ public class RegisterController extends HttpServlet {
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			e.printStackTrace();
 		}
+		
+		manager.finalize();
 
-		request.setAttribute("model", model);
+		request.setAttribute("model", model); //Setegem el model per si ha introduit alguna dada incorrecte no hagi de tornar a omplir el formulari.
 		RequestDispatcher dispatcher = request.getRequestDispatcher(view);
 		request.setAttribute("content",view);
 		dispatcher.forward(request, response);

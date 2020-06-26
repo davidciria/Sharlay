@@ -16,6 +16,9 @@ import models.User;
 
 /**
  * Servlet implementation class GetUserInfo
+ * 
+ * Obtenir informacio principal dun usuari.
+ * 
  */
 @WebServlet("/GetUserInfo")
 public class GetUserInfo extends HttpServlet {
@@ -51,21 +54,19 @@ public class GetUserInfo extends HttpServlet {
 				try {
 					BeanUtils.populate(newuser, request.getParameterMap());
 					newuser = userManager.getUser(uid);
-					userManager.finalize();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 				
 				request.setAttribute("user",newuser);
 			}else {
-			//Visualitzant perfil d'un altre usuari.
+			//Visualitzant perfil d'un altre usuari (anoymouse).
 				User newuser = new User();
 				
 				try {
 					BeanUtils.populate(newuser, request.getParameterMap());
 					newuser = userManager.getUser(viewuser.getUid());
 					session.setAttribute("isFollowed", userManager.userIsFollowed(uid, viewuser.getUid()));
-					userManager.finalize();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -77,7 +78,6 @@ public class GetUserInfo extends HttpServlet {
 		else {
 			try {
 				request.setAttribute("viewuser", userManager.getUser(Integer.parseInt(request.getParameter("uid"))));
-				userManager.finalize();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -85,7 +85,7 @@ public class GetUserInfo extends HttpServlet {
 			cview = "/viewUserInfoAnonymouse.jsp";
 		}
 		
-		
+		userManager.finalize();
 		RequestDispatcher dispatcher = request.getRequestDispatcher(cview); 
 		dispatcher.include(request,response);
 	}
