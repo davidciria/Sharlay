@@ -141,7 +141,7 @@ $(document).ready(function(){
 				icon.removeClass("lT").addClass("dlT");
 				icon.removeClass("w3-theme-l5").addClass("w3-theme");
 				var preNum = parseInt(numRTs.text());
-				numRTs.html("<b>" + (numRTs + 1) + "</b>");
+				numRTs.html("<b>" + (preNum + 1) + "</b>");
 			}
 	  	}).fail(function(response, status) {
 	  		console.log("Some problem trying to retweet the tweet.");
@@ -155,13 +155,14 @@ $(document).ready(function(){
 		var tweet = $(this).parent();
 		var icon = $(this);
 		var numRTs = $(this).next();
+		console.log(numRTs);
 		$.post( "UnRetweetTweet", { tweetid: $(this).parent().attr("id") } , function(data, status) {
 			if(status == "success"){
 				icon.removeClass("dlT").addClass("lT");
 				icon.removeClass("w3-theme").addClass("w3-theme-l5");
 				var preNum = parseInt(numRTs.text());
 				if(preNum > 0){
-					numRTs.html("<b>" + (numRTs - 1) + "</b>");
+					numRTs.html("<b>" + (preNum - 1) + "</b>");
 				}
 			}
 		}).fail(function(response, status) {
