@@ -146,7 +146,7 @@ public class ManageTweet {
 	
 	// Get tweets from a user given start and end
 		public List<Tweet> getUserTweetsAnonymouse(Integer uid,Integer start, Integer end) throws Exception {
-			String query = "SELECT Tweets.tweetid,Tweets.uid,Tweets.createdAt,Tweets.text FROM Tweets WHERE Tweets.uid = ? ORDER BY Tweets.createdAt DESC LIMIT ?,? ;";
+			String query = "SELECT * FROM Tweets WHERE Tweets.uid = ? ORDER BY Tweets.createdAt DESC LIMIT ?,? ;";
 			PreparedStatement statement = null;
 			List<Tweet> l = new ArrayList<Tweet>();
 			try {
@@ -160,6 +160,9 @@ public class ManageTweet {
 		       		tweet.setTweetid(rs.getInt("tweetid"));
 					tweet.setUid(rs.getInt("uid"));
 					tweet.setCreatedAt(rs.getTimestamp("createdAt"));
+					tweet.setLikes(rs.getInt("likes"));
+					tweet.setComments(rs.getInt("comments"));
+					tweet.setRetweets(rs.getInt("retweets"));
 					tweet.setText(rs.getString("text"));
 					tweet.setIsLiked(tweetIsLiked(tweet.getUid(), tweet.getTweetid()));
 					tweet.setIsRetweeted(tweetIsRetweeted(tweet.getUid(), tweet.getTweetid()));
