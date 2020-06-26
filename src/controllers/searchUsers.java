@@ -35,19 +35,35 @@ public class searchUsers extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ManageUser userManager = new ManageUser();
 		HttpSession session = request.getSession(false);
-		int uid = (int)session.getAttribute("uid");
-		try {
-			List<User> searchResult = userManager.searchUsers(request.getParameter("searchWords"));
-			for(int i = 0; i < searchResult.size(); i++) {
-				searchResult.get(i).setIsFollowed(userManager.userIsFollowed(uid, searchResult.get(i).getUid()));
-			}
-			request.setAttribute("searchResult", searchResult);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		String cview = "";
+		if(session != null) {
+			int uid = (int)session.getAttribute("uid");
+			cview = "searchResult.jsp";
+			try {
+				List<User> searchResult = userManager.searchUsers(request.getParameter("searchWords"));
+				for(int i = 0; i < searchResult.size(); i++) {
+					searchResult.get(i).setIsFollowed(userManager.userIsFollowed(uid, searchResult.get(i).getUid()));
+				}
+				request.setAttribute("searchResult", searchResult);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}	
+		}
+		else
+		{
+			cview = "searchResultFromAnonymous.jsp";
+			try {
+				List<User> searchResult = userManager.searchUsers(request.getParameter("searchWords"));
+				request.setAttribute("searchResult", searchResult);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}	
 		}
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("searchResult.jsp");
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher(cview);
 		dispatcher.forward(request, response);
 	}
 
