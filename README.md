@@ -47,6 +47,8 @@ Per configurar el context ens dirigirem al fitxer server.xml.
 
 ! [Imatge ajuda](https://github.com/davidciria/Sharlay/blob/master/readme_images/tutorial_context.png?raw=true)
 
+<img src="https://github.com/davidciria/Sharlay/blob/master/readme_images/tutorial_context.png?raw=true">
+
 Dins del fitxer afegirem la següent linia dins l'etiqueta `<Host>` especificant la ruta local de la carpeta ProfileImages del nostre projecte.
 
 `<Context docBase="ruta_a_la_carpeta_ProfileImages" path="/Sharlay/ProfileImages" />`
@@ -54,6 +56,8 @@ Dins del fitxer afegirem la següent linia dins l'etiqueta `<Host>` especificant
 **Exemple:** `<Context docBase="C:\Users\david\eclipse-workspace\Sharlay\WebContent\ProfileImages" path="/Sharlay/ProfileImages" />`
 
 ! [Imatge ajuda](https://github.com/davidciria/Sharlay/blob/master/readme_images/tutorial_context2.png?raw=true)
+
+<img src="https://github.com/davidciria/Sharlay/blob/master/readme_images/tutorial_context2.png?raw=true">
 
 
 
