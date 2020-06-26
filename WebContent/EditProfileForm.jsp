@@ -177,6 +177,8 @@ $(document).ready(function(){
 <div class="w3-container w3-card w3-text w3-round w3-margin w3-animate-opacity">
 
 <!-- Edit user info form -->
+<h2>Edit personal data</h2>
+<hr>
 <form id="${uid}" data-parsley-validate action="#" method="POST" class="editForm">
 	<p>      
     <label class="imp-text"><b> First Name </b></label>
@@ -192,6 +194,8 @@ $(document).ready(function(){
 </form>
 
 <!-- Edit password form -->
+<h2>Edit password</h2>
+<hr>
 <form id="${uid}" data-parsley-validate action="#" method="POST" class="editPwdForm">
 	<p>
 	<label class="imp-text"><b> Current Password </b></label>
@@ -208,6 +212,8 @@ $(document).ready(function(){
 </form>
 
 <!-- Edit profile image form -->
+<h2>Edit profile image</h2>
+<hr>
 <form id="${uid}" class="uploadProfileImage" action = "UploadProfileImage" method = "post" enctype = "multipart/form-data">
      <label class="imp-text"><b> Profile Image </b></label>
      <br /><br />
