@@ -34,7 +34,7 @@ Un cop instal·lat el servidor Tomcat procedirem a carregar la base de dades de 
 
 En primer lloc crearem un nou usuari anomenat mysql amb el password prac:
 
-`CREATE USER 'mysql'@'localhost' IDENTIFIED BY 'prac'; `
+`CREATE USER 'mysql'@'localhost' IDENTIFIED BY 'prac'; ` <br>
 `GRANT ALL PRIVILEGES ON *.* TO 'mysql'@'localhost'; `
 
 Tot seguit, obrirem el script Lab4_SQLDUMP.sql realitzarem una execució completa.
