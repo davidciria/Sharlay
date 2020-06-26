@@ -22,10 +22,32 @@
 
 ## Instalació
 
+## Eclipse
+
+Hem emprat l'IDE Eclipse per desenvolupar el projecte. Es pot descarregar fàcilment desde la pàgina oficial: https://www.eclipse.org/
+
+**IMPORTANT:** Instalar la versió "Eclipse IDE for Java EE Developers".
+
 ## Tomcat
 Per al desenvolupament de l'aplicació s'ha usat el servidor Tomcat en la versió 9. Per instalar-lo és necessari descarregar el arxiu zip core desde el següent enllaç: https://tomcat.apache.org/download-90.cgi
 
 Seguir el següent link per la seva instal·lació: http://www.coreservlets.com/Apache-Tomcat-Tutorial/tomcat-7-with-eclipse.html
+
+## Descàrrega del projecte
+
+Existeixen dues alternatives per descarregar el projecte:
+
+### 1. Github
+
+Realitzarem un git clone del següent respositori al nostre workspace d'Eclipse: https://github.com/davidciria/Sharlay/
+
+### 2. Fitxer WAR
+
+Importarem el fitxer WAR a Eclipse. Els passos son els següents:
+1- Desde el menú accedir a: `File --> Import`
+2- Desplegar carpeta `Web` i seleccionar `WAR file`. Fer click a `Next`.
+3- Fer un browse del fitxer .war i assegurar-nos que esta seleccionat a l'apartat `Target runtime` el servidor `Apache Tomcat v9.0`.
+4- Fer click a `Finish`.
 
 ## SQL DUMP
 
@@ -53,7 +75,5 @@ Dins del fitxer afegirem la següent linia dins l'etiqueta `<Host>` especificant
 **Exemple:** `<Context docBase="C:\Users\david\eclipse-workspace\Sharlay\WebContent\ProfileImages" path="/Sharlay/ProfileImages" />`
 
 <img src="https://github.com/davidciria/Sharlay/blob/master/readme_images/tutorial_context2.png?raw=true">
-
-
 
 
