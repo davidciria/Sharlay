@@ -59,7 +59,7 @@ public class ChangePwd extends HttpServlet {
 			
 			if(currentPwdOK) {
 				userManager.editUserPassword(uid, newPwd);
-				response.getWriter().append("Password changed successfully");
+				response.getWriter().append("success");
 			}else {
 				response.getWriter().append("Current password is wrong");
 			}

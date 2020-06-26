@@ -74,8 +74,18 @@ $(document).ready(function(){
 		var formParams = $(this).serializeArray();
 		var currentPwd = formParams[0].value;
 		var newPwd = formParams[1].value;
-		$('#dtweets').load("ChangePwd",{uid: "${uid}", currentPwd: currentPwd, newPwd: newPwd}, function(data){
-			$("#duser").load( "GetUserInfo", { uid:  uid } ,function() {});
+		$.post("ChangePwd",{uid: "${uid}", currentPwd: currentPwd, newPwd: newPwd}, function(data){
+			
+			 if(data.trim() == "success"){
+	    		   $("#passwordUpdatedStatus").removeClass("w3-text-red").addClass("w3-text-green");
+	    		   $("#passwordUpdatedStatus").text("Password updated successfully");
+	    	   }
+	    	   else{
+	    		   $("#passwordUpdatedStatus").removeClass("w3-text-green").addClass("w3-text-red");
+	    		   $("#passwordUpdatedStatus").text(data);
+	    	   }
+	    	   
+	    	   $("#passwordUpdatedStatus").show();
 		});
 	});
 	
@@ -167,6 +177,8 @@ $(document).ready(function(){
 <div class="w3-container w3-card w3-text w3-round w3-margin w3-animate-opacity">
 
 <!-- Edit user info form -->
+<h2>Edit personal data</h2>
+<hr>
 <form id="${uid}" data-parsley-validate action="#" method="POST" class="editForm">
 	<p>      
     <label class="imp-text"><b> First Name </b></label>
@@ -182,6 +194,8 @@ $(document).ready(function(){
 </form>
 
 <!-- Edit password form -->
+<h2>Edit password</h2>
+<hr>
 <form id="${uid}" data-parsley-validate action="#" method="POST" class="editPwdForm">
 	<p>
 	<label class="imp-text"><b> Current Password </b></label>
@@ -189,11 +203,17 @@ $(document).ready(function(){
 	<p>
 	<label class="imp-text"><b> New Password </b></label>
 	<input class="w3-input w3-border form-bg w3-text" type="password" id="pwd1" name="newpwd" placeholder="New Password" value="${newpwd}" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"></p>
+	<div>
 	<p>
-    <input class="editinput w3-button w3-round-medium w3-theme" type="submit" name="submit" value="Update"></p>
+    <input class="editinput w3-button w3-round-medium w3-theme" type="submit" name="submit" value="Update">
+    <span class="w3-text-green" style="display:none;" id="passwordUpdatedStatus"></span>
+    </p>
+    </div>
 </form>
 
 <!-- Edit profile image form -->
+<h2>Edit profile image</h2>
+<hr>
 <form id="${uid}" class="uploadProfileImage" action = "UploadProfileImage" method = "post" enctype = "multipart/form-data">
      <label class="imp-text"><b> Profile Image </b></label>
      <br /><br />
