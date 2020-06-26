@@ -6,7 +6,6 @@
  $(document).ready(function(){
 	$(".sU").submit( function(event){
 		event.preventDefault();
-		console.log("searching Users");
 		$("#dtweets").load( "searchUsers", $(this).serialize() , function(data) {
 			start = 0;
 			cview = "searchUsers";

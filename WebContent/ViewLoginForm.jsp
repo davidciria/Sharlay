@@ -11,7 +11,6 @@ $(document).ready(function(){
 	  $("input").keyup(function(){
 		  var instance = $("input").parsley();
 		  for(var i = 0; i < instance.length - 1; i++){
-			console.log(i, instance[i].isValid());
 			if($("input").eq(i).val() == ""){
 				$("input").eq(i).attr("class", "w3-input w3-border form-bg w3-text");
 			}else{

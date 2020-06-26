@@ -40,7 +40,6 @@ $(document).ready(function(){
 	  $(".editinput").keyup(function(){
 		  var instance = $(".editinput").parsley();
 		  for(var i = 0; i < instance.length - 1; i++){
-			console.log(i, instance[i].isValid());
 			if($(".editinput").eq(i).val() == ""){
 				$(".editinput").eq(i).attr("class", "w3-input w3-border form-bg w3-text");
 			}else{
