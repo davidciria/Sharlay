@@ -50,22 +50,22 @@ $(document).ready(function(){
 
 <div class="server-errors-list w3-center">
 <c:if test = "${login.error[0]}">
-	Mail format is not correct 
+	Mail format is not correct <br>
 </c:if>
 <c:if test = "${login.error[1]}">
-	 Password format is not correct 
+	 Password format is not correct <br> 
 </c:if>
 <c:if test = "${db_error == 1}">
-	 Password is not correct 
+	 Password is not correct <br>
 </c:if>
 <c:if test = "${db_error == 2}">
-	 User is not registered 
+	 User is not registered  <br>
 </c:if>
 <c:if test = "${db_error == 3}">
-	 Cannot reach the server 
+	 Cannot reach the server <br>
 </c:if>
 <c:if test = "${db_error == 4}">
-	 You have to verify your email 
+	 You have to verify your email <br>
 </c:if>
 </div>
 <div class="w3-row">

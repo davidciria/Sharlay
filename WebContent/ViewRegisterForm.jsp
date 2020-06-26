@@ -53,22 +53,22 @@ $(document).ready(function(){
 
 <div class="server-errors-list w3-center">
 <c:if test = "${model.error[0]}">
-	 First or Last name format is not correct 
+	 First or Last name format is not correct <br>
 </c:if>
 <c:if test = "${model.error[1]}">
-	Entered user name is invalid or has been already registered 
+	Entered user name is invalid or has been already registered <br>
 </c:if>
 <c:if test = "${model.error[2]}">
-	 Entered email is invalid or has been already registered 
+	 Entered email is invalid or has been already registered <br>
 </c:if>
 <c:if test = "${model.error[3]}">
-	 Password format is not valid 
+	 Password format is not valid <br>
 </c:if>
 <c:if test = "${model.error[4]}">
-	The second password must be the same 
+	The second password must be the same <br>
 </c:if>
 <c:if test = "${model.error[5]}">
-	 You are not yet 16 years old 
+	 You are not yet 16 years old <br>
 </c:if>
 </div>
  <div class="w3-row">
