@@ -193,10 +193,16 @@ $(document).ready(function(){
 		console.log("button follow" + "${viewuser.username}");
 		var followButton = $(this);
 		var user = $(this).parent().parent();
-		var unfollowButton = $('<button type="button" class="uU w3-button w3-red w3-margin-bottom"><i class="fa fa-minus-circle"></i>&nbsp;Unfollow</button>');
+		var unfollowButton;
+		if(cview == "searchUsers"){
+			unfollowButton = $('<button type="button" class="uU w3-button w3-right w3-red w3-margin-bottom w3-round-medium"><i class="fa fa-minus-circle"></i>&nbsp;Unfollow</button>');	
+		}else{
+			unfollowButton = $('<button type="button" class="uU w3-button w3-red w3-margin-bottom"><i class="fa fa-minus-circle"></i>&nbsp;Unfollow</button>');	
+		}
+		
 		console.log(user.attr("id"));
 		$.post( "FollowUser", { uid: user.attr("id") } , function(data) {
-			//followButton.replaceWith(unfollowButton);
+			followButton.replaceWith(unfollowButton);
 			$("#duser").load( "GetUserInfo", { uid:  user.attr("id") } ,function() {});
 	  	});
 	});
@@ -209,9 +215,14 @@ $(document).ready(function(){
 		var unfollowButton = $(this);
 		var user = $(this).parent().parent();
 		console.log(user.attr("id"));
-		var followButton = $('<button type="button" class="fU w3-button w3-green w3-margin-bottom"><i class="fa fa-plus-circle"></i>&nbsp;Follow</button>');
+		var followButton;
+		if(cview == "searchUsers"){
+			followButton = $('<button type="button" class="fU w3-button w3-right w3-green w3-margin-bottom w3-round-medium"><i class="fa fa-plus-circle"></i>&nbsp;Follow</button>');	
+		}else{
+			followButton = $('<button type="button" class="fU w3-button w3-green w3-margin-bottom"><i class="fa fa-plus-circle"></i>&nbsp;Follow</button>');
+		}
 		$.post( "UnfollowUser", { uid: user.attr("id") } , function(data) {
-			//unfollowButton.replaceWith(followButton);
+			unfollowButton.replaceWith(followButton);
 			$("#duser").load( "GetUserInfo", { uid:  user.attr("id") } ,function() {});
 	  	});
 	});
@@ -236,9 +247,11 @@ $(document).ready(function(){
 		
 		console.log(uid);
 		//event.stopImmediatePropagation();
-		$("#dtweets").load( "EditProfileForm", { uid: uid, firstCall: true } , function(data) {
-			start = nt;
-			cview = "EditProfileForm";
+		$.post("changeSessionVar", {setVar: "defaultDtweets", getVar: "GetTweetsFromUser", mode: 2}, function(data){
+			$("#dtweets").load( "EditProfileForm", { uid: uid } , function(data) {
+				start = nt;
+				cview = "EditProfileForm";
+			});
 		});
 	});
 	

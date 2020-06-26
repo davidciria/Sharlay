@@ -54,16 +54,16 @@ $(document).ready(function(){
 		event.preventDefault();
 		var uid = $(this).attr("id");
 		var formParams = $(this).serializeArray();
-		var firstname = "${editUser.firstname}";
-		var lastname = "${editUser.lastname}";
-		var username = "${editUser.username}";
+		var firstname = "${firstname}";
+		var lastname = "${lastname}";
+		var username = "${username}";
 		var newfirstname = null;
 		var newlastname = null;
 		var newusername = null;
 		if(firstname != formParams[0].value) newfirstname = formParams[0].value;
 		if(lastname != formParams[1].value) newlastname = formParams[1].value;
 		if(username != formParams[2].value) newusername = formParams[2].value;
-		$('#dtweets').load("EditProfileForm",{firstname: newfirstname, lastname: newlastname, username: newusername, uid: "${uid}",firstCall: false}, function(data){
+		$('#dtweets').load("EditProfileForm",{firstname: newfirstname, lastname: newlastname, username: newusername, uid: "${uid}"}, function(data){
 			$("#duser").load( "GetUserInfo", { uid:  uid } ,function() {});
 		});
 	});
@@ -168,6 +168,10 @@ $(document).ready(function(){
     <p>
     <input class="editinput w3-button w3-round-medium w3-theme" type="submit" name="submit" value="Update"></p>
 </form>
+
+<p>
+	<label class="imp-text"><b> Password </b></label>
+	<input class="w3-input w3-border form-bg w3-text" type="password" id="pwd1" name="pwd1" placeholder="Password" value="${model.pwd1}" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"></p>
 
 <form id="${uid}" class="uploadProfileImage" action = "UploadProfileImage" method = "post" enctype = "multipart/form-data">
      <label class="imp-text"><b> Profile Image </b></label>
