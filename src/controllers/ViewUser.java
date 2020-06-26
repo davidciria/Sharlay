@@ -38,9 +38,7 @@ public class ViewUser extends HttpServlet {
 		
 		String viewusername = null;
 		
-		if(request.getParameter("viewusername") != null) {
-			viewusername = request.getParameter("viewusername").replace(" ", "");
-		}
+		viewusername = request.getParameter("viewusername").replace(" ", "");
 		
 		HttpSession session = request.getSession(false);
 		User user;
