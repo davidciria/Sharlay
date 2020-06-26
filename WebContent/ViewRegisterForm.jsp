@@ -98,7 +98,7 @@ $(document).ready(function(){
 		    <label class="imp-text"><b> Birthday </b></label>
 		    <input class="editinput w3-input w3-border form-bg w3-text" type="date" id="birth" name="birth" value="${model.birth}" required data-parsley-min-age="16"></p>
 		    <p>
-		    <input class="w3-button w3-purple w3-round-medium" type="submit" name="sumbit" value="Submit"></p>
+		    <input class="w3-button w3-theme w3-round-medium" type="submit" name="sumbit" value="Submit"></p>
 		</form>
 	</div>
 	<div class="w3-container w3-quarter">
