@@ -389,6 +389,28 @@ public class ManageUser {
 		}
 	}
 	
+	public void editUserPassword(Integer uid, String newPwd) {
+		
+		/* Generar salt i password+salt hashejats */
+		byte[] salt = PwdHashGenerator.generateRandomSalt(12);
+		String base64salt = PwdHashGenerator.convertToBase64(salt); // Salt de 16 bytes.
+		String hashedPwd = PwdHashGenerator.generatePasswordSaltHash(newPwd.getBytes(StandardCharsets.UTF_8), salt);
+		
+		String query = "UPDATE Users SET hashedPassword=?, salt=? WHERE uid=?";
+		
+		PreparedStatement statement = null; 
+		try {
+			statement = db.prepareStatement(query);
+			statement.setString(1, hashedPwd);
+			statement.setString(2, base64salt);
+			statement.setInt(3, uid);
+			statement.executeUpdate();
+			statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public List<User> searchUsers(String searchWords) throws Exception{
 		List<User> users = new ArrayList<>();
 		String regex = ".*(?i)(" + searchWords + ").*";
