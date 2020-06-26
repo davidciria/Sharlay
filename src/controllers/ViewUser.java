@@ -15,6 +15,9 @@ import models.User;
 
 /**
  * Servlet implementation class ViewUser
+ * 
+ * Servlet per mostrar la vista dun usuari.
+ * 
  */
 @WebServlet("/ViewUser")
 public class ViewUser extends HttpServlet {
@@ -41,11 +44,14 @@ public class ViewUser extends HttpServlet {
 		ManageUser userManager = new ManageUser();
 		
 		if(session != null) {
+			//Usuari loggejat.
 			user = (User)session.getAttribute("user");
+			//Volem veure el perfil de lusuari loggejat.
 			if(viewusername.equals(user.getUsername())) {
 				session.setAttribute("viewuser", user);
 				cview = "ViewLoginDone.jsp";
 			}else {
+			//Volem veure el perfil dun altre usuari (no es el loggejat).
 				User viewuser = null;
 				Boolean isFollowed = null;
 				try {
@@ -60,23 +66,23 @@ public class ViewUser extends HttpServlet {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				userManager.finalize();
 				session.setAttribute("viewuser", viewuser);
 				session.setAttribute("isFollowed", isFollowed);
 				cview = "ProfileUserView.jsp";
 			}
 
 		} else {
-			
+			//Usuari anonymous.
 			try {
 				request.setAttribute("viewuser", userManager.getUser(viewusername));
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			userManager.finalize();
 			cview = "ProfileUserViewFromAnonymouse.jsp";
 		}
+		
+		userManager.finalize();
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(cview);
 		dispatcher.forward(request, response);

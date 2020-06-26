@@ -20,6 +20,9 @@ import javax.servlet.http.Part;
 
 /**
  * Servlet implementation class FileUpload
+ * 
+ * Servlet per pujar una foto de perfil.
+ * 
  */
 @WebServlet("/UploadProfileImage")
 @MultipartConfig
@@ -39,8 +42,12 @@ public class UploadProfileImage extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//Upload file.
+		//Pujar la fotografia de perfil.
 		processRequest(request,response);
+		
+		/*La fotografia segueix el seguent patro: {userid}.png */
+		/*Daquesta manera no es necesari guardar el nom de la fotografia a la base de dades*/
+		/*Si lusuari torna a pujar una nova fotografia de perfil es sobreescriu.*/
 	    
 	}
 
@@ -65,7 +72,7 @@ public class UploadProfileImage extends HttpServlet {
 	    String fileFormat = splittedFileName[splittedFileName.length - 1];
 	    
 	    if(fileFormat.equals("png")) {
-	    	fileName = request.getParameter("uid") + ".png";
+	    	fileName = request.getParameter("uid") + ".png"; /*La fotografia segueix el seguent patro: {userid}.png */
 		    OutputStream out = null;
 		    InputStream filecontent = null;
 		    final PrintWriter writer = response.getWriter();

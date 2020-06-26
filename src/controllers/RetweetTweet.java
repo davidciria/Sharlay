@@ -15,6 +15,9 @@ import models.Tweet;
 
 /**
  * Servlet implementation class RetweetTweet
+ * 
+ * Servlet per fer un retweet dun tweet.
+ * 
  */
 @WebServlet("/RetweetTweet")
 public class RetweetTweet extends HttpServlet {
@@ -37,6 +40,7 @@ public class RetweetTweet extends HttpServlet {
 		int uid = (int)session.getAttribute("uid");
 		Tweet tweet = new Tweet();
 		ManageTweet tweetManager = new ManageTweet();
+		
 		try {
 			BeanUtils.populate(tweet, request.getParameterMap());
 			/*Si no esta retweetejat per l'usuari fem retweet*/
@@ -50,6 +54,8 @@ public class RetweetTweet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		tweetManager.finalize();
 	}
 
 	/**

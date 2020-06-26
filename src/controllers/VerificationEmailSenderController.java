@@ -12,6 +12,9 @@ import utils.VerificationEmailSender;
 
 /**
  * Servlet implementation class VerificationEmailSenderController
+ * 
+ * Servlet per enviar email de verificacio.
+ * 
  */
 @WebServlet("/VerificationEmailSenderController")
 public class VerificationEmailSenderController extends HttpServlet {
@@ -34,9 +37,12 @@ public class VerificationEmailSenderController extends HttpServlet {
 		// TODO Auto-generated method stub
 		String mail = request.getParameter("mail");
 		String username = request.getParameter("username");
+		
 		ManageUser manager = new ManageUser();
 		VerificationEmailSender verSender = new VerificationEmailSender();
 		verSender.sendVerificationEmail(mail, manager.getUserID(mail), username);
+		verSender.finalize();
+		
 		manager.finalize();
 	}
 

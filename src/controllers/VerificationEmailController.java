@@ -16,6 +16,9 @@ import utils.DAO;
 
 /**
  * Servlet implementation class VerificationEmailController
+ * 
+ * Servlet que sexecuta quan usuari obre el link de verificacio.
+ * 
  */
 @WebServlet("/VerificationEmailController")
 public class VerificationEmailController extends HttpServlet {
@@ -35,6 +38,16 @@ public class VerificationEmailController extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
+	
+	public void finalize() {
+		try {
+			super.finalize();
+			db.disconnectBD();
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+	}
+	
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -63,6 +76,8 @@ public class VerificationEmailController extends HttpServlet {
 			    dispatcher.forward(request, response);
 			}
 		}
+		
+		this.finalize();
 	}
 
 	/*Aquesta part es pot posar al userManger*/

@@ -11,6 +11,9 @@ import managers.ManageTweet;
 
 /**
  * Servlet implementation class SaveEditTweetFromUser
+ * 
+ * Servlet per guardar un tweet modificat.
+ * 
  */
 @WebServlet("/SaveEditTweetFromUser")
 public class SaveEditTweetFromUser extends HttpServlet {
@@ -32,6 +35,7 @@ public class SaveEditTweetFromUser extends HttpServlet {
 		String tweetText = request.getParameter("tweetText");
 		String tweetidStr = request.getParameter("tweetid");
 		Integer tweetid = Integer.parseInt(tweetidStr);
+		/*Si te contingut*/
 		if(tweetText != "") {		
 			ManageTweet tweetManager = new ManageTweet();
 			tweetManager.editTweet(tweetid, tweetText);

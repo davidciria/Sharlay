@@ -19,17 +19,25 @@ public class VerificationEmailSender {
 			e.printStackTrace();
 		}
 	}
+	
+	public void finalize() {
+		try {
+			super.finalize();
+			db.disconnectBD();
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+	}
 
 	public void sendVerificationEmail(String destEmail, Integer uid, String username) throws UnknownHostException {
 		String token = this.generateVerificationToken();
 		this.addTokenToUser(token, uid);
 		EmailSender sender = new EmailSender();
-		// String hostname = InetAddress.getLocalHost().getHostAddress();
-		// System.out.println(sHostName);
 		String hostname = "localhost";
 		sender.sendEmail(destEmail, "Gaming Twitter Email Verification",
 				verificationMsg + "http://" + hostname + ":8080/Sharlay/VerificationEmailController?email=" + destEmail
 						+ "&token=" + token + " " + incorrectEmailMsg);
+		this.finalize();
 	}
 
 	private void addTokenToUser(String token, Integer uid) {

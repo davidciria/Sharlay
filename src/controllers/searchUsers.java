@@ -16,6 +16,9 @@ import models.User;
 
 /**
  * Servlet implementation class searchUsers
+ * 
+ * Servlet per fer una cerca dusuaris.
+ * 
  */
 @WebServlet("/searchUsers")
 public class searchUsers extends HttpServlet {
@@ -37,11 +40,13 @@ public class searchUsers extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		String cview = "";
 		if(session != null) {
+			//Usuari loggejat.
 			int uid = (int)session.getAttribute("uid");
 			cview = "searchResult.jsp";
 			try {
 				List<User> searchResult = userManager.searchUsers(request.getParameter("searchWords"));
 				for(int i = 0; i < searchResult.size(); i++) {
+					//Saber si els segueix lusuari loggejat.
 					searchResult.get(i).setIsFollowed(userManager.userIsFollowed(uid, searchResult.get(i).getUid()));
 				}
 				request.setAttribute("searchResult", searchResult);
@@ -52,6 +57,7 @@ public class searchUsers extends HttpServlet {
 		}
 		else
 		{
+			//Usuari anonymous.
 			cview = "searchResultFromAnonymous.jsp";
 			try {
 				List<User> searchResult = userManager.searchUsers(request.getParameter("searchWords"));
@@ -62,7 +68,7 @@ public class searchUsers extends HttpServlet {
 			}	
 		}
 		
-		
+		userManager.finalize();
 		RequestDispatcher dispatcher = request.getRequestDispatcher(cview);
 		dispatcher.forward(request, response);
 	}

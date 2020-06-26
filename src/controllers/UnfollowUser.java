@@ -12,6 +12,9 @@ import managers.ManageUser;
 
 /**
  * Servlet implementation class UnfollowUser
+ * 
+ * Servlet per deixar de seguir a un usuari.
+ * 
  */
 @WebServlet("/UnfollowUser")
 public class UnfollowUser extends HttpServlet {
@@ -32,18 +35,19 @@ public class UnfollowUser extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		int uid = (int)session.getAttribute("uid");
 		Integer userToUnfollow = Integer.parseInt(request.getParameter("uid"));
+		ManageUser userManager = new ManageUser();
 		try {
-			ManageUser userManager = new ManageUser();
 			boolean result = false;
 			if(userManager.userIsFollowed(uid, userToUnfollow))  result = userManager.unfollow(uid, userToUnfollow);
+			/*Comprovem que no hi ha hagut cap error.*/
 			if(result) response.setStatus(HttpServletResponse.SC_ACCEPTED);
 			else{
 				response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			}
-			userManager.finalize();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		userManager.finalize();
 	}
 
 	/**
