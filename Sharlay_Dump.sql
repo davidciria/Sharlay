@@ -42,6 +42,7 @@ CREATE TABLE `follows` (
 
 LOCK TABLES `follows` WRITE;
 /*!40000 ALTER TABLE `follows` DISABLE KEYS */;
+INSERT INTO `follows` VALUES (4,9);
 /*!40000 ALTER TABLE `follows` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -121,7 +122,7 @@ CREATE TABLE `tweets` (
   KEY `tweets_tweets_fk` (`parentTweet`),
   CONSTRAINT `tweets_tweets_fk` FOREIGN KEY (`parentTweet`) REFERENCES `tweets` (`tweetid`),
   CONSTRAINT `tweets_users_fk` FOREIGN KEY (`uid`) REFERENCES `users` (`uid`)
-) ENGINE=InnoDB AUTO_INCREMENT=282 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=305 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -130,6 +131,7 @@ CREATE TABLE `tweets` (
 
 LOCK TABLES `tweets` WRITE;
 /*!40000 ALTER TABLE `tweets` DISABLE KEYS */;
+INSERT INTO `tweets` VALUES (282,1,'I finally get off work, hallelujah... Now it\'s time to play!',0,0,0,'2020-06-25 21:04:29',NULL),(283,2,'I miss NBA games, I can\'t wait to see my Warriors again!',0,0,0,'2020-06-24 06:27:18',NULL),(285,2,'Bored right now. I\'ve played all my games. Hit like if you are too',0,0,0,'2020-06-26 20:08:44',NULL),(287,3,'My eyes hurts from so much playing. It\'s time to sleep for a while :)',0,0,0,'2020-06-26 20:11:16',NULL),(288,4,'I am looking forward to the new season of Noragami!!! ^^',0,0,0,'2020-06-23 18:12:08',NULL),(289,5,'Bastante preocupado por el covid, iré suficientemente protegido?? Suerte que casi no salgo de casa jaja',0,0,0,'2020-06-26 20:13:44',NULL),(290,5,'Estoy harto de ver a gente sin mascarilla, no es tan complicado tener un poco de empatía!',0,0,0,'2020-06-23 10:10:24',NULL),(291,6,'Por fin voy a poder volver a sacar fotos, sígueme si quieres una sesión! Mientras voy jugando al Rocket League',0,0,0,'2020-06-26 20:15:26',NULL),(292,7,'Llevo media carrera y no sé ni lo que estoy haciendo... Pensaba que informàtica trataria mas de videojuegos :(',0,0,0,'2020-06-25 19:15:49',NULL),(293,7,'No me apetece ni salir de casa. Quién un lol?',0,0,0,'2020-06-26 20:17:25',NULL),(294,10,'Here no one puts on the mask, we will have problems again at any time :/ This is not a game, we only have one life',0,0,0,'2020-06-26 20:18:52',NULL),(295,10,'If there\'s someone I can\'t listen to for more than two minutes, it\'s Trump.',0,0,0,'2020-06-24 14:19:28',NULL),(296,3,'I really can\'t sleep, I don\'t know what\'s wrong with me (??)',0,0,0,'2020-06-26 20:20:33',NULL),(297,8,'No se que es mas triste, si haber acabado el curso sin ver a mis compañeros o ver al Barcelona...',0,0,0,'2020-06-24 21:58:21',NULL),(298,8,'No me puedo creer que tenga que estudiar para la sele, solo me apetece jugar al fifa',0,0,0,'2020-06-26 20:24:33',NULL),(299,9,'No me puedo creer que no hayan sacado nunca un juego de Sakura, yo habría comprado 20!!',0,0,0,'2020-06-24 09:45:26',NULL),(300,9,'Nunca fui mucho de Nintendogs, ahora, si hubiese sido Nintencats...',0,0,0,'2020-06-26 20:27:07',NULL),(301,4,'OMG, the Android Noragami game is fucking awesome!!',0,0,0,'2020-06-26 20:34:03',NULL),(302,4,'A Spanish just followed me! Hola amiga :)',0,0,0,'2020-06-26 20:35:00',NULL),(303,4,'I have just joined to Sharlay, hey gamers!! :D',0,0,0,'2020-06-23 08:45:12',NULL);
 /*!40000 ALTER TABLE `tweets` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -168,7 +170,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'milson85','Milton','Hanson','mhanson@gmail.com','u1cknfKRz9IcFYUjOT8Sj5DvSTHVQHX+cx+ulElmlPo=','crCfki3rOFvt5otP',1,'1985-04-05',0,0,0,0,0,'VGtl8prytrefH_xbeeemL7m10UoOJR-O'),(2,'kellybee12','Alyssa','Kelley','akelley@gmail.com','RFy50yLsZjBREL1kb6pIRyLaaN/BqSRHwRMaZ4UdvYo=','kq7+rDfYp1fxD6ec',1,'1992-05-12',0,0,0,0,0,'a06xTYrxHk-20yn8GoWCKrY6w9BBKool'),(3,'silvermissy','Abigail','George','ageorge@gmail.com','d6lqlV8zfir6R7+kIVnUVZm6pwoM+AWbNhoUPnYSfIQ=','7L3jx98WGPYqTMKz',1,'1998-12-05',0,0,0,0,0,'3ttlVLr_zjV_J7ki0Vv8iQiuku5kUB_O'),(4,'animebot','Shawn','Fleming','sfleming@gmail.com','3c+0HCkB372nVTT6K9ne+0KXqeziXl2fXogIBeOrzDg=','8z5wkH5mnoUmNT4l',1,'2000-12-08',0,0,0,0,0,'FZXjuSmpICH451froscvmXPlJIvarLjN'),(5,'hopez26','Hugo','Lopez','hlopez@gmail.com','IQ/H5uDPCUOhlu3Rhl5xzyrcoYZAKGl2Z1TnOuwsmMQ=','d2MOb62JBgOktwpL',1,'1999-01-26',0,0,0,0,0,'mLxRXZ9IJoXmTIJvfyuWPi5DEuCjfeDF'),(6,'felipo37','Felipe','Sancho','fsancho@gmail.com','TvyxFlJq2ndAtyfkXCKXy1DRmQpmcWzGeMHcWJIq+2M=','LrCAGSy3lLPPMxvi',1,'1997-09-08',0,0,0,0,0,'Czx3nYc_a_hEjh5vgU5YFDoYnTJSqDc4'),(7,'carlii00','Carla','Martinez','cmartinez@gmail.com','QiplkgK7dOOySifWrh/FCk8DvHr/KF6sRwDQvODXQGo=','okQnQc7mg8L9ufQE',1,'2000-07-17',0,0,0,0,0,'EiJLRU-DO4S_9aK2Ueyc2I86l6QIaV_B'),(8,'fcbiker02','Iker','Santos','isantos@gmail.com','BY81FZhYHJ8v/31twC/gt9G36vfaEhIWkzXD/+W6DAk=','DqruJ8PaCUMm+AgV',1,'2002-02-01',0,0,0,0,0,'7-0-Q2ltdKYCu7FLJv9Qp7STzaBO3Szj'),(9,'sushipan','Sara','Paredes','sparedes@gmail.com','x9NVXysQDU3W1+O6B6YjvGEOcANJ/gTxIl3kKuMqhTQ=','pq3PDjX+2L9X+XGh',1,'2001-10-08',0,0,0,0,0,'KEwANEqq5H9BuSpzwwmWu2y3edGcJ4xJ'),(10,'phills90','Peter','Hills','phills@gmail.com','g8Cx7ySDtu13zdtKRjButnn/FGM8vFAFK8DeNXMKUow=','yzbFSpOXr6C/z/uA',1,'1990-04-24',0,0,0,0,0,'m6Prc-TuYu_zCAw9EHptmoGChGZvxGqd');
+INSERT INTO `users` VALUES (1,'milson85','Milton','Hanson','mhanson@gmail.com','u1cknfKRz9IcFYUjOT8Sj5DvSTHVQHX+cx+ulElmlPo=','crCfki3rOFvt5otP',1,'1985-04-05',1,0,0,0,0,'VGtl8prytrefH_xbeeemL7m10UoOJR-O'),(2,'kellybee12','Alyssa','Kelley','akelley@gmail.com','RFy50yLsZjBREL1kb6pIRyLaaN/BqSRHwRMaZ4UdvYo=','kq7+rDfYp1fxD6ec',1,'1992-05-12',2,0,0,0,0,'a06xTYrxHk-20yn8GoWCKrY6w9BBKool'),(3,'silvermissy','Abigail','George','ageorge@gmail.com','d6lqlV8zfir6R7+kIVnUVZm6pwoM+AWbNhoUPnYSfIQ=','7L3jx98WGPYqTMKz',1,'1998-12-05',2,0,0,0,0,'3ttlVLr_zjV_J7ki0Vv8iQiuku5kUB_O'),(4,'animebot','Shawn','Fleming','sfleming@gmail.com','3c+0HCkB372nVTT6K9ne+0KXqeziXl2fXogIBeOrzDg=','8z5wkH5mnoUmNT4l',1,'2000-12-08',4,0,1,0,0,'FZXjuSmpICH451froscvmXPlJIvarLjN'),(5,'hopez26','Hugo','Lopez','hlopez@gmail.com','IQ/H5uDPCUOhlu3Rhl5xzyrcoYZAKGl2Z1TnOuwsmMQ=','d2MOb62JBgOktwpL',1,'1999-01-26',2,0,0,0,0,'mLxRXZ9IJoXmTIJvfyuWPi5DEuCjfeDF'),(6,'felipo37','Felipe','Sancho','fsancho@gmail.com','TvyxFlJq2ndAtyfkXCKXy1DRmQpmcWzGeMHcWJIq+2M=','LrCAGSy3lLPPMxvi',1,'1997-09-08',1,0,0,0,0,'Czx3nYc_a_hEjh5vgU5YFDoYnTJSqDc4'),(7,'carlii00','Carla','Martinez','cmartinez@gmail.com','QiplkgK7dOOySifWrh/FCk8DvHr/KF6sRwDQvODXQGo=','okQnQc7mg8L9ufQE',1,'2000-07-17',2,0,0,0,0,'EiJLRU-DO4S_9aK2Ueyc2I86l6QIaV_B'),(8,'fcbiker02','Iker','Santos','isantos@gmail.com','BY81FZhYHJ8v/31twC/gt9G36vfaEhIWkzXD/+W6DAk=','DqruJ8PaCUMm+AgV',1,'2002-02-01',2,0,0,0,0,'7-0-Q2ltdKYCu7FLJv9Qp7STzaBO3Szj'),(9,'sushipan','Sara','Paredes','sparedes@gmail.com','x9NVXysQDU3W1+O6B6YjvGEOcANJ/gTxIl3kKuMqhTQ=','pq3PDjX+2L9X+XGh',1,'2001-10-08',2,1,0,0,0,'KEwANEqq5H9BuSpzwwmWu2y3edGcJ4xJ'),(10,'phills90','Peter','Hills','phills@gmail.com','g8Cx7ySDtu13zdtKRjButnn/FGM8vFAFK8DeNXMKUow=','yzbFSpOXr6C/z/uA',1,'1990-04-24',2,0,0,0,0,'m6Prc-TuYu_zCAw9EHptmoGChGZvxGqd');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -181,4 +183,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-26 18:45:57
+-- Dump completed on 2020-06-26 19:49:00
