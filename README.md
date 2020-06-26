@@ -58,7 +58,7 @@ En primer lloc crearem un nou usuari anomenat mysql amb el password prac:
 `CREATE USER 'mysql'@'localhost' IDENTIFIED BY 'prac'; ` <br>
 `GRANT ALL PRIVILEGES ON *.* TO 'mysql'@'localhost'; `
 
-Tot seguit, obrirem el script Lab4_SQLDUMP.sql i realitzarem una execució completa.
+Tot seguit, obrirem el script Sharlay_Dump_1.1.sql i realitzarem una execució completa.
 
 ## Context de les fotografies de perfil
 
@@ -93,6 +93,17 @@ Quan un usuari es registra a la plataforma s'envia un email de verificació. Fin
 Es pot canviar el correu origen (direcció desde on s'envien els correus de verificació) a la clase EmailSender situada al package utils.
 
 En el cas que no arribi el email de verificació al usuari es pot modificar el atribut regVerified de la taula Users a true.
+
+## Usuaris de prova
+
+Hem creat una base de dades adient a la temàtica *gamer* del nostre *Twitter*. Per accedir als usuaris haurem de fer *login* amb les següents dades:
+ - Usuari: inicial.cognom@gmail.com
+ - Contrasenya: Test1234
+ 
+Els usuaris son accessibles des de la vista com a usuari anònim tant cercant-los amb la barra de cerca del menú com veient els tweets globals.
+Per accedir al administrador de *Sharlay* haurem de fer *login* amb les següents dades:
+ - Usuari: sadmin@gmail.com
+ - Contrasenya: Admin1234
 
 
 
