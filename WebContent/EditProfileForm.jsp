@@ -68,6 +68,17 @@ $(document).ready(function(){
 		});
 	});
 	
+	$(".editPwdForm").submit( function(event) {
+		event.preventDefault();
+		var uid = $(this).attr("id");
+		var formParams = $(this).serializeArray();
+		var currentPwd = formParams[0].value;
+		var newPwd = formParams[1].value;
+		$('#dtweets').load("ChangePwd",{uid: "${uid}", currentPwd: currentPwd, newPwd: newPwd}, function(data){
+			$("#duser").load( "GetUserInfo", { uid:  uid } ,function() {});
+		});
+	});
+	
 	$(".uploadProfileImage").submit(function(evt){	 
 	      evt.preventDefault();
 	      var formData = new FormData($(this)[0]);
@@ -155,6 +166,7 @@ $(document).ready(function(){
 
 <div class="w3-container w3-card w3-text w3-round w3-margin w3-animate-opacity">
 
+<!-- Edit user info form -->
 <form id="${uid}" data-parsley-validate action="#" method="POST" class="editForm">
 	<p>      
     <label class="imp-text"><b> First Name </b></label>
@@ -169,10 +181,19 @@ $(document).ready(function(){
     <input class="editinput w3-button w3-round-medium w3-theme" type="submit" name="submit" value="Update"></p>
 </form>
 
-<p>
-	<label class="imp-text"><b> Password </b></label>
-	<input class="w3-input w3-border form-bg w3-text" type="password" id="pwd1" name="pwd1" placeholder="Password" value="${model.pwd1}" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"></p>
+<!-- Edit password form -->
+<form id="${uid}" data-parsley-validate action="#" method="POST" class="editPwdForm">
+	<p>
+	<label class="imp-text"><b> Current Password </b></label>
+	<input class="w3-input w3-border form-bg w3-text" type="password" id="pwd1" name="currentpwd" placeholder="Current Password" value="${currentpwd}" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"></p>
+	<p>
+	<label class="imp-text"><b> New Password </b></label>
+	<input class="w3-input w3-border form-bg w3-text" type="password" id="pwd1" name="newpwd" placeholder="New Password" value="${newpwd}" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"></p>
+	<p>
+    <input class="editinput w3-button w3-round-medium w3-theme" type="submit" name="submit" value="Update"></p>
+</form>
 
+<!-- Edit profile image form -->
 <form id="${uid}" class="uploadProfileImage" action = "UploadProfileImage" method = "post" enctype = "multipart/form-data">
      <label class="imp-text"><b> Profile Image </b></label>
      <br /><br />
