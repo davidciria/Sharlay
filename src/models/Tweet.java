@@ -118,14 +118,4 @@ public class Tweet  {
 	}
 	
 	
-	/*public boolean isComplete() {
-		return (this.hasValue(this.getUsername()) && this.hasValue(this.getContent()) && this.hasValue(this.getSecondName()) && this.hasValue(this.getPassword()) &&
-				this.hasValue(this.getPasswordRepeat()) && this.hasValue(this.getMail()) && this.hasValue(this.getSex()) && this.hasValue(this.getAge()));
-	}*/
-	
-	
-
-	
-	
-	
 }

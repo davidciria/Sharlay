@@ -19,10 +19,8 @@ public class Login {
 		Matcher matcher = pattern.matcher(mail);
 		if (matcher.matches()) {
 			this.mail = mail;
-			// System.out.println(mail);
 		} else {
 			error[0] = true;
-			// System.out.println(mail);
 		}
 	}
 	
@@ -38,10 +36,8 @@ public class Login {
 			if (matcher.matches()) {
 				System.out.println(pwd);
 				this.pwd = pwd;
-				// System.out.println(mail);
 			} else {
 				error[1] = true;
-				// System.out.println(mail);
 			}
 		} else {
 			error[1] = true;

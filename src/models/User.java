@@ -66,10 +66,8 @@ public class User implements java.io.Serializable {
 		Matcher matcher = pattern.matcher(mail);
 		if (matcher.matches()) {
 			this.mail = mail;
-			// System.out.println(mail);
 		} else {
 			error[2] = true;
-			// System.out.println(mail);
 		}
 
 	}
@@ -85,12 +83,9 @@ public class User implements java.io.Serializable {
 			Pattern pattern = Pattern.compile(regex);
 			Matcher matcher = pattern.matcher(pwd1);
 			if (matcher.matches()) {
-				System.out.println(pwd1);
 				this.pwd1 = pwd1;
-				// System.out.println(mail);
 			} else {
 				error[3] = true;
-				// System.out.println(mail);
 			}
 		} else {
 			error[3] = true;
@@ -113,7 +108,6 @@ public class User implements java.io.Serializable {
 				}
 			} else {
 				error[4] = true;
-				// System.out.println(mail);
 			}
 		} else {
 			error[4] = true;
@@ -126,14 +120,11 @@ public class User implements java.io.Serializable {
 
 	
 	public void setBirth(String birth) {
-		System.out.println(birth);
 		DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		LocalDate fechaNac = LocalDate.parse(birth, fmt);
 		LocalDate ahora = LocalDate.now();
 
 		Period periodo = Period.between(fechaNac, ahora);
-		System.out.printf("Tu edad es: %s anos, %s meses y %s dias", periodo.getYears(), periodo.getMonths(),
-				periodo.getDays());
 		if (periodo.getYears() >= 16) {
 			this.birth = birth;
 		} else {
