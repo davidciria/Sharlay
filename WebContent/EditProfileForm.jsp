@@ -57,13 +57,16 @@ $(document).ready(function(){
 		var firstname = "${firstname}";
 		var lastname = "${lastname}";
 		var username = "${username}";
+		var birth = "${username}";
 		var newfirstname = null;
 		var newlastname = null;
 		var newusername = null;
+		var newbirth = null;
 		if(firstname != formParams[0].value) newfirstname = formParams[0].value;
 		if(lastname != formParams[1].value) newlastname = formParams[1].value;
 		if(username != formParams[2].value) newusername = formParams[2].value;
-		$('#dtweets').load("EditProfileForm",{firstname: newfirstname, lastname: newlastname, username: newusername, uid: "${uid}"}, function(data){
+		if(birth != formParams[3].value) newbirth = formParams[3].value;
+		$('#dtweets').load("EditProfileForm",{firstname: newfirstname, lastname: newlastname, username: newusername, birth: newbirth, uid: "${uid}"}, function(data){
 			$("#duser").load( "GetUserInfo", { uid:  uid } ,function() {});
 		});
 	});
@@ -190,6 +193,9 @@ $(document).ready(function(){
     <label class="imp-text"><b> Username </b></label>
     <input class="editinput w3-input w3-border form-bg w3-text" type="text" id="username" name="username" placeholder="Username" value="${username}" required pattern="^[a-zA-Z0-9_]+$"></p>
     <p>
+    <p>
+	<label class="imp-text"><b> Birthday </b></label>
+	<input class="w3-input w3-border form-bg w3-text" type="date" id="birth" name="birth" value="${birth}" required data-parsley-min-age="16"></p>
     <input class="editinput w3-button w3-round-medium w3-theme" type="submit" name="submit" value="Update"></p>
 </form>
 
