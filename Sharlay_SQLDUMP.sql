@@ -134,7 +134,6 @@ CREATE TABLE `Likes` (
 
 LOCK TABLES `Users` WRITE;
 /*!40000 ALTER TABLE `Users` DISABLE KEYS */;
-INSERT INTO `Users` (`username`,`firstname`,`lastname`,`mail`) VALUES ('MESPUGA11','Mireia','Espuga', 'mireia.espuga01@estudiant.upf.edu');
 /*!40000 ALTER TABLE `Users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
