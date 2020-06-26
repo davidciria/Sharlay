@@ -77,11 +77,11 @@ $(document).ready(function(){
 		<form action="LoginController" method="POST">
 			<p>      
 		    <label class="imp-text"><b> Email </b></label>
-		    <input class="w3-input w3-border form-bg w3-text" type="email" name="mail" value="${login.mail}" required></p>
+		    <input class="w3-input w3-border form-bg w3-text" type="email" name="mail" placeholder="Email" value="${login.mail}" required></p>
 		    <p>
 		    <p>      
 		    <label class="imp-text"><b> Password </b></label>
-		    <input class="w3-input w3-border form-bg w3-text" type="password" name="pwd" value="${login.pwd}" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"></p>
+		    <input class="w3-input w3-border form-bg w3-text" type="password" name="pwd" placeholder="Password" value="${login.pwd}" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"></p>
 		    <p>
 		    <input class="w3-button w3-theme w3-round-medium" type="submit" name="sumbit" value="Submit"></p>
 		</form>
