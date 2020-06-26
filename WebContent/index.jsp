@@ -95,10 +95,13 @@ $(document).ready(function(){
 		//event.stopImmediatePropagation();
 		var tweet = $(this).parent();
 		var icon = $(this);
+		var numLikes = $(this).next();
 		$.post( "LikeTweet", { tweetid: $(this).parent().attr("id") } , function(data, status) {
 			if(status == "success"){
 				icon.removeClass("lT").addClass("dlT");
 				icon.removeClass("w3-theme-l5").addClass("w3-theme");
+				var preNum = parseInt(numLikes.text());
+				numLikes.html("<b>" + (preNum + 1) + "</b>");
 			}
 	  	}).fail(function(response, status) {
 	  		console.log("Some problem trying to like tweet.");
@@ -111,10 +114,13 @@ $(document).ready(function(){
 		//event.stopImmediatePropagation();
 		var tweet = $(this).parent();
 		var icon = $(this);
+		var numLikes = $(this).next();
 		$.post( "DislikeTweet", { tweetid: $(this).parent().attr("id") } , function(data, status) {
 			if(status == "success"){
 				icon.removeClass("dlT").addClass("lT");
 				icon.removeClass("w3-theme").addClass("w3-theme-l5");
+				var preNum = parseInt(numLikes.text());
+				numLikes.html("<b>" + (preNum - 1) + "</b>");
 			}
 		}).fail(function(response, status) {
 			console.log("Some problem trying to dislike tweet.");
@@ -126,12 +132,14 @@ $(document).ready(function(){
 		event.preventDefault();
 		//event.stopImmediatePropagation();
 		var tweet = $(this).parent();
-		console.log("Show" + $(this).parent().attr("id"));
 		var icon = $(this);
+		var numRTs = $(this).next();
 		$.post( "RetweetTweet", { tweetid: $(this).parent().attr("id") } , function(data, status) {
 			if(status == "success"){
 				icon.removeClass("lT").addClass("dlT");
 				icon.removeClass("w3-theme-l5").addClass("w3-theme");
+				var preNum = parseInt(numRTs.text());
+				numRTs.html("<b>" + (numRTs + 1) + "</b>");
 			}
 	  	}).fail(function(response, status) {
 	  		console.log("Some problem trying to retweet the tweet.");
@@ -148,6 +156,8 @@ $(document).ready(function(){
 			if(status == "success"){
 				icon.removeClass("dlT").addClass("lT");
 				icon.removeClass("w3-theme").addClass("w3-theme-l5");
+				var preNum = parseInt(numRTs.text());
+				numRTs.html("<b>" + (numRTs - 1) + "</b>");
 			}
 		}).fail(function(response, status) {
 			console.log("Some problem trying to unretweet the tweet.");
