@@ -35,7 +35,12 @@ public class FollowUser extends HttpServlet {
 		Integer userToFollow = Integer.parseInt(request.getParameter("uid"));
 		try {
 			ManageUser userManager = new ManageUser();
-			userManager.follow(uid, userToFollow);
+			boolean result = false;
+			if(!userManager.userIsFollowed(uid, userToFollow)) result = userManager.follow(uid, userToFollow);
+			if(result) response.setStatus(HttpServletResponse.SC_ACCEPTED);
+			else{
+				response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+			}
 			userManager.finalize();
 		} catch (Exception e) {
 			e.printStackTrace();

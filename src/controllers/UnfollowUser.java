@@ -35,7 +35,12 @@ public class UnfollowUser extends HttpServlet {
 		Integer userToUnfollow = Integer.parseInt(request.getParameter("uid"));
 		try {
 			ManageUser userManager = new ManageUser();
-			userManager.unfollow(uid, userToUnfollow);
+			boolean result = false;
+			if(userManager.userIsFollowed(uid, userToUnfollow))  result = userManager.unfollow(uid, userToUnfollow);
+			if(result) response.setStatus(HttpServletResponse.SC_ACCEPTED);
+			else{
+				response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+			}
 			userManager.finalize();
 		} catch (Exception e) {
 			e.printStackTrace();

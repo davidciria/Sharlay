@@ -189,27 +189,47 @@ public class ManageUser {
 	// TODO: login and logout
 
 	
-	public void unfollow(Integer uid1, Integer uid2) throws Exception{
+	public boolean unfollow(Integer uid1, Integer uid2) throws Exception{
 		
 		String query1 = "DELETE FROM Follows WHERE uid1 = ? and uid2 = ?";
-		String query2 = "UPDATE Users SET following = following - 1 WHERE uid = ?"; //uid1
-		String query3 = "UPDATE Users SET followers = followers - 1 WHERE uid = ?"; //uid2
-
 		PreparedStatement statement1 = null; //eliminem follow a la taula de follows
-		PreparedStatement statement2 = null; //decrementem comptador de following al user 
-		PreparedStatement statement3 = null; //decrementem comptador de followers al user 
+		int rows_deleted = 0;
 		
 		try {
 			statement1 = db.prepareStatement(query1);
 			statement1.setInt(1, uid1);
 			statement1.setInt(2, uid2);
-			statement1.executeUpdate();
+			rows_deleted = statement1.executeUpdate();
 			statement1.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		if(rows_deleted == 0) return false;
+		
+		
+		String query2 = "UPDATE Users SET following = following - 1 WHERE uid = ?"; //uid1
+		PreparedStatement statement2 = null; //decrementem comptador de following al user 
+		
+		try {
 			
 			statement2 = db.prepareStatement(query2);
 			statement2.setInt(1, uid1);
 			statement2.executeUpdate();
 			statement2.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		
+		String query3 = "UPDATE Users SET followers = followers - 1 WHERE uid = ?"; //uid2
+		PreparedStatement statement3 = null; //decrementem comptador de followers al user 
+
+		try {
 			
 			statement3 = db.prepareStatement(query3);
 			statement3.setInt(1, uid2);
@@ -218,20 +238,18 @@ public class ManageUser {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return;
+			return false;
 		}
+		
+		return true;
 	}
 	
 	
-	public void follow(Integer uid1, Integer uid2) throws Exception{
-
+	public boolean follow(Integer uid1, Integer uid2) throws Exception{
+		
+		/*Afegeix follow a la taula de follows*/
 		String query1 = "INSERT INTO Follows (uid1,uid2) VALUES (?,?)";
-		String query2 = "UPDATE Users SET following = following + 1 WHERE uid = ?"; //uid1
-		String query3 = "UPDATE Users SET followers = followers + 1 WHERE uid = ?"; //uid2
-
-		PreparedStatement statement1 = null; //afegeix follow a la taula de follows
-		PreparedStatement statement2 = null; //incrementem comptador de following al user 
-		PreparedStatement statement3 = null; //incrementem comptador de followers al user 
+		PreparedStatement statement1 = null;
 		
 		try {
 			statement1 = db.prepareStatement(query1);
@@ -239,21 +257,40 @@ public class ManageUser {
 			statement1.setInt(2, uid2);
 			statement1.executeUpdate();
 			statement1.close();
-			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		/*Incrementem comptador de following al user*/ 
+		String query2 = "UPDATE Users SET following = following + 1 WHERE uid = ?"; 
+		PreparedStatement statement2 = null; 
+		
+		try {
 			statement2 = db.prepareStatement(query2);
 			statement2.setInt(1, uid1);
 			statement2.executeUpdate();
 			statement2.close();
-			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		/*Incrementem comptador de followers al user*/
+		String query3 = "UPDATE Users SET followers = followers + 1 WHERE uid = ?"; 
+		PreparedStatement statement3 = null;
+		
+		try {
 			statement3 = db.prepareStatement(query3);
 			statement3.setInt(1, uid2);
 			statement3.executeUpdate();
 			statement3.close();
-
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return;
+			return false;
 		}
+		
+		return true;
 	}
 	
 	public boolean userIsFollowed(int uidfollower, int uid) {
