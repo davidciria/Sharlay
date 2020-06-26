@@ -40,7 +40,7 @@ Tot seguit, obrirem el script Lab4_SQLDUMP.sql i realitzarem una execució compl
 
 ## Context de les fotografies de perfil
 
-Sharlay permet pujar una foto de perfil en format .png. Per que aquesta funcionalitat funcioni correctament cal configurar el context on es troben les imatges.
+Sharlay permet pujar fotografies de perfil en format .png. Per que aquesta funcionalitat funcioni correctament cal configurar el context on es troben les imatges.
 
 Per configurar el context ens dirigirem al fitxer server.xml.
 
