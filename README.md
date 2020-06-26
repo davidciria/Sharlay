@@ -23,7 +23,7 @@
 ## Instalació
 
 ## Tomcat
-Per al desenvolupament de l'aplicació s'ha usat el servidor Tomcat en la versió 8. Per instalar-lo és necessari descarregar el arxiu zip core desde el següent enllaç: https://tomcat.apache.org/download-80.cgi
+Per al desenvolupament de l'aplicació s'ha usat el servidor Tomcat en la versió 9. Per instalar-lo és necessari descarregar el arxiu zip core desde el següent enllaç: https://tomcat.apache.org/download-90.cgi
 
 Seguir el següent link per la seva instal·lació: http://www.coreservlets.com/Apache-Tomcat-Tutorial/tomcat-7-with-eclipse.html
 
