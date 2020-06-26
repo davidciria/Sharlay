@@ -34,6 +34,8 @@ public class User implements java.io.Serializable {
 	private Boolean isVerified = null;
 	private Boolean isAdmin = null;
 	
+	private Boolean isFollowed = false; //Per saber si el usuari es seguit per l'usuari que ha fet login. No existeix en el model de la bbdd s'assigna dinamicament.
+	
 	//no sabem si treure-ho
 	private String pwd1 = "";
 	private String pwd2 = "";
@@ -276,6 +278,14 @@ public class User implements java.io.Serializable {
 	
 	public void setIsAdmin(Boolean isAdmin) {
 		this.isAdmin = isAdmin;
+	}
+	
+	public Boolean getIsFollowed() {
+		return this.isFollowed;
+	}
+	
+	public void setIsFollowed(Boolean isFollowed) {
+		this.isFollowed = isFollowed;
 	}
 	
 

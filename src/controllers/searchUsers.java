@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import managers.ManageUser;
 import models.User;
@@ -33,9 +34,13 @@ public class searchUsers extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ManageUser userManager = new ManageUser();
-		System.out.println("sdaasdasd");
+		HttpSession session = request.getSession(false);
+		int uid = (int)session.getAttribute("uid");
 		try {
 			List<User> searchResult = userManager.searchUsers(request.getParameter("searchWords"));
+			for(int i = 0; i < searchResult.size(); i++) {
+				searchResult.get(i).setIsFollowed(userManager.userIsFollowed(uid, searchResult.get(i).getUid()));
+			}
 			request.setAttribute("searchResult", searchResult);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
