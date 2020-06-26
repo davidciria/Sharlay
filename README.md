@@ -51,7 +51,7 @@ Dins del fitxer afegirem la següent linia dins l'etiqueta `<Host>` especificant
 
 `<Context docBase="ruta_a_la_carpeta_ProfileImages" path="/Sharlay/ProfileImages" />`
 
-* Exemple: * `<Context docBase="C:\Users\david\eclipse-workspace\Sharlay\WebContent\ProfileImages" path="/Sharlay/ProfileImages" />`
+** Exemple: ** `<Context docBase="C:\Users\david\eclipse-workspace\Sharlay\WebContent\ProfileImages" path="/Sharlay/ProfileImages" />`
 
 ! [Imatge ajuda] (tutorial_context2.png)
 
