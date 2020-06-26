@@ -14,6 +14,9 @@ import managers.ManageTweet;
 import models.Tweet;
 /**
  * Servlet implementation class DelTweetFromUser
+ * 
+ * Eliminar un tweet.
+ * 
  */
 @WebServlet("/DelTweetFromUser")
 public class DelTweetFromUser extends HttpServlet {
@@ -32,15 +35,17 @@ public class DelTweetFromUser extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		Tweet tweet = new Tweet();
+		ManageTweet tweetManager = new ManageTweet();
 		
 		try {
 			BeanUtils.populate(tweet, request.getParameterMap());
-			ManageTweet tweetManager = new ManageTweet();
+			//Eliminem el tweet.
 			tweetManager.deleteTweet(tweet.getTweetid());
-			tweetManager.finalize();
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
+		
+		tweetManager.finalize();
 		
 	}
 

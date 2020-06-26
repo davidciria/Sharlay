@@ -10,6 +10,9 @@ import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class changeSessionVar
+ * 
+ * Servlet util per cambiar variables en sessio (mantenir la vista on es troba el usuari al recarregar la pagina).
+ * 
  */
 @WebServlet("/changeSessionVar")
 public class changeSessionVar extends HttpServlet {
@@ -30,9 +33,11 @@ public class changeSessionVar extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession(false);
 		if(session != null) {
+			//Mode 1 --> Cambiar la variable de sessio setVar per una de sessio. Util per assignar userview a user.
 			if(Integer.parseInt(request.getParameter("mode")) == 1) {
 				session.setAttribute(request.getParameter("setVar"), session.getAttribute(request.getParameter("getVar")));
 			}else {
+			//Mode 2 --> Cambiar la variable de sessio setVar per una de request.
 				session.setAttribute(request.getParameter("setVar"), request.getParameter("getVar"));
 			}
 		}
