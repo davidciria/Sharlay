@@ -74,8 +74,18 @@ $(document).ready(function(){
 		var formParams = $(this).serializeArray();
 		var currentPwd = formParams[0].value;
 		var newPwd = formParams[1].value;
-		$('#dtweets').load("ChangePwd",{uid: "${uid}", currentPwd: currentPwd, newPwd: newPwd}, function(data){
-			$("#duser").load( "GetUserInfo", { uid:  uid } ,function() {});
+		$.post("ChangePwd",{uid: "${uid}", currentPwd: currentPwd, newPwd: newPwd}, function(data){
+			
+			 if(data.trim() == "success"){
+	    		   $("#passwordUpdatedStatus").removeClass("w3-text-red").addClass("w3-text-green");
+	    		   $("#passwordUpdatedStatus").text("Password updated successfully");
+	    	   }
+	    	   else{
+	    		   $("#passwordUpdatedStatus").removeClass("w3-text-green").addClass("w3-text-red");
+	    		   $("#passwordUpdatedStatus").text(data);
+	    	   }
+	    	   
+	    	   $("#passwordUpdatedStatus").show();
 		});
 	});
 	
@@ -189,8 +199,12 @@ $(document).ready(function(){
 	<p>
 	<label class="imp-text"><b> New Password </b></label>
 	<input class="w3-input w3-border form-bg w3-text" type="password" id="pwd1" name="newpwd" placeholder="New Password" value="${newpwd}" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"></p>
+	<div>
 	<p>
-    <input class="editinput w3-button w3-round-medium w3-theme" type="submit" name="submit" value="Update"></p>
+    <input class="editinput w3-button w3-round-medium w3-theme" type="submit" name="submit" value="Update">
+    <span class="w3-text-green" style="display:none;" id="passwordUpdatedStatus"></span>
+    </p>
+    </div>
 </form>
 
 <!-- Edit profile image form -->
