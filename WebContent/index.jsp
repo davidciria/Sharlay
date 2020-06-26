@@ -120,7 +120,9 @@ $(document).ready(function(){
 				icon.removeClass("dlT").addClass("lT");
 				icon.removeClass("w3-theme").addClass("w3-theme-l5");
 				var preNum = parseInt(numLikes.text());
-				numLikes.html("<b>" + (preNum - 1) + "</b>");
+				if(preNum > 0){
+					numLikes.html("<b>" + (preNum - 1) + "</b>");	
+				}
 			}
 		}).fail(function(response, status) {
 			console.log("Some problem trying to dislike tweet.");
@@ -152,12 +154,15 @@ $(document).ready(function(){
 		//event.stopImmediatePropagation();
 		var tweet = $(this).parent();
 		var icon = $(this);
+		var numRTs = $(this).next();
 		$.post( "UnRetweetTweet", { tweetid: $(this).parent().attr("id") } , function(data, status) {
 			if(status == "success"){
 				icon.removeClass("dlT").addClass("lT");
 				icon.removeClass("w3-theme").addClass("w3-theme-l5");
 				var preNum = parseInt(numRTs.text());
-				numRTs.html("<b>" + (numRTs - 1) + "</b>");
+				if(preNum > 0){
+					numRTs.html("<b>" + (numRTs - 1) + "</b>");
+				}
 			}
 		}).fail(function(response, status) {
 			console.log("Some problem trying to unretweet the tweet.");

@@ -42,12 +42,12 @@
 	   <div class="splitscreen">
 		    <div class="left">
 		        <p id="followingtxt" class="vF w3-center imp-text" style="text-decoration:none" onmouseover="style='text-decoration:underline; cursor:pointer'" onmouseout="style='text-decoration:none'"><b>Following</b> </p>
-		        <p id="followingnum" class="w3-center" style="margin-top: -5px;"> ${user.following} </p>
+		        <p id="followingnum" class="w3-center" style="margin-top: -5px;"><b>${user.following}</b></p>
 		    </div>
 		        <div class="center line-in-middle"></div>
 		    <div class="right">
 		      	<p id="followerstxt" class="vS w3-center imp-text" style="text-decoration:none" onmouseover="style='text-decoration:underline; cursor:pointer'" onmouseout="style='text-decoration:none'"><b>Followers</b> </p>
-		      	<p id="followersnum" class="w3-center" style="margin-top: -5px;"> ${user.followers} </p>
+		      	<p id="followersnum" class="w3-center" style="margin-top: -5px;"><b>${user.followers}</b></p>
 		    </div>
 		</div>
 	  </div>
@@ -76,12 +76,12 @@
 	   <div class="splitscreen">
 		    <div class="left">
 		        <p id="followingtxt" class="vF w3-center imp-text" style="text-decoration:none" onmouseover="style='text-decoration:underline; cursor:pointer'" onmouseout="style='text-decoration:none'"><b>Following</b> </p>
-		        <p id="followingnum" class="w3-center" style="margin-top: -5px;"> ${viewuser.following} </p>
+		        <p id="followingnum" class="w3-center" style="margin-top: -5px;"><b>${viewuser.following}</b></p>
 		    </div>
 		        <div class="center line-in-middle"></div>
 		    <div class="right">
 		      	<p id="followerstxt" class="vS w3-center imp-text" style="text-decoration:none" onmouseover="style='text-decoration:underline; cursor:pointer'" onmouseout="style='text-decoration:none'"><b>Followers</b> </p>
-		      	<p id="followersnum" class="w3-center" style="margin-top: -5px;"> ${viewuser.followers} </p>
+		      	<p id="followersnum" class="w3-center" style="margin-top: -5px;"><b>${viewuser.followers}</b></p>
 		    </div>
 		</div>
 	  </div>
