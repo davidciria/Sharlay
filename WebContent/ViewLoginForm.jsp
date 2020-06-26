@@ -35,39 +35,45 @@ $(document).ready(function(){
 			    });
 	});
      </script>
-	<li class="w3-center w3-green"> User has been registered correctly, please verify your email before login </li>
+	<div class="w3-center  w3-text-green"> User has been registered correctly, please verify your email before login </div>
 </c:if>
 </ul>
 
-<ul class="w3-center w3-green">
+<div class="w3-center w3-text-green">
 <c:if test = "${verified == 1}">
-	<li> User has been verified correctly, now you can log in </li>
+	 User has been verified correctly, now you can log in <br>
 </c:if>
+<c:if test = "${verified == 3}">
+	User already verified <br>
+</c:if>
+</div>
+<div class="w3-center w3-text-red">
 <c:if test = "${verified == 2}">
-	<li> There has been a problem verifiying user, please try again later </li>
+	There has been a problem verifiying user, please try again later <br>
 </c:if>
-</ul>
+</div>
 
-<ul class="server-errors-list w3-center">
+
+<div class="server-errors-list w3-center">
 <c:if test = "${login.error[0]}">
-	<li> Mail format is not correct </li>
+	Mail format is not correct <br>
 </c:if>
 <c:if test = "${login.error[1]}">
-	<li> Password format is not correct </li>
+	 Password format is not correct <br> 
 </c:if>
 <c:if test = "${db_error == 1}">
-	<li> Password is not correct </li>
+	 Password is not correct <br>
 </c:if>
 <c:if test = "${db_error == 2}">
-	<li> User is not registered </li>
+	 User is not registered  <br>
 </c:if>
 <c:if test = "${db_error == 3}">
-	<li> Cannot reach the server </li>
+	 Cannot reach the server <br>
 </c:if>
 <c:if test = "${db_error == 4}">
-	<li> You have to verify your email </li>
+	 You have to verify your email <br>
 </c:if>
-</ul>
+</div>
 <div class="w3-row">
   	<div class="w3-container w3-quarter">
 	</div> 
