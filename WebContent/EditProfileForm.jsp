@@ -37,16 +37,14 @@ window.Parsley.addValidator("minAge", {
 <script>
 $(document).ready(function(){
 	
-	  $(".editinput").keyup(function(){
-		  var instance = $(".editinput").parsley();
-		  for(var i = 0; i < instance.length - 1; i++){
-			if($(".editinput").eq(i).val() == ""){
-				$(".editinput").eq(i).attr("class", "w3-input w3-border form-bg w3-text");
+	 $(".editinput").keyup(function(){
+		  var instance = $(this).parsley();
+			if($(this).val() == ""){
+				$(this).attr("class", "w3-input w3-border form-bg w3-text");
 			}else{
-				if(instance[i].isValid()) $(".editinput").eq(i).attr("class", "w3-input w3-border w3-border-green w3-hover-border-green form-bg w3-text");
-				else $(".editinput").eq(i).attr("class", "w3-input w3-border w3-border-red form-bg w3-text");
+				if(instance.isValid()) $(this).attr("class", "w3-input w3-border w3-border-green w3-hover-border-green form-bg w3-text");
+				else $(this).attr("class", "w3-input w3-border w3-border-red form-bg w3-text");
 			}
-		  }
 	  });
 	  
 	$(".editForm").submit( function(event) {
@@ -194,7 +192,7 @@ $(document).ready(function(){
     <p>
     <p>
 	<label class="imp-text"><b> Birthday </b></label>
-	<input class="w3-input w3-border form-bg w3-text" type="date" id="birth" name="birth" value="${birth}" required data-parsley-min-age="16"></p>
+	<input class="editinput w3-input w3-border form-bg w3-text" type="date" id="birth" name="birth" value="${birth}" required data-parsley-min-age="16"></p>
     <input class="editinput w3-button w3-round-medium w3-theme" type="submit" name="submit" value="Update"></p>
 </form>
 
@@ -204,10 +202,10 @@ $(document).ready(function(){
 <form id="${uid}" data-parsley-validate action="#" method="POST" class="editPwdForm">
 	<p>
 	<label class="imp-text"><b> Current Password </b></label>
-	<input class="w3-input w3-border form-bg w3-text" type="password" id="pwd1" name="currentpwd" placeholder="Current Password" value="${currentpwd}" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"></p>
+	<input class="editinput w3-input w3-border form-bg w3-text" type="password" id="pwd1" name="currentpwd" placeholder="Current Password" value="${currentpwd}" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"></p>
 	<p>
 	<label class="imp-text"><b> New Password </b></label>
-	<input class="w3-input w3-border form-bg w3-text" type="password" id="pwd1" name="newpwd" placeholder="New Password" value="${newpwd}" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"></p>
+	<input class="editinput w3-input w3-border form-bg w3-text" type="password" id="pwd1" name="newpwd" placeholder="New Password" value="${newpwd}" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"></p>
 	<div>
 	<p>
     <input class="editinput w3-button w3-round-medium w3-theme" type="submit" name="submit" value="Update">

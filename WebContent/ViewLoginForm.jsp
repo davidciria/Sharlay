@@ -8,16 +8,14 @@
 <script>
 $(document).ready(function(){
 	
-	  $("input").keyup(function(){
-		  var instance = $("input").parsley();
-		  for(var i = 0; i < instance.length - 1; i++){
-			if($("input").eq(i).val() == ""){
-				$("input").eq(i).attr("class", "w3-input w3-border form-bg w3-text");
+	 $(".editinput").keyup(function(){
+		  var instance = $(this).parsley();
+			if($(this).val() == ""){
+				$(this).attr("class", "w3-input w3-border form-bg w3-text");
 			}else{
-				if(instance[i].isValid()) $("input").eq(i).attr("class", "w3-input w3-border w3-border-green w3-hover-border-green form-bg w3-text");
-				else $("input").eq(i).attr("class", "w3-input w3-border w3-border-red form-bg w3-text");
+				if(instance.isValid()) $(this).attr("class", "w3-input w3-border w3-border-green w3-hover-border-green form-bg w3-text");
+				else $(this).attr("class", "w3-input w3-border w3-border-red form-bg w3-text");
 			}
-		  }
 	  });
 	  
 	});
@@ -77,11 +75,11 @@ $(document).ready(function(){
 		<form action="LoginController" method="POST">
 			<p>      
 		    <label class="imp-text"><b> Email </b></label>
-		    <input class="w3-input w3-border form-bg w3-text" type="email" name="mail" placeholder="Email" value="${login.mail}" required></p>
+		    <input class="editinput w3-input w3-border form-bg w3-text" type="email" name="mail" placeholder="Email" value="${login.mail}" required></p>
 		    <p>
 		    <p>      
 		    <label class="imp-text"><b> Password </b></label>
-		    <input class="w3-input w3-border form-bg w3-text" type="password" name="pwd" placeholder="Password" value="${login.pwd}" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"></p>
+		    <input class="editinput w3-input w3-border form-bg w3-text" type="password" name="pwd" placeholder="Password" value="${login.pwd}" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"></p>
 		    <p>
 		    <input class="w3-button w3-theme w3-round-medium" type="submit" name="sumbit" value="Submit"></p>
 		</form>
