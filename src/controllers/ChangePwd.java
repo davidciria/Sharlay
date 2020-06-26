@@ -12,6 +12,9 @@ import utils.PwdHashGenerator;
 
 /**
  * Servlet implementation class ChangePwd
+ * 
+ * Servlet per canviar el password dun usuari.
+ * 
  */
 @WebServlet("/ChangePwd")
 public class ChangePwd extends HttpServlet {
@@ -29,8 +32,6 @@ public class ChangePwd extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 		String currentPwd = request.getParameter("currentPwd");
 		
@@ -50,6 +51,7 @@ public class ChangePwd extends HttpServlet {
 		}
 		
 		if(currentPwd == newPwd) {
+			//El usuari ha escollit el mateix password.
 			response.getWriter().append("Please, choose different password");
 		}else {
 			/* Generar salt i password+salt hashejats */
@@ -57,14 +59,17 @@ public class ChangePwd extends HttpServlet {
 			String base64pwd = user.getHashedPassword(); 
 			Boolean currentPwdOK = PwdHashGenerator.checkPassword(currentPwd, base64pwd, base64salt);
 			
+			//El password es correcte.
 			if(currentPwdOK) {
 				userManager.editUserPassword(uid, newPwd);
 				response.getWriter().append("success");
 			}else {
+			//El password es incorrecte.
 				response.getWriter().append("Current password is wrong");
 			}
-			
 		}
+		
+		userManager.finalize();
 	}
 
 	/**

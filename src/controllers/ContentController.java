@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Servlet implementation class ContentController
+ * 
+ * Cambia el contingut de la web.
+ * 
  */
 @WebServlet("/ContentController")
 public class ContentController extends HttpServlet {

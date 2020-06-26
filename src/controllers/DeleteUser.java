@@ -15,6 +15,9 @@ import models.User;
 
 /**
  * Servlet implementation class DeleteUser
+ * 
+ * Eliminar un usuari de la base de dades.
+ * 
  */
 @WebServlet("/DeleteUser")
 public class DeleteUser extends HttpServlet {

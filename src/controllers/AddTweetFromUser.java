@@ -16,6 +16,9 @@ import models.Tweet;
 
 /**
  * Servlet implementation class AddTweetFromUser
+ * 
+ * Afegir un tweet a la base de dades
+ * 
  */
 @WebServlet("/AddTweetFromUser")
 public class AddTweetFromUser extends HttpServlet {
