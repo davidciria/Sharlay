@@ -37,57 +37,59 @@ public class ViewUser extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String viewusername = null;
-		
-		viewusername = request.getParameter("viewusername").replace(" ", "");
-		
-		HttpSession session = request.getSession(false);
-		User user;
-		String cview = "";
-		ManageUser userManager = new ManageUser();
-		
-		if(session != null) {
-			//Usuari loggejat.
-			user = (User)session.getAttribute("user");
-			//Volem veure el perfil de lusuari loggejat.
-			if(viewusername.equals(user.getUsername())) {
-				session.setAttribute("viewuser", user);
-				cview = "ViewLoginDone.jsp";
-			}else {
-			//Volem veure el perfil dun altre usuari (no es el loggejat).
-				User viewuser = null;
-				Boolean isFollowed = null;
+		viewusername = request.getParameter("viewusername");
+		if(viewusername != null) {
+			viewusername = viewusername.replace(" ", "");
+			
+			HttpSession session = request.getSession(false);
+			User user;
+			String cview = "";
+			ManageUser userManager = new ManageUser();
+			
+			if(session != null) {
+				//Usuari loggejat.
+				user = (User)session.getAttribute("user");
+				//Volem veure el perfil de lusuari loggejat.
+				if(viewusername.equals(user.getUsername())) {
+					session.setAttribute("viewuser", user);
+					cview = "ViewLoginDone.jsp";
+				}else {
+				//Volem veure el perfil dun altre usuari (no es el loggejat).
+					User viewuser = null;
+					Boolean isFollowed = null;
+					try {
+						viewuser = userManager.getUser(viewusername);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					try {
+						isFollowed = userManager.userIsFollowed(user.getUid(), viewuser.getUid());
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					session.setAttribute("viewuser", viewuser);
+					session.setAttribute("isFollowed", isFollowed);
+					cview = "ProfileUserView.jsp";
+				}
+	
+			} else {
+				//Usuari anonymous.
 				try {
-					viewuser = userManager.getUser(viewusername);
+					request.setAttribute("viewuser", userManager.getUser(viewusername));
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				try {
-					isFollowed = userManager.userIsFollowed(user.getUid(), viewuser.getUid());
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				session.setAttribute("viewuser", viewuser);
-				session.setAttribute("isFollowed", isFollowed);
-				cview = "ProfileUserView.jsp";
+				cview = "ProfileUserViewFromAnonymouse.jsp";
 			}
-
-		} else {
-			//Usuari anonymous.
-			try {
-				request.setAttribute("viewuser", userManager.getUser(viewusername));
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			cview = "ProfileUserViewFromAnonymouse.jsp";
+			
+			userManager.finalize();
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher(cview);
+			dispatcher.forward(request, response);
 		}
-		
-		userManager.finalize();
-		
-		RequestDispatcher dispatcher = request.getRequestDispatcher(cview);
-		dispatcher.forward(request, response);
 	}
 
 	/**
