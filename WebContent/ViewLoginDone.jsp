@@ -2,7 +2,7 @@
 
 <script>
 start = 0;
-nt = 4;
+nt = 8;
 var cview = "${defaultDtweets}";
 var uid = "${user.uid}";
 	

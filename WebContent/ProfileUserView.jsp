@@ -4,7 +4,7 @@
 <script>
 
 start = 0;
-nt = 4;
+nt = 8;
 cview = "GetTweetsFromUser";
 uid = "${viewuser.uid}"; //uid of view user.
 	
@@ -36,7 +36,7 @@ $('#navigation').load('MenuController', function(){
 		$.post("changeSessionVar", {setVar: "viewuser", getVar:"user", mode: 1}, function(data){
 			$.post("changeSessionVar", {setVar: "defaultDtweets", getVar: "GetTweetsFromUser", mode: 2}, function(data){
 				start=0;
-				nt=4;
+				nt=8;
 				$("#content").load( "ViewLoginDone.jsp");
 			});
 		});
@@ -48,7 +48,7 @@ $('#navigation').load('MenuController', function(){
 		$.post("changeSessionVar", {setVar: "viewuser", getVar:"user", mode: 1}, function(data){
 			$.post("changeSessionVar", {setVar: "defaultDtweets", getVar: "GetAllTweets", mode: 2}, function(data){
 				start=0;
-				nt=4;
+				nt=8;
 				$("#content").load( "ViewLoginDone.jsp");
 			});
 		});
@@ -60,7 +60,7 @@ $('#navigation').load('MenuController', function(){
 		$.post("changeSessionVar", {setVar: "viewuser", getVar:"user", mode: 1}, function(data){
 			$.post("changeSessionVar", {setVar: "defaultDtweets", getVar: "GetAllTweetsFollowing", mode: 2}, function(data){
 				start=0;
-				nt=4;
+				nt=8;
 				$("#content").load( "ViewLoginDone.jsp");
 			});
 		});

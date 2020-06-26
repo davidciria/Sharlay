@@ -23,7 +23,7 @@
 <script type="text/javascript">
 
 var start = 0;
-var nt = 4;
+var nt = 8;
 var cview;
 var uid;
 
@@ -253,7 +253,7 @@ $(document).ready(function(){
 		$.post("changeSessionVar", {setVar: "defaultDtweets", getVar: "GetTweetsFromUser", mode: 2}, function(data){
 			$("#content").load( "ViewUser", { viewusername: viewusername } , function(data) {
 				start = 0;
-				nt=4;
+				nt=8;
 				cview = "ViewUser";
 			});
 		});
