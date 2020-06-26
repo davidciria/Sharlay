@@ -138,7 +138,7 @@ $(document).ready(function(){
 		var numRTs = $(this).next();
 		$.post( "RetweetTweet", { tweetid: $(this).parent().attr("id") } , function(data, status) {
 			if(status == "success"){
-				icon.removeClass("lT").addClass("dlT");
+				icon.removeClass("rT").addClass("urT");
 				icon.removeClass("w3-theme-l5").addClass("w3-theme");
 				var preNum = parseInt(numRTs.text());
 				numRTs.html("<b>" + (preNum + 1) + "</b>");
@@ -158,7 +158,7 @@ $(document).ready(function(){
 		console.log(numRTs);
 		$.post( "UnRetweetTweet", { tweetid: $(this).parent().attr("id") } , function(data, status) {
 			if(status == "success"){
-				icon.removeClass("dlT").addClass("lT");
+				icon.removeClass("urT").addClass("rT");
 				icon.removeClass("w3-theme").addClass("w3-theme-l5");
 				var preNum = parseInt(numRTs.text());
 				if(preNum > 0){
