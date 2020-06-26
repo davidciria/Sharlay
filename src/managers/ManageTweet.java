@@ -695,7 +695,8 @@ public class ManageTweet {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+		//Avoid retweets in general view.
+		/*
 		query = "SELECT r.uid AS ruid, t.uid, r.createdAt, t.tweetid, t.text, t.likes, t.retweets, t.comments, t.parentTweet FROM Retweets r JOIN Tweets t ON r.tweetid=t.tweetid";
 
 		statement = null;
@@ -708,7 +709,7 @@ public class ManageTweet {
 			while (rs.next()) {
 		      Tweet tweet = new Tweet();
 		      
-		      /*Omplim les dades del tweet*/
+		      //Omplim les dades del tweet
 		      tweet.setUid(rs.getInt("uid"));
 		      tweet.setTweetid(rs.getInt("tweetid"));
 		      tweet.setText(rs.getString("text"));
@@ -726,7 +727,7 @@ public class ManageTweet {
 		      tweet.setUsername(usertweet.getUsername());
 		      tweet.setRetweetedBy(userretweet.getUsername());
 		      
-		      /*Afegim el tweet a la llista de tweets*/
+		      //Afegim el tweet a la llista de tweets
 		      tweets.add(tweet);
 			}
 			
@@ -735,6 +736,7 @@ public class ManageTweet {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		 */
 		
 		manager.finalize();
 		
