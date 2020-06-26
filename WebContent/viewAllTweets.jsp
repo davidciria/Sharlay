@@ -6,7 +6,7 @@
 	 
 	 	<c:if test="${t.retweetedBy != \"\"}">
 	 		<div class="w3-container w3-text  w3-margin w3-animate-opacity">
-	 			<i class="fa fa-retweet"></i> Retweeted by ${t.retweetedBy}
+	 			<i class="fa fa-retweet"></i> Retweeted by <span class="uVw" style="text-decoration:none" onmouseover="style='text-decoration:underline; cursor:pointer'" onmouseout="style='text-decoration:none'">${t.retweetedBy}</span>
 	 		</div>
 	 	</c:if>
 		 
@@ -22,12 +22,14 @@
 		   <c:if test="${!t.isLiked}">
 		   <button type="button" class="lT w3-button w3-theme-l5 w3-margin-bottom w3-round-medium"><i class="fa fa-thumbs-up"></i> &nbsp;Like</button>
 		   </c:if>
+		   <span class="likes-rts"><b>${t.likes}</b></span>
 		   <c:if test="${t.isRetweeted}">
 		   <button type="button" class="urT w3-button w3-theme w3-margin-bottom w3-round-medium"><i class="fa fa-retweet"></i> &nbsp;Retweet</button>
 		   </c:if>
 		   <c:if test="${!t.isRetweeted}">
 		   <button type="button" class="rT w3-button w3-theme-l5 w3-margin-bottom w3-round-medium"><i class="fa fa-retweet"></i> &nbsp;Retweet</button>
 		   </c:if>
+		   <span class="likes-rts"><b>${t.retweets}</b></span>
 		   <c:if test="${t.uid == user.uid || user.isAdmin}">
 		   		<button type="button" class="dT w3-button w3-theme w3-margin-bottom w3-right w3-round-medium" style="margin-left: -5px"><i class="fa fa-trash"></i></button>
 		   	   	<button type="button" class="eT w3-button w3-theme w3-margin-bottom w3-right w3-round-medium"><i class="fa fa-pencil"></i></button>

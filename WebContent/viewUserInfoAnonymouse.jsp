@@ -34,7 +34,7 @@
    <h4 class="w3-center"> ${viewuser.firstname} ${viewuser.lastname}</h4>
    <p class="w3-center"><img src="ProfileImages/${viewuser.uid}.png" id="profileImage" class="w3-circle" style="height:106px;width:106px" alt="Avatar" onerror="javascript:this.src='ProfileImages/default.png'"></p>
    <hr>
-   <p id="name"><i class="fa fa-user fa-fw w3-margin-right imp-text"></i> ${viewuser.username} </p>
+   <p id="name" class="uVw" style="text-decoration:none" onmouseover="style='text-decoration:underline; cursor:pointer'" onmouseout="style='text-decoration:none'"><i class="fa fa-user fa-fw w3-margin-right imp-text"></i> ${viewuser.username} </p>
 	<p id="birthday"><i class="fa fa-birthday-cake fa-fw w3-margin-right imp-text"></i> ${viewuser.birth} </p>
    <hr>
    <div class="splitscreen">

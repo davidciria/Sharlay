@@ -42,6 +42,12 @@ textarea.parsley-error {
   opacity: 1;
   display:inline-block;
 }
+.likes-rts{
+	position: relative;
+	top: -5px; 
+	margin-left: 5px; 
+	margin-right: 10px;
+}
 .global-bg{
 	background-color: #464646;
 }

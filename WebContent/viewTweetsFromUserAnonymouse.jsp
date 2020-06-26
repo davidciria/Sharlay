@@ -9,6 +9,8 @@
 	   <hr class="w3-clear" style="margin-top: -5px">
 	   <p id="tweetText"> ${t.text} </p>
 	   <button type="button" class="w3-button w3-theme-l5 w3-margin-bottom w3-round-medium"><i class="fa fa-thumbs-up"></i> &nbsp;Like</button>
+	   <span class="likes-rts"><b>${t.likes}</b></span>
 	   <button type="button" class="w3-button w3-theme-l5 w3-margin-bottom w3-round-medium"><i class="fa fa-retweet"></i> &nbsp;Retweet</button>
+	   <span class="likes-rts"><b>${t.retweets}</b></span>
 	   </div>
 	</c:forEach>

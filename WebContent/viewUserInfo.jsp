@@ -30,13 +30,13 @@
 
 <c:if test="${viewuser.uid == user.uid}">
 	<div class="w3-card w3-round w3-text" id="${user.uid}">
-	  <div class="w3-container">
+	  <div class="w3-container" id="${user.uid}">
 	   <h4 class="w3-center"> ${user.firstname} ${user.lastname}
 	   	<button type="button" class="eP w3-button w3-tiny w3-padding-small w3-theme w3-round-xxlarge" style="margin-top: -5px"><i class="fa fa-pencil"></i></button> 
 	   </h4>
 	   <p class="w3-center"><img src="ProfileImages/${user.uid}.png" id="profileImage" class="w3-circle" style="height:106px;width:106px" alt="Avatar" onerror="javascript:this.src='ProfileImages/default.png'"></p>
 	   <hr>
-	   <p id="name"><i class="fa fa-user fa-fw w3-margin-right imp-text"></i> ${user.username} </p>
+	   <p id="name" class="uVw" style="text-decoration:none" onmouseover="style='text-decoration:underline; cursor:pointer'" onmouseout="style='text-decoration:none'"><i class="fa fa-user fa-fw w3-margin-right imp-text"></i> ${user.username} </p>
 	   <p id="birthday"><i class="fa fa-birthday-cake fa-fw w3-margin-right imp-text"></i> ${user.birth} </p>
 	   <hr>
 	   <div class="splitscreen">
@@ -70,7 +70,7 @@
 	   <c:if test="${isFollowed}">
 	   	<button type="button" class="uU w3-button w3-red w3-margin-bottom w3-round-medium"><i class="fa fa-minus-circle"></i>&nbsp;Unfollow</button>
 	   </c:if>
-	   <p id="name"><i class="fa fa-user fa-fw w3-margin-right imp-text"></i> ${viewuser.username} </p>
+	   <p id="name" class="uVw" style="text-decoration:none" onmouseover="style='text-decoration:underline; cursor:pointer'" onmouseout="style='text-decoration:none'"><i class="fa fa-user fa-fw w3-margin-right imp-text"></i> ${viewuser.username} </p>
 		<p id="birthday"><i class="fa fa-birthday-cake fa-fw w3-margin-right imp-text"></i> ${viewuser.birth} </p>
 	   <hr>
 	   <div class="splitscreen">
