@@ -247,9 +247,11 @@ $(document).ready(function(){
 		
 		console.log(uid);
 		//event.stopImmediatePropagation();
-		$("#dtweets").load( "EditProfileForm", { uid: uid } , function(data) {
-			start = nt;
-			cview = "EditProfileForm";
+		$.post("changeSessionVar", {setVar: "defaultDtweets", getVar: "GetTweetsFromUser", mode: 2}, function(data){
+			$("#dtweets").load( "EditProfileForm", { uid: uid } , function(data) {
+				start = nt;
+				cview = "EditProfileForm";
+			});
 		});
 	});
 	

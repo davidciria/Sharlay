@@ -169,6 +169,10 @@ $(document).ready(function(){
     <input class="editinput w3-button w3-round-medium w3-theme" type="submit" name="submit" value="Update"></p>
 </form>
 
+<p>
+	<label class="imp-text"><b> Password </b></label>
+	<input class="w3-input w3-border form-bg w3-text" type="password" id="pwd1" name="pwd1" placeholder="Password" value="${model.pwd1}" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"></p>
+
 <form id="${uid}" class="uploadProfileImage" action = "UploadProfileImage" method = "post" enctype = "multipart/form-data">
      <label class="imp-text"><b> Profile Image </b></label>
      <br /><br />
