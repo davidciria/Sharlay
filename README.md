@@ -1,5 +1,4 @@
-# Sharlay
-### Share and Play
+# Sharlay - Share and Play
 
 ## Universitat Pompeu Fabra (UPF) 2020 - Software Engineering of Web Applications
 
