@@ -33,7 +33,7 @@ public class ManageUser {
 		}
 	}
 
-	// Add new user
+	// Afegir un nou usuari.
 	public boolean addUser(User user, String pwd)
 			throws UnknownHostException {
 		/* Generar salt i password+salt hashejats */
@@ -71,6 +71,7 @@ public class ManageUser {
 		}
 	}
 
+	/*Comprovar el login dun usuari.*/
 	public int checkLogin(String mail, String pwd) {
 		String query = "SELECT hashedPassword,salt,regVerified FROM Users WHERE mail=?";
 		PreparedStatement statement = null;
@@ -104,7 +105,7 @@ public class ManageUser {
 	}
 	
 	
-	// Get users a given user is following
+	// Obtenir els usuaris que un usuari esta seguint.
 	public List<User> getUserFollows(Integer uid, Integer start, Integer end) {
 		String query = "SELECT Users.uid,Users.username FROM Follows JOIN Users ON Users.uid = Follows.uid2 WHERE Follows.uid1 = ? ORDER BY Users.username LIMIT ?,?;;";
 		PreparedStatement statement = null;
@@ -129,7 +130,7 @@ public class ManageUser {
 		return  l;
 	}
 	
-	// Get users a given user is following
+	// Obtenir els usuaris que segueixen a un usuari.
 		public List<User> getUserFollowers(Integer uid, Integer start, Integer end) {
 			String query = "SELECT Users.uid,Users.username FROM Follows JOIN Users ON Users.uid = Follows.uid1 WHERE Follows.uid2 = ? ORDER BY Users.username LIMIT ?,?;;";
 			PreparedStatement statement = null;
@@ -154,6 +155,7 @@ public class ManageUser {
 			return  l;
 		}
 
+	// Obtenir el uid dun usuari donat un mail.
 	public Integer getUserID(String mail) {
 		String query = "SELECT uid FROM Users WHERE mail=?";
 		PreparedStatement statement = null;
@@ -185,14 +187,11 @@ public class ManageUser {
 		return ((val != null) && (!val.equals("")));
 	}
 
-
-	// TODO: login and logout
-
-	
+	// Deixar de seguir a un usuari.
 	public boolean unfollow(Integer uid1, Integer uid2) throws Exception{
 		
 		String query1 = "DELETE FROM Follows WHERE uid1 = ? and uid2 = ?";
-		PreparedStatement statement1 = null; //eliminem follow a la taula de follows
+		PreparedStatement statement1 = null; //Eliminem follow a la taula de follows
 		int rows_deleted = 0;
 		
 		try {
@@ -244,7 +243,7 @@ public class ManageUser {
 		return true;
 	}
 	
-	
+	//Seguir a un usuari.
 	public boolean follow(Integer uid1, Integer uid2) throws Exception{
 		
 		/*Afegeix follow a la taula de follows*/
@@ -302,8 +301,15 @@ public class ManageUser {
 			statement.setInt(1, uidfollower);
 			statement.setInt(2, uid);
 			ResultSet rs = statement.executeQuery();
-			if(rs.next()) return true;
-			else return false;
+			
+			if(rs.next()) {
+				statement.close();
+				return true;
+			}
+			else {
+				statement.close();
+				return false;
+			}
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -311,6 +317,7 @@ public class ManageUser {
 		return false;
 	}
 	
+	//Otenir un usuari de la base de dades donat el uid.
 	public User getUser(Integer uid) throws Exception{
 		User user = new User();
 		
@@ -338,10 +345,12 @@ public class ManageUser {
 	      	user.setIsVerified(rs.getBoolean("isVerified"));
 	      	user.setIsAdmin(rs.getBoolean("isAdmin"));
 		}
-	
+		
+		statement.close();
 		return user;
 	}
 	
+	//Obtenir un usuari donat el username.
 	public User getUser(String username) throws Exception{
 		User user = new User();
 		
@@ -368,10 +377,13 @@ public class ManageUser {
 	      	user.setFollowing(rs.getInt("following"));
 	      	user.setIsVerified(rs.getBoolean("isVerified"));
 		}
+		
+		statement.close();
 	
 		return user;
 	}
 	
+	//Editar la informacio personal dun usuari.
 	public void editUser(Integer uid, String username, String firstname, String lastname, String birth) {
 		
 		if(hasValue(username)) {
@@ -383,7 +395,6 @@ public class ManageUser {
 				statement1.setInt(2, uid);
 				statement1.executeUpdate();
 				statement1.close();
-				
 			} catch (SQLException e) {
 				e.printStackTrace();
 				return;
@@ -400,7 +411,6 @@ public class ManageUser {
 				statement2.setInt(2, uid);
 				statement2.executeUpdate();
 				statement2.close();
-				
 			} catch (SQLException e) {
 				e.printStackTrace();
 				return;
@@ -417,7 +427,6 @@ public class ManageUser {
 				statement3.setInt(2, uid);
 				statement3.executeUpdate();
 				statement3.close();
-				
 			} catch (SQLException e) {
 				e.printStackTrace();
 				return;
@@ -435,7 +444,6 @@ public class ManageUser {
 				statement4.setInt(2, uid);
 				statement4.executeUpdate();
 				statement4.close();
-				
 			} catch (SQLException e) {
 				e.printStackTrace();
 				return;
@@ -444,6 +452,7 @@ public class ManageUser {
 		}
 	}
 	
+	//Editar el password dun usuari.
 	public void editUserPassword(Integer uid, String newPwd) {
 		
 		/* Generar salt i password+salt hashejats */
@@ -466,10 +475,11 @@ public class ManageUser {
 		}
 	}
 	
+	//Buscar usuaris.
 	public List<User> searchUsers(String searchWords) throws Exception{
 		List<User> users = new ArrayList<>();
 		String regex = ".*(?i)(" + searchWords + ").*";
-		
+		/*La cerca la realitzarem tant per username com per firstname i lastname*/
 		String query = "SELECT uid FROM Users WHERE username REGEXP ? OR firstname REGEXP ? OR lastname REGEXP ?";
 		
 		PreparedStatement statement = null; 
@@ -491,8 +501,9 @@ public class ManageUser {
 		return users;
 	}
 	
+	//Eliminar un usuari.
 	public void deleteUser(int uid) {
-		/*Delete tweets*/
+		/*Eliminar tweets*/
 		String query = "DELETE FROM Tweets WHERE uid=?;";
 		
 		PreparedStatement statement = null; 
@@ -506,7 +517,7 @@ public class ManageUser {
 			e.printStackTrace();
 		}
 		
-		/*Delete follows*/
+		/*Eliminar follows*/
 		query = "DELETE FROM Follows WHERE uid1=? OR uid2=?;";
 		statement = null; 
 		
@@ -520,7 +531,7 @@ public class ManageUser {
 			e.printStackTrace();
 		}
 		
-		/*Delete likes*/
+		/*Eliminar likes*/
 		query = "DELETE FROM Likes WHERE uid=?;";
 		statement = null; 
 		
@@ -533,7 +544,7 @@ public class ManageUser {
 			e.printStackTrace();
 		}
 		
-		/*Delete user*/
+		/*Eliminar usuari*/
 		query = "DELETE FROM Users WHERE uid=?;";
 		statement = null; 
 		
@@ -546,8 +557,6 @@ public class ManageUser {
 			e.printStackTrace();
 		}
 	}
-	
-	//TODO: hasPermission returns isAdmin related to extended class admin
 	
 	
 }
