@@ -37,9 +37,23 @@ En primer lloc crearem un nou usuari anomenat mysql amb el password prac:
 `CREATE USER 'mysql'@'localhost' IDENTIFIED BY 'prac'; ` <br>
 `GRANT ALL PRIVILEGES ON *.* TO 'mysql'@'localhost'; `
 
-Tot seguit, obrirem el script Lab4_SQLDUMP.sql realitzarem una execució completa.
+Tot seguit, obrirem el script Lab4_SQLDUMP.sql i realitzarem una execució completa.
 
+## Context de les fotografies de perfil
 
+Sharlay permet pujar una foto de perfil en format .png. Per que aquesta funcionalitat funcioni correctament cal configurar el context on es troben les imatges.
+
+Per configurar el context ens dirigirem al fitxer server.xml.
+
+! [Imatge ajuda] (tutorial_context.png)
+
+Dins del fitxer afegirem la següent linia dins l'etiqueta `<Host>` especificant la ruta local de la carpeta ProfileImages del nostre projecte.
+
+`<Context docBase="ruta_a_la_carpeta_ProfileImages" path="/Sharlay/ProfileImages" />`
+
+Exemple: `<Context docBase="C:\Users\david\eclipse-workspace\Sharlay\WebContent\ProfileImages" path="/Sharlay/ProfileImages" />`
+
+! [Imatge ajuda] (tutorial_context2.png)
 
 
 
