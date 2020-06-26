@@ -222,7 +222,7 @@ $(document).ready(function(){
 		//event.stopImmediatePropagation();
 		console.log("button unfollow");
 		var unfollowButton = $(this);
-		var user = $(this).parent().parent();
+		var user = $(this).parent();
 		$.post( "UnfollowUser", { uid: user.attr("id") } , function(data) {
 			user.remove();
 			$("#duser").load( "GetUserInfo", { uid:  user.attr("id") } ,function() {});
@@ -246,7 +246,6 @@ $(document).ready(function(){
 	$("body").on("click", ".uVw", function(event){
 		event.preventDefault();
 		//event.stopImmediatePropagation();
-		console.log("clicking");
 		console.log($(this).text());
 		$("#content").load( "ViewUser", { viewusername: $(this).text() } , function(data) {
 			start = 0;

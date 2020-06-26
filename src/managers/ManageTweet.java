@@ -79,7 +79,7 @@ public class ManageTweet {
 	}
 	
 	//Aquesta funcio s'ha de revisar !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	public List<Tweet> getTweets(Integer tweetid) throws Exception {
+	public List<Tweet> getTweet(Integer tweetid) throws Exception {
 
 		List<Tweet> tweets = new ArrayList<Tweet>();
 	
@@ -107,6 +107,7 @@ public class ManageTweet {
 		return tweets;
 	}
 	
+	/*
 	// Get tweets from a user given start and end
 	public List<Tweet> getUserTweets(Integer uid,Integer start, Integer end) throws Exception {
 		String query = "SELECT Tweets.tweetid,Tweets.uid,Tweets.createdAt,Tweets.text FROM Tweets WHERE Tweets.uid = ? ORDER BY Tweets.createdAt DESC LIMIT ?,? ;";
@@ -141,6 +142,7 @@ public class ManageTweet {
 		} 
 		return  l;
 	}
+	*/
 	
 	// Get tweets from a user given start and end
 		public List<Tweet> getUserTweetsAnonymouse(Integer uid,Integer start, Integer end) throws Exception {
@@ -178,7 +180,10 @@ public class ManageTweet {
 			Collections.sort(l, new SortTweetsByTime()); //Sort tweets array.
 			
 			if(start + end >= l.size()) {
-				return l.subList(start, l.size());
+				if(start == l.size() - 1) return l.subList(l.size() - 1, l.size());
+				else if(start < l.size() - 1) return l.subList(start, l.size());
+				else return Collections.emptyList();
+				
 			}else {
 				return l.subList(start, start + end);
 			}
@@ -593,7 +598,7 @@ public class ManageTweet {
 		return false;
 	}
 	
-
+	/*
 	public List<Tweet> getAllTweets(int uid) throws Exception {
 
 		List<Tweet> tweets = new ArrayList<Tweet>();
@@ -609,7 +614,7 @@ public class ManageTweet {
 			while (rs.next()) {
 		      Tweet tweet = new Tweet();
 		      
-		      /*Omplim les dades del tweet*/
+		      //Omplim les dades del tweet
 		      tweet.setUid(rs.getInt("uid"));
 		      tweet.setTweetid(rs.getInt("tweetid"));
 		      tweet.setText(rs.getString("text"));
@@ -628,7 +633,7 @@ public class ManageTweet {
 		      
 		      tweet.setUsername(usertweet.getUsername());
 		      
-		      /*Afegim el tweet a la llista de tweets*/
+		      //Afegim el tweet a la llista de tweets
 		      tweets.add(tweet);
 			}
 			
@@ -646,7 +651,7 @@ public class ManageTweet {
 			while (rs.next()) {
 		      Tweet tweet = new Tweet();
 		      
-		      /*Omplim les dades del tweet*/
+		      //Omplim les dades del tweet
 		      tweet.setUid(rs.getInt("ruid"));
 		      tweet.setTweetid(rs.getInt("tweetid"));
 		      tweet.setText(rs.getString("text"));
@@ -667,7 +672,7 @@ public class ManageTweet {
 		      tweet.setUsername(usertweet.getUsername());
 		      tweet.setRetweetedBy(userretweet.getUsername());
 		      
-		      /*Afegim el tweet a la llista de tweets*/
+		      //Afegim el tweet a la llista de tweets
 		      tweets.add(tweet);
 			}
 			
@@ -681,6 +686,8 @@ public class ManageTweet {
 		return tweets;
 		
 	}
+	
+	*/
 	
 	public List<Tweet> getAllTweetsAnonymouse(int start, int end) throws Exception {
 
@@ -868,7 +875,6 @@ public class ManageTweet {
 			return tweets.subList(start, start + end);
 		}
 		
-		
 	}
 	
 	
@@ -960,7 +966,10 @@ public class ManageTweet {
 		Collections.sort(tweets, new SortTweetsByTime()); //Sort tweets array.
 		
 		if(start + end >= tweets.size()) {
-			return tweets.subList(start, tweets.size());
+			if(start == tweets.size() - 1) return tweets.subList(tweets.size() - 1, tweets.size());
+			else if(start < tweets.size() - 1) return tweets.subList(start, tweets.size());
+			else return Collections.emptyList();
+			
 		}else {
 			return tweets.subList(start, start + end);
 		}
