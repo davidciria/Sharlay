@@ -44,10 +44,10 @@ Realitzarem un git clone del següent respositori al nostre workspace d'Eclipse:
 ### 2. Fitxer WAR
 
 Importarem el fitxer WAR a Eclipse. Els passos son els següents:
-1- Desde el menú accedir a: `File --> Import`
-2- Desplegar carpeta `Web` i seleccionar `WAR file`. Fer click a `Next`.
-3- Fer un browse del fitxer .war i assegurar-nos que esta seleccionat a l'apartat `Target runtime` el servidor `Apache Tomcat v9.0`.
-4- Fer click a `Finish`.
+1. Desde el menú accedir a: `File --> Import`
+2. Desplegar carpeta `Web` i seleccionar `WAR file`. Fer click a `Next`.
+3. Fer un browse del fitxer .war i assegurar-nos que esta seleccionat a l'apartat `Target runtime` el servidor `Apache Tomcat v9.0`.
+4. Fer click a `Finish`.
 
 ## SQL DUMP
 
