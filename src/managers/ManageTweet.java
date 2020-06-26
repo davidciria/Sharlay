@@ -640,7 +640,7 @@ public class ManageTweet {
 		manager.finalize();
 		
 		Collections.sort(tweets, new SortTweetsByTime()); //Sort tweets array.
-		System.out.println("tweets from" + start + "to" + end);
+		
 		if(start + end >= tweets.size()) {
 			if(start == tweets.size() - 1) return tweets.subList(tweets.size() - 1, tweets.size());
 			else if(start < tweets.size() - 1) return tweets.subList(start, tweets.size());

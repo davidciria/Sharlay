@@ -36,7 +36,11 @@ public class ViewUser extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String viewusername = request.getParameter("viewusername").replace(" ", "");
+		String viewusername = null;
+		
+		if(request.getParameter("viewusername") != null) {
+			viewusername = request.getParameter("viewusername").replace(" ", "");
+		}
 		
 		HttpSession session = request.getSession(false);
 		User user;
