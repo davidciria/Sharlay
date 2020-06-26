@@ -33,7 +33,6 @@ public class ViewUser extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		System.out.println("Hii from view user "+request.getParameter("viewusername"));
 		String viewusername = request.getParameter("viewusername").replace(" ", "");
 		
 		HttpSession session = request.getSession(false);
@@ -44,7 +43,6 @@ public class ViewUser extends HttpServlet {
 		if(session != null) {
 			user = (User)session.getAttribute("user");
 			if(viewusername.equals(user.getUsername())) {
-				System.out.println("Same user");
 				session.setAttribute("viewuser", user);
 				cview = "ViewLoginDone.jsp";
 			}else {
@@ -69,7 +67,7 @@ public class ViewUser extends HttpServlet {
 			}
 
 		} else {
-			System.out.println("session null");
+			
 			try {
 				request.setAttribute("viewuser", userManager.getUser(viewusername));
 			} catch (Exception e) {

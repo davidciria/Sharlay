@@ -30,7 +30,6 @@ public class SaveEditTweetFromUser extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String tweetText = request.getParameter("tweetText");
-		System.out.println(tweetText);
 		String tweetidStr = request.getParameter("tweetid");
 		Integer tweetid = Integer.parseInt(tweetidStr);
 		if(tweetText != "") {		

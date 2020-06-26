@@ -37,7 +37,6 @@ public class GetFollows extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		System.out.println("Hola mundo");
 		List<User> users = Collections.emptyList();
 		dTmodel dt = new dTmodel();
 		

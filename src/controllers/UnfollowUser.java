@@ -31,7 +31,6 @@ public class UnfollowUser extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		int uid = (int)session.getAttribute("uid");
-		System.out.println("To unfollow" + request.getParameter("uid"));
 		Integer userToUnfollow = Integer.parseInt(request.getParameter("uid"));
 		try {
 			ManageUser userManager = new ManageUser();

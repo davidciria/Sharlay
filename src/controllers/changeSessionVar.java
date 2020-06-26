@@ -35,7 +35,6 @@ public class changeSessionVar extends HttpServlet {
 			}else {
 				session.setAttribute(request.getParameter("setVar"), request.getParameter("getVar"));
 			}
-			System.out.print("Var setted correctly");
 		}
 	}
 

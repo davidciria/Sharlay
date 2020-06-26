@@ -31,7 +31,6 @@ public class FollowUser extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		int uid = (int)session.getAttribute("uid");
-		System.out.println("To follow" + request.getParameter("uid"));
 		Integer userToFollow = Integer.parseInt(request.getParameter("uid"));
 		try {
 			ManageUser userManager = new ManageUser();

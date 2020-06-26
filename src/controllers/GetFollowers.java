@@ -38,10 +38,8 @@ public class GetFollowers extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("Hola mundo");
 		List<User> users = Collections.emptyList();
 		dTmodel dt = new dTmodel();
-		System.out.println(request.getParameter("uid"));
 		int viewuid = Integer.parseInt(request.getParameter("uid"));
 		HttpSession session = request.getSession(false);
 		

@@ -32,13 +32,12 @@ public class LikeTweet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//System.out.println("like");
+		
 		HttpSession session = request.getSession(false);
 		int uid = (int)session.getAttribute("uid");
 		Tweet tweet = new Tweet();
 		try {
 			BeanUtils.populate(tweet, request.getParameterMap());
-			System.out.print(tweet.getTweetid());
 			ManageTweet tweetManager = new ManageTweet();
 			boolean result = false;
 			if(!tweetManager.tweetIsLiked(uid, tweet.getTweetid())) result = tweetManager.likeTweet(tweet.getTweetid(), uid);

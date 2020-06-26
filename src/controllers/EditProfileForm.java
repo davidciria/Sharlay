@@ -41,7 +41,6 @@ public class EditProfileForm extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		boolean isAdmin = ((User)session.getAttribute("user")).getIsAdmin();
 		boolean isLoggedUser = false;
-		System.out.println(birth);
 		if(((User)session.getAttribute("user")).getUid() == ((User)session.getAttribute("viewuser")).getUid()) {
 			isLoggedUser = true;
 		}
@@ -57,8 +56,6 @@ public class EditProfileForm extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		System.out.println(username+ " " +firstname + " " + lastname + " ");
 		
 		if((username != "" && username != null) || (firstname != "" && firstname != null)|| (lastname != "" && lastname != null) || (birth != "" && birth != null)) {
 			

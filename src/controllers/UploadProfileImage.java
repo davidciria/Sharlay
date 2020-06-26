@@ -40,7 +40,6 @@ public class UploadProfileImage extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		//Upload file.
-		System.out.print("Server uploading file");
 		processRequest(request,response);
 	    
 	}
@@ -61,7 +60,6 @@ public class UploadProfileImage extends HttpServlet {
 	    String path = "C://Users//angel//eclipse-workspace//Sharlay//WebContent//ProfileImages";
 		final Part filePart = request.getPart("file");
 	    String fileName = getFileName(filePart);
-	    System.out.print(fileName);
 	    String[] splittedFileName = fileName.split(Pattern.quote("."));
 	    
 	    String fileFormat = splittedFileName[splittedFileName.length - 1];

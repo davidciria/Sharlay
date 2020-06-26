@@ -69,7 +69,7 @@ public class GetUserInfo extends HttpServlet {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				System.out.println(viewuser.getUid());
+				
 				session.setAttribute("viewuser",newuser);
 				
 			}

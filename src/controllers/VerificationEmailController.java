@@ -86,7 +86,6 @@ public class VerificationEmailController extends HttpServlet {
 					statement.setString(1, email);
 					statement.executeUpdate();
 					statement.close();
-					System.out.println("User verified correctly");
 					return true;
 				}
 			}
