@@ -149,6 +149,7 @@ public class ManageTweet {
 			String query = "SELECT * FROM Tweets WHERE Tweets.uid = ?";
 			PreparedStatement statement = null;
 			List<Tweet> l = new ArrayList<Tweet>();
+			ManageUser manager = new ManageUser();
 			try {
 				statement = db.prepareStatement(query);
 				statement.setInt(1,uid);
@@ -164,10 +165,8 @@ public class ManageTweet {
 					tweet.setText(rs.getString("text"));
 					tweet.setIsLiked(tweetIsLiked(tweet.getUid(), tweet.getTweetid()));
 					tweet.setIsRetweeted(tweetIsRetweeted(tweet.getUid(), tweet.getTweetid()));
-					ManageUser manager = new ManageUser();
+				
 				    User usertweet = manager.getUser(tweet.getUid());
-				    
-				    manager.finalize();
 				      
 				    tweet.setUsername(usertweet.getUsername());
 					l.add(tweet);
@@ -195,11 +194,9 @@ public class ManageTweet {
 					tweet.setText(rs.getString("text"));
 					tweet.setIsLiked(tweetIsLiked(tweet.getUid(), tweet.getTweetid()));
 					tweet.setIsRetweeted(tweetIsRetweeted(tweet.getUid(), tweet.getTweetid()));
-					ManageUser manager = new ManageUser();
+
 				    User usertweet = manager.getUser(tweet.getUid());
 				    User retweetuser = manager.getUser(rs.getInt("ruid"));
-				    
-				    manager.finalize();
 				      
 				    tweet.setUsername(usertweet.getUsername());
 				    tweet.setRetweetedBy(retweetuser.getUsername());
@@ -210,6 +207,8 @@ public class ManageTweet {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} 
+			
+			 manager.finalize();
 			
 			Collections.sort(l, new SortTweetsByTime()); //Sort tweets array.
 			
@@ -229,6 +228,8 @@ public class ManageTweet {
 			String query = "SELECT * FROM Tweets WHERE Tweets.uid = ?;";
 			PreparedStatement statement = null;
 			List<Tweet> l = new ArrayList<Tweet>();
+			ManageUser manager = new ManageUser();
+			
 			try {
 				statement = db.prepareStatement(query);
 				statement.setInt(1,uid);
@@ -245,10 +246,7 @@ public class ManageTweet {
 					tweet.setParentTweet(rs.getInt("parentTweet"));
 					tweet.setIsLiked(tweetIsLiked(loggedUid, tweet.getTweetid()));
 					tweet.setIsRetweeted(tweetIsRetweeted(loggedUid, tweet.getTweetid())); //Change variable name
-					ManageUser manager = new ManageUser();
 				    User usertweet = manager.getUser(tweet.getUid());
-				    
-				    manager.finalize();
 				      
 				    tweet.setUsername(usertweet.getUsername());
 					l.add(tweet);
@@ -278,11 +276,9 @@ public class ManageTweet {
 					
 					tweet.setIsLiked(tweetIsLiked(loggedUid, tweet.getTweetid()));
 					tweet.setIsRetweeted(tweetIsRetweeted(loggedUid, tweet.getTweetid())); //Change variable name
-					ManageUser manager = new ManageUser();
+				
 				    User usertweet = manager.getUser(tweet.getUid());
 				    User retweetedusertweet = manager.getUser(rs.getInt("ruid"));
-				    
-				    manager.finalize();
 				      
 				    tweet.setUsername(usertweet.getUsername());
 				    tweet.setRetweetedBy(retweetedusertweet.getUsername());
@@ -293,6 +289,8 @@ public class ManageTweet {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} 
+			
+			manager.finalize();
 			
 			Collections.sort(l, new SortTweetsByTime()); //Sort tweets array.
 			
@@ -738,6 +736,7 @@ public class ManageTweet {
 	public List<Tweet> getAllTweetsAnonymouse(int start, int end) throws Exception {
 
 		List<Tweet> tweets = new ArrayList<Tweet>();
+		ManageUser manager = new ManageUser();
 		
 		String query = "SELECT * FROM Tweets ORDER BY createdAt DESC LIMIT ?,? ;";
 
@@ -763,10 +762,7 @@ public class ManageTweet {
 		      tweet.setIsLiked(false);
 		      tweet.setIsRetweeted(false);
 		      
-		      ManageUser manager = new ManageUser();
 		      User usertweet = manager.getUser(tweet.getUid());
-		      
-		      manager.finalize();
 		      
 		      tweet.setUsername(usertweet.getUsername());
 		      
@@ -803,11 +799,9 @@ public class ManageTweet {
 		      tweet.setIsLiked(false);
 		      tweet.setIsRetweeted(false);
 		      
-		      ManageUser manager = new ManageUser();
 		      User usertweet = manager.getUser(tweet.getUid());
 		      User userretweet = manager.getUser(rs.getInt("ruid"));
 		      
-		      manager.finalize();
 		      
 		      tweet.setUsername(usertweet.getUsername());
 		      tweet.setRetweetedBy(userretweet.getUsername());
@@ -820,6 +814,8 @@ public class ManageTweet {
 			e.printStackTrace();
 		}
 		
+		manager.finalize();
+		
 		Collections.sort(tweets, new SortTweetsByTime()); //Sort tweets array.
 		
 		return tweets;
@@ -829,6 +825,7 @@ public class ManageTweet {
 	public List<Tweet> getAllTweets(int uid,int start, int end) throws Exception {
 
 		List<Tweet> tweets = new ArrayList<Tweet>();
+		ManageUser manager = new ManageUser();
 		
 		String query = "SELECT * FROM Tweets ORDER BY createdAt";
 
@@ -854,11 +851,8 @@ public class ManageTweet {
 		      tweet.setIsLiked(this.tweetIsLiked(uid, tweet.getTweetid()));
 		      tweet.setIsRetweeted(this.tweetIsRetweeted(uid, tweet.getTweetid()));
 		      
-		      ManageUser manager = new ManageUser();
 		      User usertweet = manager.getUser(tweet.getUid());
-		      
-		      manager.finalize();
-		      
+		   
 		      tweet.setUsername(usertweet.getUsername());
 		      
 		      /*Afegim el tweet a la llista de tweets*/
@@ -893,12 +887,9 @@ public class ManageTweet {
 		      tweet.setIsLiked(this.tweetIsLiked(uid, tweet.getTweetid()));
 		      tweet.setIsRetweeted(this.tweetIsRetweeted(uid, tweet.getTweetid()));
 		      
-		      ManageUser manager = new ManageUser();
 		      User usertweet = manager.getUser(tweet.getUid());
 		      User userretweet = manager.getUser(rs.getInt("ruid"));
-		      
-		      manager.finalize();
-		      
+		   
 		      tweet.setUsername(usertweet.getUsername());
 		      tweet.setRetweetedBy(userretweet.getUsername());
 		      
@@ -909,6 +900,8 @@ public class ManageTweet {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		manager.finalize();
 		
 		Collections.sort(tweets, new SortTweetsByTime()); //Sort tweets array.
 		
@@ -927,6 +920,7 @@ public class ManageTweet {
 	public List<Tweet> getAllTweetsFollowing(int uid,int start, int end) throws Exception {
 
 		List<Tweet> tweets = new ArrayList<Tweet>();
+		ManageUser manager = new ManageUser(); 
 		
 		String query = "SELECT * FROM ((SELECT uid2 AS uid FROM Follows f WHERE f.uid1=?) UNION (SELECT ?)) AS fIDs INNER JOIN Tweets t ON t.uid=fIDs.uid";
 
@@ -952,10 +946,7 @@ public class ManageTweet {
 		      tweet.setIsLiked(this.tweetIsLiked(uid, tweet.getTweetid()));
 		      tweet.setIsRetweeted(this.tweetIsRetweeted(uid, tweet.getTweetid()));
 		      
-		      ManageUser manager = new ManageUser();
 		      User usertweet = manager.getUser(tweet.getUid());
-		      
-		      manager.finalize();
 		      
 		      tweet.setUsername(usertweet.getUsername());
 		      
@@ -991,11 +982,8 @@ public class ManageTweet {
 		      tweet.setIsLiked(this.tweetIsLiked(uid, tweet.getTweetid()));
 		      tweet.setIsRetweeted(this.tweetIsRetweeted(uid, tweet.getTweetid()));
 		      
-		      ManageUser manager = new ManageUser();
 		      User usertweet = manager.getUser(tweet.getUid());
 		      User userretweettweet = manager.getUser(rs.getInt("ruid"));
-		      
-		      manager.finalize();
 		      
 		      tweet.setUsername(usertweet.getUsername());
 		      tweet.setRetweetedBy(userretweettweet.getUsername());
@@ -1008,6 +996,7 @@ public class ManageTweet {
 			e.printStackTrace();
 		}
 		
+		manager.finalize();
 		
 		Collections.sort(tweets, new SortTweetsByTime()); //Sort tweets array.
 		
