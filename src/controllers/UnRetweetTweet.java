@@ -39,7 +39,13 @@ public class UnRetweetTweet extends HttpServlet {
 		ManageTweet tweetManager = new ManageTweet();
 		try {
 			BeanUtils.populate(tweet, request.getParameterMap());
-			tweetManager.unretweetTweet(tweet.getTweetid(), uid);
+			/*Si no esta retweetejat per l'usuari fem retweet*/
+			boolean result = false;
+			if(tweetManager.tweetIsRetweeted(uid, tweet.getTweetid())) result = tweetManager.unretweetTweet(tweet.getTweetid(), uid);
+			if(result) response.setStatus(HttpServletResponse.SC_ACCEPTED);
+			else{
+				response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

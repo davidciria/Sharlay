@@ -421,17 +421,20 @@ public class ManageTweet {
 	
 		String query1 = "DELETE FROM Likes WHERE tweetid = ? and uid = ?";
 		PreparedStatement statement1 = null; //afegeix like a la taula de likes
-		
+		int rows_modified = 0;
 		try {
 			statement1 = db.prepareStatement(query1);
 			statement1.setInt(1, tweetid);
 			statement1.setInt(2, uid);
-			statement1.executeUpdate();
+			rows_modified = statement1.executeUpdate();
 			statement1.close();
 		} catch (SQLException e) {
+			System.out.println("pROBLEM DELETING");
 			e.printStackTrace();
 			return false;
 		}
+		
+		if(rows_modified == 0) return false;
 		
 		String query2 = "UPDATE Tweets SET likes = likes - 1 WHERE tweetid = ?";
 		PreparedStatement statement2 = null; //decrementem comptador de likes a liked tweet 
@@ -485,7 +488,7 @@ public class ManageTweet {
 	
 	
 
-	public void retweetTweet(Integer tweetid, Integer uid) throws Exception{
+	public boolean retweetTweet(Integer tweetid, Integer uid) throws Exception{
 		
 		//Afegeix retweet a la taula de retweets.
 		String query1 = "INSERT INTO Retweets (uid,tweetid, createdAt) VALUES (?,?,?)";
@@ -500,7 +503,7 @@ public class ManageTweet {
 			statement1.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return;
+			return false;
 		}
 		
 		//Incrementem comptador de retweets al retweeted tweet 
@@ -514,7 +517,7 @@ public class ManageTweet {
 			statement2.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return;
+			return false;
 		}
 		
 		//Afegir el tweet a la pagina del user que ha retuitat
@@ -529,27 +532,32 @@ public class ManageTweet {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return;
+			return false;
 		}
+		
+		return true;
 		
 	}
 	
-	public void unretweetTweet(Integer tweetid, Integer uid) throws Exception{
+	public boolean unretweetTweet(Integer tweetid, Integer uid) throws Exception{
 		
 		//Eliminem retweet a la taula de retweets
 		String query1 = "DELETE FROM Retweets WHERE tweetid = ? and uid = ?";
 		PreparedStatement statement1 = null; 
+		int rows_modified = 0;
 		
 		try {
 			statement1 = db.prepareStatement(query1);
 			statement1.setInt(1, tweetid);
 			statement1.setInt(2, uid);
-			statement1.executeUpdate();
+			rows_modified = statement1.executeUpdate();
 			statement1.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return;
+			return false;
 		}
+		
+		if(rows_modified == 0) return false;
 		
 		//Decrementem comptador de retweets al retweeted tweet 
 		String query2 = "UPDATE Tweets SET retweets = retweets - 1 WHERE tweetid = ?";
@@ -563,7 +571,7 @@ public class ManageTweet {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return;
+			return false;
 		}
 		
 		//Treure el tweet a la pagina del user que ha retuitat
@@ -578,8 +586,10 @@ public class ManageTweet {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return;
+			return false;
 		}
+		
+		return true;
 	}
 	
 	public boolean tweetIsRetweeted(int uid, int tweetid) {
