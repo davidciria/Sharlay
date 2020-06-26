@@ -601,13 +601,11 @@ public class ManageTweet {
 		List<Tweet> tweets = new ArrayList<Tweet>();
 		ManageUser manager = new ManageUser();
 		
-		String query = "SELECT * FROM Tweets ORDER BY createdAt DESC LIMIT ?,? ;";
+		String query = "SELECT * FROM Tweets";
 
 		PreparedStatement statement = null;
 		try {
 			statement = db.prepareStatement(query);
-			statement.setInt(1, start);
-			statement.setInt(2, end);
 			ResultSet rs = statement.executeQuery();
 
 			while (rs.next()) {
@@ -640,7 +638,7 @@ public class ManageTweet {
 		}
 		
 
-		query = "SELECT r.uid AS ruid, r.createdAt, t.tweetid, t.text, t.likes, t.retweets, t.comments, t.parentTweet FROM Retweets r JOIN Tweets t ON r.tweetid=t.tweetid LIMIT ?,?;";
+		query = "SELECT r.uid AS ruid, t.uid, r.createdAt, t.tweetid, t.text, t.likes, t.retweets, t.comments, t.parentTweet FROM Retweets r JOIN Tweets t ON r.tweetid=t.tweetid LIMIT ?,?;";
 
 		statement = null;
 		try {
@@ -653,7 +651,7 @@ public class ManageTweet {
 		      Tweet tweet = new Tweet();
 		      
 		      /*Omplim les dades del tweet*/
-		      tweet.setUid(rs.getInt("ruid"));
+		      tweet.setUid(rs.getInt("uid"));
 		      tweet.setTweetid(rs.getInt("tweetid"));
 		      tweet.setText(rs.getString("text"));
 		      tweet.setLikes(rs.getInt("likes"));
@@ -684,7 +682,7 @@ public class ManageTweet {
 		manager.finalize();
 		
 		Collections.sort(tweets, new SortTweetsByTime()); //Sort tweets array.
-		
+		System.out.println("tweets from" + start + "to" + end);
 		if(start + end >= tweets.size()) {
 			if(start == tweets.size() - 1) return tweets.subList(tweets.size() - 1, tweets.size());
 			else if(start < tweets.size() - 1) return tweets.subList(start, tweets.size());
