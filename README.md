@@ -86,6 +86,8 @@ Cambiar la variable path per la ruta local del projecte on es troben les imatges
 
 Ja tenim tot el workspace llest, podem executar el projecte desde eclipse fent clic al icone del play. Assegurat d'utilitzar Tomcat en la versió 9 per executar el projecte.
 
+<img src="https://github.com/davidciria/Sharlay/blob/master/readme_images/play_icon.png?raw=true">
+
 ## Email de verificació
 
 Quan un usuari es registra a la plataforma s'envia un email de verificació. Fins que l'usuari no confirma el correu, no pot iniciar sessió.
