@@ -206,7 +206,8 @@ public class ManageTweet {
 					tweet.setCreatedAt(rs.getTimestamp("createdAt"));
 					tweet.setText(rs.getString("text"));
 					tweet.setLikes(rs.getInt("likes"));
-					tweet.setLikes(rs.getInt("comments"));
+					tweet.setComments(rs.getInt("comments"));
+					tweet.setRetweets(rs.getInt("retweets"));
 					tweet.setParentTweet(rs.getInt("parentTweet"));
 					tweet.setIsLiked(tweetIsLiked(loggedUid, tweet.getTweetid()));
 					tweet.setIsRetweeted(tweetIsRetweeted(loggedUid, tweet.getTweetid())); //Change variable name
@@ -237,7 +238,8 @@ public class ManageTweet {
 					tweet.setCreatedAt(rs.getTimestamp("createdAt"));
 					tweet.setText(rs.getString("text"));
 					tweet.setLikes(rs.getInt("likes"));
-					tweet.setLikes(rs.getInt("comments"));
+					tweet.setComments(rs.getInt("comments"));
+					tweet.setRetweets(rs.getInt("retweets"));
 					tweet.setParentTweet(rs.getInt("parentTweet"));
 					
 					tweet.setIsLiked(tweetIsLiked(loggedUid, tweet.getTweetid()));
