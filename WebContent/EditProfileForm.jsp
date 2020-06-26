@@ -150,28 +150,6 @@ $(document).ready(function(){
 });
 </script>
 
-
-<ul class="server-errors-list">
-<c:if test = "${model.error[0]}">
-	<li> First or Last name format is not correct </li>
-</c:if>
-<c:if test = "${model.error[1]}">
-	<li> Entered user name is invalid or has been already registered </li>
-</c:if>
-<c:if test = "${model.error[2]}">
-	<li> Entered email is invalid or has been already registered </li>
-</c:if>
-<c:if test = "${model.error[3]}">
-	<li> Password format is not valid </li>
-</c:if>
-<c:if test = "${model.error[4]}">
-	<li> The second password must be the same </li>
-</c:if>
-<c:if test = "${model.error[5]}">
-	<li> You are not yet 16 years old </li>
-</c:if>
-</ul>
-
 <div id="confirmDialog">Are you sure you want to delete your account?</div>
 
 <div class="w3-container w3-card w3-text w3-round w3-margin w3-animate-opacity">
