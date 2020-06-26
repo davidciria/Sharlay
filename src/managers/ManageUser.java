@@ -190,8 +190,9 @@ public class ManageUser {
 	// Deixar de seguir a un usuari.
 	public boolean unfollow(Integer uid1, Integer uid2) throws Exception{
 		
+		//Eliminem follow a la taula de follows
 		String query1 = "DELETE FROM Follows WHERE uid1 = ? and uid2 = ?";
-		PreparedStatement statement1 = null; //Eliminem follow a la taula de follows
+		PreparedStatement statement1 = null; 
 		int rows_deleted = 0;
 		
 		try {
@@ -208,9 +209,9 @@ public class ManageUser {
 		
 		if(rows_deleted == 0) return false;
 		
-		
+		//Decrementem comptador de following al user 
 		String query2 = "UPDATE Users SET following = following - 1 WHERE uid = ?"; //uid1
-		PreparedStatement statement2 = null; //decrementem comptador de following al user 
+		PreparedStatement statement2 = null; 
 		
 		try {
 			
@@ -224,9 +225,9 @@ public class ManageUser {
 			return false;
 		}
 		
-		
+		//Decrementem comptador de followers al user 
 		String query3 = "UPDATE Users SET followers = followers - 1 WHERE uid = ?"; //uid2
-		PreparedStatement statement3 = null; //decrementem comptador de followers al user 
+		PreparedStatement statement3 = null; 
 
 		try {
 			
@@ -292,6 +293,7 @@ public class ManageUser {
 		return true;
 	}
 	
+	//Saber si un usuari es seguit per un altre.
 	public boolean userIsFollowed(int uidfollower, int uid) {
 		String query = "SELECT * FROM Follows WHERE uid1=? AND uid2=?";
 
@@ -531,8 +533,47 @@ public class ManageUser {
 			e.printStackTrace();
 		}
 		
+		/*Eliminar likes dels tweets*/
+		query = "UPDATE Tweets SET likes = likes - 1 WHERE tweetid IN (SELECT tweetid FROM Likes WHERE uid=?);";
+		statement = null; 
+		
+		try {
+			statement = db.prepareStatement(query);
+			statement.setInt(1, uid);
+			statement.executeUpdate();
+			statement.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 		/*Eliminar likes*/
 		query = "DELETE FROM Likes WHERE uid=?;";
+		statement = null; 
+		
+		try {
+			statement = db.prepareStatement(query);
+			statement.setInt(1, uid);
+			statement.executeUpdate();
+			statement.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		/*Eliminar retweets dels retweets*/
+		query = "UPDATE Tweets SET retweets = retweets - 1 WHERE tweetid IN (SELECT tweetid FROM Retweets WHERE uid=?);";
+		statement = null; 
+		
+		try {
+			statement = db.prepareStatement(query);
+			statement.setInt(1, uid);
+			statement.executeUpdate();
+			statement.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		/*Eliminar retweets*/
+		query = "DELETE FROM Retweets WHERE uid=?;";
 		statement = null; 
 		
 		try {
