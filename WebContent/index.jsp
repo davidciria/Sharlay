@@ -282,10 +282,38 @@ $(document).ready(function(){
 		});
 	});
 	
+	
+	//Confirm dialogue.
+	$("#needRegister").dialog({
+        autoOpen: false,
+        modal: true
+      }).prev(".ui-dialog-titlebar").css("background","#8947df");
+	
+	$("body").on("click",".nR",function(e) {
+	       e.preventDefault();
+			
+	       $("#needRegister").dialog({
+	           buttons : {
+	             "Register" : function() {
+	               //Delete account.
+	               $(this).dialog("close");
+	               $("#content").load("RegisterController");
+	             },
+	             "Continue as anonymous" : function() {
+	               $(this).dialog("close");
+	             }
+	           }
+	         });
+	       
+	       $("#needRegister").dialog('open');
+	  });
+	
 });
 </script>
 </head>
 <body class="global-bg">
+
+	<div id="needRegister">You need an account to do that:</div>
 
  	<!-- Begin Navigation -->
  	<div class="w3-bar w3-theme" id="navigation">

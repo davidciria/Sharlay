@@ -126,7 +126,7 @@ $(document).ready(function(){
 	$("#confirmDialog").dialog({
         autoOpen: false,
         modal: true
-      }).prev(".ui-dialog-titlebar").css("background","purple");
+      }).prev(".ui-dialog-titlebar").css("background","#8947df");
 	
 	 $("#deleteAccount").click(function(e) {
 	       e.preventDefault();
@@ -171,7 +171,7 @@ $(document).ready(function(){
     <p>
 	<label class="imp-text"><b> Birthday </b></label>
 	<input class="editinput w3-input w3-border form-bg w3-text" type="date" id="birth" name="birth" value="${birth}" required data-parsley-min-age="16"></p>
-    <input class="editinput w3-button w3-round-medium w3-theme" type="submit" name="submit" value="Update"></p>
+    <input class="w3-button w3-round-medium w3-theme" type="submit" name="submit" value="Update"></p>
 </form>
 
 <!-- Edit password form -->
@@ -186,7 +186,7 @@ $(document).ready(function(){
 	<input class="editinput w3-input w3-border form-bg w3-text" type="password" id="pwd1" name="newpwd" placeholder="New Password" value="${newpwd}" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"></p>
 	<div>
 	<p>
-    <input class="editinput w3-button w3-round-medium w3-theme" type="submit" name="submit" value="Update">
+    <input class="w3-button w3-round-medium w3-theme" type="submit" name="submit" value="Update">
     <span class="w3-text-green" style="display:none;" id="passwordUpdatedStatus"></span>
     </p>
     </div>

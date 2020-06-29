@@ -55,6 +55,15 @@ public class VerificationEmailController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		if(db == null) {
+			try {
+				db = new DAO();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		// TODO Auto-generated method stub
 		if (request.getParameter("email") != null && request.getParameter("token") != null) {
 			int verificationStatus = this.verifyEmailToken(request.getParameter("email"),
@@ -78,6 +87,7 @@ public class VerificationEmailController extends HttpServlet {
 		}
 		
 		this.finalize();
+		db = null;
 	}
 
 	/*Aquesta part es pot posar al userManger*/
