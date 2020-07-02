@@ -34,7 +34,7 @@ public class Login {
 			Pattern pattern = Pattern.compile(regex);
 			Matcher matcher = pattern.matcher(pwd);
 			if (matcher.matches()) {
-				System.out.println(pwd);
+				//System.out.println(pwd);
 				this.pwd = pwd;
 			} else {
 				error[1] = true;

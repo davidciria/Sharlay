@@ -64,7 +64,7 @@ public class UploadProfileImage extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 
 	    // Create path components to save the file (you have to change this)
-	    String path = "C://Users//angel//eclipse-workspace//Sharlay//WebContent//ProfileImages";
+	    String path = "C://Users//david//eclipse-workspace//Sharlay//WebContent//ProfileImages";
 		final Part filePart = request.getPart("file");
 	    String fileName = getFileName(filePart);
 	    String[] splittedFileName = fileName.split(Pattern.quote("."));
